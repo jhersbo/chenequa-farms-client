@@ -2,21 +2,72 @@
 
 @media (min-width: $mobilebreakpoint){
     .nav-container{
+        background-color: $Blk;
+        color:white;
+
+        max-width: 10vw;
+
+
         display: flex;
         flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
     }
     
+    .nav-list{
+        padding: 0em;
+        display: flex;
+        flex-direction: column;
+        height: 55vh;
+        width: 100%;
+        justify-content: space-around;
+        align-items: center;
+    }
+
     .nav-list-item{
         list-style-type: none;
+
+        display: flex;
+        justify-content: center;
+
+        width: 90%;
+        height: 25%;
+        border-radius: 15px;
+    }
+
+    nav{
+        width: 100%;
     }
 
     .nav-list-btn{
         border: none;
         background-color: transparent;
+
+        border-radius: 15px;
+
+        width: 100%;
     }
 
-    .nav-list-btn:hover{
+    .nav-list-btn:not(.foot-btn):hover{
         cursor: pointer;
+        box-shadow: inset 1px 1px 20px grey;
+    }
+
+    .foot-btn:hover{
+        cursor: pointer;
+    }
+
+    .nav-foot-container{
+        height: 20vh;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        button{
+            margin-bottom: 1em;
+        }
     }
 }
 
