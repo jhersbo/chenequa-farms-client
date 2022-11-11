@@ -1,0 +1,25 @@
+@import "/src/Sass/_variables"; 
+
+@media (min-width: $mobilebreakpoint){
+    .nav-container{
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .nav-list-item{
+        list-style-type: none;
+    }
+
+    .nav-list-btn{
+        border: none;
+        background-color: transparent;
+    }
+
+    .nav-list-btn:hover{
+        cursor: pointer;
+    }
+}
+
+@media (max-width: $mobilebreakpoint){
+
+}

@@ -1,0 +1,19 @@
+@import "./_variables";
+
+@media (min-width: $mobilebreakpoint){
+    .app{
+        min-height: 100vh;
+        min-width: 100vw;
+
+        font-family: $genSans;
+        font-size: x-large;
+        font-weight: 600;
+    
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: $mobilebreakpoint){
+
+}
