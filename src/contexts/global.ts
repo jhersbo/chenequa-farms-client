@@ -7,6 +7,7 @@ export interface UserContextInterface{
     password_hash: string,
     first_name: string,
     last_name: string,
+    is_admin: boolean,
     user_orders?: [
         {
             filled: boolean,
