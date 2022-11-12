@@ -4,10 +4,12 @@ import { useContext, useState } from "react";
 import Tooltip from '@mui/material/Tooltip';
 import CottageIcon from '@mui/icons-material/Cottage';
 import CategoryIcon from '@mui/icons-material/Category';
+import LocalFloristIcon from '@mui/icons-material/LocalFlorist';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LoyaltyIcon from '@mui/icons-material/Loyalty';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 //contexts
 import { ScreenSizeContext, UserContext } from "../contexts/global";
@@ -20,16 +22,19 @@ export interface NavMethodsMap{
     jsx: JSX.Element
 }
 
-const NavBar = ()=>{
-    //-1 is neutral state
-    const [ clickIndex, setClickIndex ] = useState(-1)
+interface NavBarProps{
+    clickIndex: number,
+    setClickIndex: React.Dispatch<React.SetStateAction<number>>
+}
+
+const NavBar = ({ clickIndex, setClickIndex }: NavBarProps)=>{
 
     const screenSize = useContext(ScreenSizeContext)
     const user = useContext(UserContext)
 
     const iconSXProp = {
         color: "white",
-        fontSize: "3rem"
+        fontSize: "3rem",
     }
     
     const navMethods = [
@@ -39,21 +44,25 @@ const NavBar = ()=>{
         },
         {
             label: "Browse categories.",
-            jsx: <CategoryIcon sx={iconSXProp}/>
+            jsx: <LocalFloristIcon sx={iconSXProp}/>
         },
         {
             label: "Browse subscriptions.",
             jsx: <LoyaltyIcon sx={iconSXProp}/>
         },
+        // {
+        //     label: "View your cart.",
+        //     jsx: <ShoppingCartIcon sx={iconSXProp}/>
+        // }
         {
-            label: "View your cart.",
-            jsx: <ShoppingCartIcon sx={iconSXProp}/>
+            label: "Browse pickup dates.",
+            jsx: <CalendarMonthIcon sx={iconSXProp}/>
         }
     ]
     return(
         <div className="nav-container">
             <div className="nav-hero-container">
-                <h1>LOGO</h1>
+                <h3>LOGO</h3>
             </div>
             <nav>
                 <ul className='nav-list'>

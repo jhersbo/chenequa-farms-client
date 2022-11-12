@@ -1,0 +1,18 @@
+@import "/src/Sass/_variables"; 
+
+@media (min-width: $mobilebreakpoint){
+    .main-container{
+        min-width: 90vw;
+        height: 100vh;
+    }
+
+    .main-top-bar{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+@media (max-width: $mobilebreakpoint){
+
+}

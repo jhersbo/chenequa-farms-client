@@ -2,10 +2,10 @@
 import './Sass/App.scss'
 //Dependencies
 import Cookies from 'js-cookie'
-import { createContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 //Components
-import CartContainer from './components/CartContainer';
+
 import MainContainer from './components/MainContainer';
 import NavBar from './components/NavBar';
 
@@ -13,7 +13,7 @@ import NavBar from './components/NavBar';
 import { ScreenSizeContext, UserContext } from './contexts/global';
 
 //Types
-import { UserContextInterface } from './contexts/global';
+
 
 const serverURL = process.env.NODE_ENV === "development" 
 ? process.env.REACT_APP_LOCAL_SERVER 
@@ -28,6 +28,10 @@ function App() {
 
   const [user, setUser] = useState(cookieUser ?? null)
   const [screenSize, setScreenSize] = useState({width: window.innerWidth, height: window.innerHeight})
+
+  //-1 is neutral state
+  //0 is home page
+  const [ clickIndex, setClickIndex ] = useState(0)
 
   useEffect(()=>{
     //eventually move fetching user to different component
@@ -46,9 +50,8 @@ function App() {
     <div className='app'>
       <ScreenSizeContext.Provider value={screenSize}>
         <UserContext.Provider value={user}>
-            <NavBar/>
-            <MainContainer/>
-            <CartContainer/>
+            <NavBar clickIndex={clickIndex} setClickIndex={setClickIndex}/>
+            <MainContainer clickIndex={clickIndex} setClickIndex={setClickIndex}/>
         </UserContext.Provider>
       </ScreenSizeContext.Provider>
     </div>
