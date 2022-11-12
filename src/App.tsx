@@ -6,8 +6,8 @@ import { useEffect, useState } from "react";
 
 //Components
 
-import MainContainer from './components/MainContainer';
-import NavBar from './components/NavBar';
+import MainContainer from './main_container_components/MainContainer';
+import NavBar from './nav_components/NavBar';
 
 //Contexts
 import { ScreenSizeContext, UserContext } from './contexts/global';
@@ -33,6 +33,9 @@ function App() {
   //0 is home page
   const [ clickIndex, setClickIndex ] = useState(0)
 
+  //admin state
+  const [ siteState, setSiteState ] = useState("client")
+
   useEffect(()=>{
     //eventually move fetching user to different component
     // async function fetchUser(){
@@ -46,16 +49,24 @@ function App() {
     setScreenSize({width: window.innerWidth, height: window.innerHeight})
   }, [])
 
-  return (
-    <div className='app'>
-      <ScreenSizeContext.Provider value={screenSize}>
-        <UserContext.Provider value={user}>
-            <NavBar clickIndex={clickIndex} setClickIndex={setClickIndex}/>
-            <MainContainer clickIndex={clickIndex} setClickIndex={setClickIndex}/>
-        </UserContext.Provider>
-      </ScreenSizeContext.Provider>
-    </div>
-  );
+  if(siteState === "admin"){
+    return(
+      <div className='app'>
+        Admin Site
+      </div>
+    )
+  }else{
+    return (
+      <div className='app'>
+        <ScreenSizeContext.Provider value={screenSize}>
+          <UserContext.Provider value={user}>
+              <NavBar clickIndex={clickIndex} setClickIndex={setClickIndex}/>
+              <MainContainer clickIndex={clickIndex} setClickIndex={setClickIndex}/>
+          </UserContext.Provider>
+        </ScreenSizeContext.Provider>
+      </div>
+    );
+  }
 }
 
 export default App;

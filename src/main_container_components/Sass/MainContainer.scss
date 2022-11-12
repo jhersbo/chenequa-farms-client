@@ -2,8 +2,10 @@
 
 @media (min-width: $mobilebreakpoint){
     .main-container{
-        min-width: 90vw;
+        width: 90vw;
         height: 100vh;
+        padding-right: 1em;
+        padding-left: 1em;
     }
 
     .main-top-bar{
