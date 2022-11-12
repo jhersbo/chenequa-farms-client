@@ -10,7 +10,7 @@ import MainContainer from './main_container_components/MainContainer';
 import NavBar from './nav_components/NavBar';
 
 //Contexts
-import { ScreenSizeContext, UserContext } from './contexts/global';
+import { ScreenSizeContext, UserContext, UserContextInterface } from './contexts/global';
 
 //Types
 
@@ -24,9 +24,12 @@ function App() {
   let cookieUser = Cookies.get('user')
   if(cookieUser){
     cookieUser = JSON.parse(cookieUser)
+    
   }
 
-  const [user, setUser] = useState(cookieUser ?? null)
+  const [user, setUser] = useState(
+    ((cookieUser as unknown) as UserContextInterface | null) ?? null
+  )
   const [screenSize, setScreenSize] = useState({width: window.innerWidth, height: window.innerHeight})
 
   //-1 is neutral state
@@ -38,13 +41,13 @@ function App() {
 
   useEffect(()=>{
     //eventually move fetching user to different component
-    // async function fetchUser(){
-    //   let retrievedUser = await fetch(serverURL + "user_auth/2")
-    //   let parsedUser = await retrievedUser.json()
-    //   setUser(parsedUser)
-    //   Cookies.set("user", JSON.stringify(parsedUser))
-    // }
-    // fetchUser()
+    async function fetchUser(){
+      let retrievedUser = await fetch(serverURL + "user_auth/2")
+      let parsedUser = await retrievedUser.json()
+      setUser(parsedUser)
+      Cookies.set("user", JSON.stringify(parsedUser))
+    }
+    fetchUser()
     // Cookies.remove('user')
     setScreenSize({width: window.innerWidth, height: window.innerHeight})
   }, [])
@@ -61,7 +64,8 @@ function App() {
         <ScreenSizeContext.Provider value={screenSize}>
           <UserContext.Provider value={user}>
               <NavBar clickIndex={clickIndex} setClickIndex={setClickIndex}/>
-              <MainContainer clickIndex={clickIndex} setClickIndex={setClickIndex}/>
+              <MainContainer clickIndex={clickIndex} setClickIndex={setClickIndex} setUser={setUser}/>
+              {/* Login Popup somewhere in here */}
           </UserContext.Provider>
         </ScreenSizeContext.Provider>
       </div>
