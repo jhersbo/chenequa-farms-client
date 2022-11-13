@@ -1,3 +1,5 @@
+import Home from "./Home"
+
 interface MainSubContainerProps{
     clickIndex: number,
     setClickIndex: React.Dispatch<React.SetStateAction<number>>
@@ -8,7 +10,7 @@ const MainSubContainer = ({ clickIndex, setClickIndex }: MainSubContainerProps)=
         case 0:
             return(
                 <>
-                    Home
+                    <Home/>
                 </>
             )
         case 1:

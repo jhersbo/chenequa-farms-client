@@ -1,5 +1,6 @@
 import "./Sass/NavBar.scss"
 import { useContext, useState } from "react";
+import Cookies from "js-cookie";
 
 import Tooltip from '@mui/material/Tooltip';
 import CottageIcon from '@mui/icons-material/Cottage';
@@ -12,10 +13,11 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 //contexts
-import { ScreenSizeContext, UserContext } from "../contexts/global";
+import { ScreenSizeContext, UserContext, UserContextInterface } from "../contexts/global";
 
 //components
 import NavBtn from './minor_components/micro_components/NavBtn'
+
 
 export interface NavMethodsMap{
     label: string,
@@ -24,10 +26,11 @@ export interface NavMethodsMap{
 
 interface NavBarProps{
     clickIndex: number,
-    setClickIndex: React.Dispatch<React.SetStateAction<number>>
+    setClickIndex: React.Dispatch<React.SetStateAction<number>>,
+    setUser: React.Dispatch<React.SetStateAction<UserContextInterface | null>>
 }
 
-const NavBar = ({ clickIndex, setClickIndex }: NavBarProps)=>{
+const NavBar = ({ clickIndex, setClickIndex, setUser }: NavBarProps)=>{
 
     const screenSize = useContext(ScreenSizeContext)
     const user = useContext(UserContext)
@@ -59,6 +62,12 @@ const NavBar = ({ clickIndex, setClickIndex }: NavBarProps)=>{
             jsx: <CalendarMonthIcon sx={iconSXProp}/>
         }
     ]
+
+    const handleSignOut = ()=>{
+        setUser(null)
+        Cookies.set("user", "")
+    }
+
     return(
         <div className="nav-container">
             <div className="nav-hero-container">
@@ -82,7 +91,7 @@ const NavBar = ({ clickIndex, setClickIndex }: NavBarProps)=>{
                     </button>
                 </Tooltip>
                 <Tooltip title="Logout" placement="right" arrow>
-                    <button className="nav-list-btn foot-btn" aria-label="logout">
+                    <button className="nav-list-btn foot-btn" aria-label="logout" onClick={()=>{handleSignOut()}}>
                         <LogoutIcon sx={iconSXProp}/>
                         {/* change if user is logged in */}
                     </button>

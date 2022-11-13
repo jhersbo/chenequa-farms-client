@@ -30,24 +30,26 @@ function App() {
   const [user, setUser] = useState(
     ((cookieUser as unknown) as UserContextInterface | null) ?? null
   )
-  const [screenSize, setScreenSize] = useState({width: window.innerWidth, height: window.innerHeight})
+  const [screenSize, setScreenSize] = useState({
+    width: window.innerWidth, 
+    height: window.innerHeight
+  })
 
-  //-1 is neutral state
-  //0 is home page
+  //0 is home page. Follows .map() index in NavBar.tsx
   const [ clickIndex, setClickIndex ] = useState(0)
 
   //admin state
   const [ siteState, setSiteState ] = useState("client")
 
   useEffect(()=>{
-    //eventually move fetching user to different component
-    async function fetchUser(){
-      let retrievedUser = await fetch(serverURL + "user_auth/2")
-      let parsedUser = await retrievedUser.json()
-      setUser(parsedUser)
-      Cookies.set("user", JSON.stringify(parsedUser))
-    }
-    fetchUser()
+    // eventually move fetching user to different component
+    // async function fetchUser(){
+    //   let retrievedUser = await fetch(serverURL + "user_auth/2")
+    //   let parsedUser = await retrievedUser.json()
+    //   setUser(parsedUser)
+    //   Cookies.set("user", JSON.stringify(parsedUser))
+    // }
+    // fetchUser()
     // Cookies.remove('user')
     setScreenSize({width: window.innerWidth, height: window.innerHeight})
   }, [])
@@ -63,7 +65,7 @@ function App() {
       <div className='app'>
         <ScreenSizeContext.Provider value={screenSize}>
           <UserContext.Provider value={user}>
-              <NavBar clickIndex={clickIndex} setClickIndex={setClickIndex}/>
+              <NavBar clickIndex={clickIndex} setClickIndex={setClickIndex} setUser={setUser}/>
               <MainContainer clickIndex={clickIndex} setClickIndex={setClickIndex} setUser={setUser}/>
               {/* Login Popup somewhere in here */}
           </UserContext.Provider>

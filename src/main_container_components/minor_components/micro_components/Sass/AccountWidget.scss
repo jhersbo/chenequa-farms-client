@@ -1,0 +1,32 @@
+@import "/src/Sass/_variables";
+
+@media (min-width: $mobilebreakpoint){
+    .widget-container{
+        border: 1px solid $Blk;
+        border-radius: 15px;
+
+        padding: 1rem;
+
+    }
+
+    #greeting{
+        margin: 0rem;
+    }
+
+    .btn-container{
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .widget-btn{
+        background-color: $GO;
+
+        border-radius: 15px;
+
+        font-family: $genSans;
+    }
+}
+
+@media (max-width: $mobilebreakpoint){
+
+}
