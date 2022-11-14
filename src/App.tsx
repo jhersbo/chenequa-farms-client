@@ -12,10 +12,7 @@ import NavBar from './nav_components/NavBar';
 //Contexts
 import { ScreenSizeContext, UserContext, UserContextInterface } from './contexts/global';
 
-//Types
-
-
-const serverURL = process.env.NODE_ENV === "development" 
+export const serverURL = process.env.NODE_ENV === "development" 
 ? process.env.REACT_APP_LOCAL_SERVER 
 : process.env.REACT_APP_PROD_SERVER
 
@@ -40,19 +37,17 @@ function App() {
 
   //admin state
   const [ siteState, setSiteState ] = useState("client")
+  //login states
+  const [ loginState, setLoginState ] = useState(false)
+  const [ regState, setRegState ] = useState(false)
+  const [ blur, setBlur ] = useState(false)
 
   useEffect(()=>{
-    // eventually move fetching user to different component
-    // async function fetchUser(){
-    //   let retrievedUser = await fetch(serverURL + "user_auth/2")
-    //   let parsedUser = await retrievedUser.json()
-    //   setUser(parsedUser)
-    //   Cookies.set("user", JSON.stringify(parsedUser))
-    // }
-    // fetchUser()
-    // Cookies.remove('user')
+    if(loginState || regState){
+      setBlur(true)
+    }
     setScreenSize({width: window.innerWidth, height: window.innerHeight})
-  }, [])
+  }, [loginState, regState])
 
   if(siteState === "admin"){
     return(
@@ -65,9 +60,28 @@ function App() {
       <div className='app'>
         <ScreenSizeContext.Provider value={screenSize}>
           <UserContext.Provider value={user}>
-              <NavBar clickIndex={clickIndex} setClickIndex={setClickIndex} setUser={setUser}/>
-              <MainContainer clickIndex={clickIndex} setClickIndex={setClickIndex} setUser={setUser}/>
-              {/* Login Popup somewhere in here */}
+              <NavBar 
+                clickIndex={clickIndex} 
+                setClickIndex={setClickIndex} 
+                setUser={setUser} 
+                loginState={loginState} 
+                setLoginState={setLoginState} 
+                regState={regState} 
+                setRegState={setRegState}
+                blur={blur}
+                setBlur={setBlur}
+                />
+              <MainContainer 
+                clickIndex={clickIndex} 
+                setClickIndex={setClickIndex} 
+                setUser={setUser} 
+                loginState={loginState} 
+                setLoginState={setLoginState} 
+                regState={regState} 
+                setRegState={setRegState}
+                blur={blur}
+                setBlur={setBlur}
+                />
           </UserContext.Provider>
         </ScreenSizeContext.Provider>
       </div>

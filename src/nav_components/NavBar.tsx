@@ -1,5 +1,5 @@
 import "./Sass/NavBar.scss"
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import Cookies from "js-cookie";
 
 import Tooltip from '@mui/material/Tooltip';
@@ -28,9 +28,15 @@ interface NavBarProps{
     clickIndex: number,
     setClickIndex: React.Dispatch<React.SetStateAction<number>>,
     setUser: React.Dispatch<React.SetStateAction<UserContextInterface | null>>
+    loginState: boolean,
+    setLoginState: React.Dispatch<React.SetStateAction<boolean>>
+    regState: boolean,
+    setRegState: React.Dispatch<React.SetStateAction<boolean>>,
+    blur: boolean,
+    setBlur: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const NavBar = ({ clickIndex, setClickIndex, setUser }: NavBarProps)=>{
+const NavBar = ({ clickIndex, setClickIndex, setUser, loginState, setLoginState, regState, setRegState, blur, setBlur }: NavBarProps)=>{
 
     const screenSize = useContext(ScreenSizeContext)
     const user = useContext(UserContext)
@@ -69,7 +75,7 @@ const NavBar = ({ clickIndex, setClickIndex, setUser }: NavBarProps)=>{
     }
 
     return(
-        <div className="nav-container">
+        <div className="nav-container" style={{"filter": blur ? "blur(4px)" : "none"}}>
             <div className="nav-hero-container">
                 <h3>LOGO</h3>
             </div>
@@ -78,22 +84,21 @@ const NavBar = ({ clickIndex, setClickIndex, setUser }: NavBarProps)=>{
                     {
                         navMethods.map((element: NavMethodsMap, index: number)=>{
                             return(
-                                <NavBtn element={element} index={index} clickIndex={clickIndex} setClickIndex={setClickIndex}/>
+                                <NavBtn key={index} element={element} index={index} clickIndex={clickIndex} setClickIndex={setClickIndex}/>
                             )
                         })
                     }
                 </ul>
             </nav>
             <div className="nav-foot-container">
-                <Tooltip title="Settings" placement="right" arrow>
+                {/* <Tooltip title="Settings" placement="right" arrow>
                     <button className="nav-list-btn foot-btn" aria-label="settings">
                         <SettingsIcon sx={iconSXProp}/>
                     </button>
-                </Tooltip>
+                </Tooltip> */}
                 <Tooltip title="Logout" placement="right" arrow>
                     <button className="nav-list-btn foot-btn" aria-label="logout" onClick={()=>{handleSignOut()}}>
                         <LogoutIcon sx={iconSXProp}/>
-                        {/* change if user is logged in */}
                     </button>
                 </Tooltip>
             </div>

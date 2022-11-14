@@ -19,11 +19,36 @@
     }
 
     .widget-btn{
+        cursor: pointer;
+
         background-color: $GO;
 
         border-radius: 15px;
 
         font-family: $genSans;
+    }
+
+    #login-container{
+        position: absolute;
+
+        left: 45vw;
+        top: 30vh;
+
+        border: 1px solid $Blk;
+        border-radius: 15px;
+
+        padding: 1rem;
+    }
+
+    #login-form-container{
+        display: flex;
+        flex-direction: column;
+
+
+        #login-btn-container{
+            display: flex;
+            justify-content: space-around;
+        }
     }
 }
 
