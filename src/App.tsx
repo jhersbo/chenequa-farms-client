@@ -90,7 +90,7 @@ function App() {
                 </UserContext.Provider>
               </ScreenSizeContext.Provider>
             }/>
-            <Route path='/reset/:token' element={
+            <Route path='/forgot-password/:token' element={
               <ResetPassword/>
             }/>
           </Routes>
