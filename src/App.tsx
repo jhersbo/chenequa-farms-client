@@ -75,7 +75,7 @@ function App() {
                       setRegState={setRegState}
                       blur={blur}
                       setBlur={setBlur}
-                      />
+                    />
                     <MainContainer 
                       clickIndex={clickIndex} 
                       setClickIndex={setClickIndex} 
@@ -86,7 +86,7 @@ function App() {
                       setRegState={setRegState}
                       blur={blur}
                       setBlur={setBlur}
-                      />
+                    />
                 </UserContext.Provider>
               </ScreenSizeContext.Provider>
             }/>
