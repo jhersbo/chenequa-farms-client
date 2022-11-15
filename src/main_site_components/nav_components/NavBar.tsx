@@ -13,7 +13,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 //contexts
-import { ScreenSizeContext, UserContext, UserContextInterface } from "../contexts/global";
+import { ScreenSizeContext, UserContext, UserContextInterface } from "../../contexts/global";
 
 //components
 import NavBtn from './minor_components/micro_components/NavBtn'

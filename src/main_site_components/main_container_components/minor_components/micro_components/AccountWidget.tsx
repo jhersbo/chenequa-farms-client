@@ -1,8 +1,8 @@
 import "./Sass/AccountWidget.scss"
 
 import { useContext, useState } from "react"
-import { UserContext, UserContextInterface } from "../../../contexts/global"
-import { serverURL } from "../../../App"
+import { UserContext, UserContextInterface } from "../../../../contexts/global"
+import { serverURL } from "../../../../App"
 import Cookies from "js-cookie"
 
 import TextField from '@mui/material/TextField';
@@ -21,11 +21,15 @@ const AccountWidget = ({ setUser, loginState, setLoginState, regState, setRegSta
     const [ validationError, setValidationError ] = useState({state: false, message: ""})
     
     const [ emailInput, setEmailInput ] = useState("")
+    const [ firstName, setFirstName ] = useState("")
+    const [ lastName, setLastName ] = useState("")
     const [ password_1, setPassword_1 ] = useState("")
     const [ password_2, setPassword_2 ] = useState("")
+    const [ forgotPassword, setForgotPassword ] = useState(false)
 
     const textFieldSXProps = {
-        marginBottom: "0.5rem"
+        marginBottom: "0.5rem",
+        width: "100%"
     }
 
     const user = useContext(UserContext)
@@ -46,12 +50,6 @@ const AccountWidget = ({ setUser, loginState, setLoginState, regState, setRegSta
     }
 
     const handleLoginSubmit = async ()=>{
-        const passwordsMatch = password_1 === password_2;
-
-        if(!passwordsMatch){
-            setValidationError({state: true, message: "Passwords do not match."})
-            return
-        }
 
         let response = await fetch(serverURL + "user_auth/auth",{
             method: "POST",
@@ -68,7 +66,7 @@ const AccountWidget = ({ setUser, loginState, setLoginState, regState, setRegSta
         console.log(parsedResponse)
 
         if(!parsedResponse.success){
-            setValidationError({state: true, message: "Unable to log in."})
+            setValidationError({state: true, message: "Unable to log in. Please check your login credentials."})
             return
         }
 
@@ -84,6 +82,14 @@ const AccountWidget = ({ setUser, loginState, setLoginState, regState, setRegSta
         setEmailInput(event.target.value)
     }
 
+    const updateFirstNameInput = (event: any)=>{
+
+    }
+
+    const updateLastNameInput = (event: any)=>{
+        
+    }
+
     const updatePassword_1Input = (event: any)=>{
         setValidationError({state: false, message: ""})
         setPassword_1(event.target.value)
@@ -94,12 +100,18 @@ const AccountWidget = ({ setUser, loginState, setLoginState, regState, setRegSta
         setPassword_2(event.target.value)
     }
 
+    const handleForgotPasswordState = ()=>{
+        setLoginState(false)
+        setRegState(false)
+        setForgotPassword(true)
+    }
+
 
 
     if(loginState && !regState){
         return(
             <div id="login-container">
-                <h3>Please login</h3>
+                <h3>Login</h3>
                 <div id="login-form-container">
                     <TextField
                         id="email-input"
@@ -110,29 +122,87 @@ const AccountWidget = ({ setUser, loginState, setLoginState, regState, setRegSta
                     <TextField
                         className="password-input"
                         type="password"
-                        label={!validationError.state ? "Password" : validationError.message}
+                        label="Password"
                         onChange={(e)=>{updatePassword_1Input(e)}}
                         sx={textFieldSXProps}
                     />
-                    <TextField
-                        className="password-input"
-                        type="password"
-                        label={!validationError.state ? "Confirm Password" : validationError.message}
-                        onChange={(e)=>{updatePassword_2Input(e)}}
-                        sx={textFieldSXProps}
-                    />
+                    {
+                        validationError.state ? 
+                            <h5>
+                                {validationError.message}
+                            </h5>
+                        :
+                            null
+                    }
                     <div id="login-btn-container">
                         <button onClick={()=>{handleLoginSubmit()}}>Login</button>
-                        <button>Create an account</button>
+                        {
+                            validationError.state ?
+                                <button onClick={()=>{handleForgotPasswordState()}}>
+                                    Forgot your password?
+                                </button>
+                            :
+                                null
+                        }
+                        <button onClick={()=>{handleSwitchToReg()}}>Register</button>
                     </div>
                 </div>
             </div>
         )
     }else if(!loginState && regState){
         return(
-            <>
-                Register state
-            </>
+            <div id="login-container">
+                <h3>Register</h3>
+                <div id="login-form-container">
+                    <TextField
+                        id="email-input"
+                        className="form-fields"
+                        label="Email address"
+                        onChange={(e)=>{updateEmailInput(e)}}
+                        sx={textFieldSXProps}
+                    />
+                    <TextField
+                        id="first-name-input"
+                        className="form-fields"
+                        label="First name"
+                        onChange={(e)=>{updateFirstNameInput(e)}}
+                        sx={textFieldSXProps}
+                    />
+                    <TextField
+                        id="email-input"
+                        className="form-fields"
+                        label="Last name"
+                        onChange={(e)=>{updateLastNameInput(e)}}
+                        sx={textFieldSXProps}
+                    />
+                    <TextField
+                        className="password-input form-fields"
+                        type="password"
+                        label={!validationError.state ? "Password" : validationError.message}
+                        onChange={(e)=>{updatePassword_1Input(e)}}
+                        sx={textFieldSXProps}
+                    />
+                    <TextField
+                        className="password-input form-fields"
+                        type="password"
+                        label={!validationError.state ? "Confirm password" : validationError.message}
+                        onChange={(e)=>{updatePassword_2Input(e)}}
+                        sx={textFieldSXProps}
+                    />
+                    <div id="login-btn-container">
+                        <button>Register</button>
+                        <button onClick={()=>{handleSwitchToLogin()}}>Have an account?</button>
+                    </div>
+                </div>
+            </div>
+        )
+    }else if(forgotPassword){
+        return(
+            <div id="login-container">
+                <h3>
+                    Forgot your password?
+                </h3>
+            </div>
         )
     }else{
         return(
@@ -142,7 +212,7 @@ const AccountWidget = ({ setUser, loginState, setLoginState, regState, setRegSta
                         <div id="signed-in-container">
                             <div>
                                 <h5 id="greeting">
-                                    {"Welcome, " + user.first_name}
+                                    {"Welcome, " + user.first_name.charAt(0).toUpperCase() + user.first_name.slice(1)}
                                 </h5>
                             </div>
                             <div className="btn-container">

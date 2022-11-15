@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 
 import MainSubContainer from "./minor_components/MainSubContainer"
 import AccountWidget from "./minor_components/micro_components/AccountWidget"
-import { UserContextInterface } from "../contexts/global"
+import { UserContextInterface } from "../../contexts/global"
 
 interface MainContainerProps{
     clickIndex: number,

@@ -2,12 +2,14 @@
 import './Sass/App.scss'
 //Dependencies
 import Cookies from 'js-cookie'
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import { useEffect, useState } from "react";
 
 //Components
 
-import MainContainer from './main_container_components/MainContainer';
-import NavBar from './nav_components/NavBar';
+import MainContainer from './main_site_components/main_container_components/MainContainer';
+import NavBar from './main_site_components/nav_components/NavBar';
+import ResetPassword from './side_components/ResetPassword';
 
 //Contexts
 import { ScreenSizeContext, UserContext, UserContextInterface } from './contexts/global';
@@ -58,32 +60,41 @@ function App() {
   }else{
     return (
       <div className='app'>
-        <ScreenSizeContext.Provider value={screenSize}>
-          <UserContext.Provider value={user}>
-              <NavBar 
-                clickIndex={clickIndex} 
-                setClickIndex={setClickIndex} 
-                setUser={setUser} 
-                loginState={loginState} 
-                setLoginState={setLoginState} 
-                regState={regState} 
-                setRegState={setRegState}
-                blur={blur}
-                setBlur={setBlur}
-                />
-              <MainContainer 
-                clickIndex={clickIndex} 
-                setClickIndex={setClickIndex} 
-                setUser={setUser} 
-                loginState={loginState} 
-                setLoginState={setLoginState} 
-                regState={regState} 
-                setRegState={setRegState}
-                blur={blur}
-                setBlur={setBlur}
-                />
-          </UserContext.Provider>
-        </ScreenSizeContext.Provider>
+        <Router>
+          <Routes>
+            <Route path='/' element={
+              <ScreenSizeContext.Provider value={screenSize}>
+                <UserContext.Provider value={user}>
+                    <NavBar 
+                      clickIndex={clickIndex} 
+                      setClickIndex={setClickIndex} 
+                      setUser={setUser} 
+                      loginState={loginState} 
+                      setLoginState={setLoginState} 
+                      regState={regState} 
+                      setRegState={setRegState}
+                      blur={blur}
+                      setBlur={setBlur}
+                      />
+                    <MainContainer 
+                      clickIndex={clickIndex} 
+                      setClickIndex={setClickIndex} 
+                      setUser={setUser} 
+                      loginState={loginState} 
+                      setLoginState={setLoginState} 
+                      regState={regState} 
+                      setRegState={setRegState}
+                      blur={blur}
+                      setBlur={setBlur}
+                      />
+                </UserContext.Provider>
+              </ScreenSizeContext.Provider>
+            }/>
+            <Route path='/reset/:token' element={
+              <ResetPassword/>
+            }/>
+          </Routes>
+        </Router>
       </div>
     );
   }
