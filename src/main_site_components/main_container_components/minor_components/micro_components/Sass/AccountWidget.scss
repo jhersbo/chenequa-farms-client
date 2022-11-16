@@ -26,6 +26,21 @@
         border-radius: 15px;
 
         font-family: $genSans;
+        font-weight: 600;
+    }
+
+    .widget-btn:hover{
+        background-color: $Castleton;
+    }
+
+    #login-reg-header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .login-reg-submit{
+        width: 25%;
     }
 
     #login-container{
@@ -40,6 +55,10 @@
         border-radius: 15px;
 
         padding: 1rem;
+
+        h5{
+            margin-top: 0em;
+        }
     }
 
     #login-form-container{
@@ -50,7 +69,20 @@
         #login-btn-container{
             display: flex;
             justify-content: space-around;
+            
+            margin-top: 1rem;
         }
+    }
+
+    .close-btn{
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: transparent;
+        border-radius: 50%;
+        border: 1px solid $Blk;
+        padding: 0em;
     }
 }
 
