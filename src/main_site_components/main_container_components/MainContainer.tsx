@@ -1,9 +1,11 @@
 import "./Sass/MainContainer.scss"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 
 import MainSubContainer from "./minor_components/MainSubContainer"
-import AccountWidget from "./minor_components/micro_components/AccountWidget"
-import { UserContextInterface } from "../../contexts/global"
+import AccountWidget from "./minor_components/AccountWidget"
+import { UserContext, UserContextInterface } from "../../contexts/global"
+
+import AdminBtn from "./minor_components/micro_components/AdminBtn"
 
 interface MainContainerProps{
     clickIndex: number,
@@ -14,18 +16,29 @@ interface MainContainerProps{
     regState: boolean,
     setRegState: React.Dispatch<React.SetStateAction<boolean>>,
     blur: boolean,
-    setBlur: React.Dispatch<React.SetStateAction<boolean>>
+    setBlur: React.Dispatch<React.SetStateAction<boolean>>,
+    setSiteState: React.Dispatch<React.SetStateAction<string>>
 }
 
-const MainContainer = ({ clickIndex, setClickIndex, setUser, loginState, setLoginState, regState, setRegState, blur, setBlur }: MainContainerProps)=>{
+
+
+const MainContainer = ({ clickIndex, setClickIndex, setUser, loginState, setLoginState, regState, setRegState, blur, setBlur, setSiteState }: MainContainerProps)=>{
+
+    let user = useContext(UserContext)
 
     return(
         <div className="main-container">
             <div className="main-top-bar">
                 <header>
-                    <h1>Chenequa Farms</h1>
+                    <h1>ChenequaFarms.com</h1>
                 </header>
                 <h5>*Searchbar*</h5>
+                {
+                    user?.is_admin ?
+                        <AdminBtn setSiteState={setSiteState}/>
+                    :
+                        null
+                }
                 <AccountWidget 
                     setUser={setUser}
                     loginState={loginState} 

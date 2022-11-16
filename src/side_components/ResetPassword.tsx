@@ -1,10 +1,10 @@
 import "./Sass/ResetPassword.scss"
-import "../main_site_components/main_container_components/minor_components/micro_components/Sass/AccountWidget.scss"
+import "../main_site_components/main_container_components/minor_components/Sass/AccountWidget.scss"
 
 import { TextField } from "@mui/material"
 import { Bars } from "react-loader-spinner"
 
-import { textFieldSXProps, loadingBarsStyle } from "../main_site_components/main_container_components/minor_components/micro_components/AccountWidget"
+import { textFieldSXProps, loadingBarsStyle } from "../main_site_components/main_container_components/minor_components/AccountWidget"
 import { serverURL } from "../App"
 import { useState } from "react"
 

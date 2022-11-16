@@ -86,6 +86,7 @@ function App() {
                       setRegState={setRegState}
                       blur={blur}
                       setBlur={setBlur}
+                      setSiteState={setSiteState}
                     />
                 </UserContext.Provider>
               </ScreenSizeContext.Provider>
