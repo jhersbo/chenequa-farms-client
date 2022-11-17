@@ -5,15 +5,35 @@ import { UserContext, UserContextInterface } from "../../../contexts/global"
 import { serverURL } from "../../../App"
 import Cookies from "js-cookie"
 
+import { styled, TextField } from "@mui/material"
+
 import LoginForm from "./micro_components/LoginForm"
 import RegForm from "./micro_components/RegForm"
 import ForgotPassForm from "./micro_components/ForgotPassForm"
 import AccountScreen from "./micro_components/AccountScreen"
 
+
 export const textFieldSXProps = {
     marginBottom: "0.5rem",
-    width: "100%"
+    width: "100%",
+    // border: "1px solid #0b0b0c",
+    borderRadius: "5px",
+    // boxShadow: "1px 1px 2px #0b0b0c"
 }
+
+export const CustomTextField = styled(TextField)({
+    '& label.Mui-focused': {
+        color: '#01B763',
+    },
+    '& .MuiInput-underline:after': {
+    borderBottomColor: '#01B763',
+    },
+    '& .MuiOutlinedInput-root': {
+        '&.Mui-focused fieldset': {
+            borderColor: '#01B763',
+        },
+    },
+})
 
 export const closeIconSXProps = {
     fontSize: "28px"
@@ -22,7 +42,7 @@ export const closeIconSXProps = {
 export const loadingBarsStyle = {
     height: "40",
     width: "40",
-    color: "#005B31",
+    color: "#01B763",
     ariaLabel: "bars-loading"
 }
 
@@ -35,8 +55,17 @@ interface AccountWidgetProps{
     setBlur: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const AccountWidget = ({ setUser, loginState, setLoginState, regState, setRegState, setBlur }: AccountWidgetProps)=>{
+const AccountWidget = (props: AccountWidgetProps)=>{
     
+    let { 
+        setUser, 
+        loginState, 
+        setLoginState, 
+        regState, 
+        setRegState, 
+        setBlur 
+    } = props
+
     const [ emailInput, setEmailInput ] = useState("")
     const [ firstName, setFirstName ] = useState("")
     const [ lastName, setLastName ] = useState("")
@@ -71,6 +100,15 @@ const AccountWidget = ({ setUser, loginState, setLoginState, regState, setRegSta
 
         setIsLoading(true)
 
+        let emailOmit = emailInput === ""
+        let passWordOmit = password_1 === ""
+
+        if(emailOmit || passWordOmit){
+            setValidationError({state: true, message: "Please fill out all required fields."})
+            setIsLoading(false)
+            return
+        }
+
         let response = await fetch(serverURL + "user_auth/auth",{
             method: "POST",
             headers: {
@@ -103,6 +141,17 @@ const AccountWidget = ({ setUser, loginState, setLoginState, regState, setRegSta
     const handleRegistration = async ()=>{
 
         setIsLoading(true)
+
+        let emailOmit = emailInput === ""
+        let firstNameOmit = firstName === ""
+        let lastNameOmit = lastName === ""
+        let passWordOmit = password_1 === "" || password_2 === ""
+
+        if(emailOmit || firstNameOmit || lastNameOmit || passWordOmit){
+            setValidationError({state: true, message: "Please fill out all required fields."})
+            setIsLoading(false)
+            return
+        }
 
         let passwordsMatch = password_1 === password_2;
 
@@ -287,8 +336,8 @@ const AccountWidget = ({ setUser, loginState, setLoginState, regState, setRegSta
                                 </h5>
                             </div>
                             <div className="btn-container">
-                                <button className="widget-btn" aria-label="log out" onClick={()=>{handleSignOut()}}>Log Out</button>
-                                <button className="widget-btn" aria-label="account" onClick={()=>{handleSwitchToAccount()}}>Account</button>
+                                <button className="widget-btn collapsed-widget" aria-label="log out" onClick={()=>{handleSignOut()}}>Log Out</button>
+                                <button className="widget-btn collapsed-widget" aria-label="account" onClick={()=>{handleSwitchToAccount()}}>Account</button>
                             </div>
                         </div>
                     :

@@ -29,10 +29,10 @@ const MainContainer = ({ clickIndex, setClickIndex, setUser, loginState, setLogi
     return(
         <div className="main-container">
             <div className="main-top-bar">
-                <header>
+                <header style={{"filter": blur ? "blur(4px)" : "none"}}>
                     <h1>ChenequaFarms.com</h1>
                 </header>
-                <h5>*Searchbar*</h5>
+                <h5 style={{"filter": blur ? "blur(4px)" : "none"}}>*Searchbar*</h5>
                 {
                     user?.is_admin ?
                         <AdminBtn setSiteState={setSiteState}/>

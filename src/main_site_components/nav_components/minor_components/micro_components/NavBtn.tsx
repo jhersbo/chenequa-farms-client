@@ -10,16 +10,21 @@ interface NavBtnProps{
     element: NavMethodsMap,
     index: number,
     clickIndex: number,
-    setClickIndex: React.Dispatch<React.SetStateAction<number>>
+    setClickIndex: React.Dispatch<React.SetStateAction<number>>,
+    blur: boolean
 }
 
-const NavBtn = ({ element, index, clickIndex, setClickIndex }: NavBtnProps)=>{
+const NavBtn = ({ element, index, clickIndex, setClickIndex, blur }: NavBtnProps)=>{
     return(
         <li key={index} aria-label={element.label} className='nav-list-item' style={{
             backgroundColor: clickIndex === index ? "#01B763": "inherit",
         }}>
             <Tooltip title={element.label} placement="right" arrow>
-                <button className="nav-list-btn" aria-label={element.label} onClick={()=>{setClickIndex(index)}}>
+                <button 
+                    className="nav-list-btn" 
+                    aria-label={element.label} 
+                    disabled={blur}
+                    onClick={()=>{setClickIndex(index)}}>
                     {element.jsx}
                 </button>
             </Tooltip>

@@ -66,10 +66,12 @@ const ForgotPassForm = (props: ForgotPassFormProps)=>{
                 </header>
                 <h5>Enter your email below and you will receive an email to reset your password.</h5>
                 <TextField
+                    error={validationError.state}
                     id="email-input"
                     label="Email address"
                     onChange={(e)=>{updateEmailInput(e)}}
                     sx={textFieldSXProps}
+                    required
                 />
                 {
                     validationError.state ? 

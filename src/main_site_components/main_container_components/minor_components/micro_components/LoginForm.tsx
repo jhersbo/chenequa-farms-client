@@ -1,7 +1,7 @@
 import "../Sass/AccountWidget.scss"
 
 import CloseIcon from '@mui/icons-material/Close';
-import TextField from '@mui/material/TextField';
+import { CustomTextField } from "../AccountWidget";
 import { Bars } from "react-loader-spinner"
 
 interface LoginFormProps{
@@ -67,18 +67,22 @@ const LoginForm = (props: LoginFormProps)=>{
                 }
             </header>
             <div id="login-form-container">
-                <TextField
+                <CustomTextField
+                    error={validationError.state}
                     id="email-input"
                     label="Email address"
                     onChange={(e)=>{updateEmailInput(e)}}
                     sx={textFieldSXProps}
+                    required
                 />
-                <TextField
+                <CustomTextField
+                    error={validationError.state}
                     className="password-input"
                     type="password"
                     label="Password"
                     onChange={(e)=>{updatePassword_1Input(e)}}
                     sx={textFieldSXProps}
+                    required
                 />
                 {
                     validationError.state ? 

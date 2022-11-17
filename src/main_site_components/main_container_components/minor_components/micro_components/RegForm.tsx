@@ -2,6 +2,7 @@ import "../Sass/AccountWidget.scss"
 
 import CloseIcon from '@mui/icons-material/Close';
 import TextField from '@mui/material/TextField';
+import { CustomTextField } from "../AccountWidget";
 import { Bars } from "react-loader-spinner"
 
 interface RegFormProps{
@@ -75,40 +76,50 @@ const RegForm = (props: RegFormProps)=>{
                     }
                 </header>
                 <div id="login-form-container">
-                    <TextField
+                    <CustomTextField
+                        error={validationError.state}
                         id="email-input"
                         className="form-fields"
                         label="Email address"
                         onChange={(e)=>{updateEmailInput(e)}}
                         sx={textFieldSXProps}
+                        required
                     />
-                    <TextField
+                    <CustomTextField
+                        error={validationError.state}
                         id="first-name-input"
                         className="form-fields"
                         label="First name"
                         onChange={(e)=>{updateFirstNameInput(e)}}
                         sx={textFieldSXProps}
+                        required
                     />
-                    <TextField
+                    <CustomTextField
+                        error={validationError.state}
                         id="email-input"
                         className="form-fields"
                         label="Last name"
                         onChange={(e)=>{updateLastNameInput(e)}}
                         sx={textFieldSXProps}
+                        required
                     />
-                    <TextField
+                    <CustomTextField
+                        error={validationError.state}
                         className="password-input form-fields"
                         type="password"
-                        label={!validationError.state ? "Password" : validationError.message}
+                        label={"Password"}
                         onChange={(e)=>{updatePassword_1Input(e)}}
                         sx={textFieldSXProps}
+                        required
                     />
-                    <TextField
+                    <CustomTextField
+                        error={validationError.state}
                         className="password-input form-fields"
                         type="password"
-                        label={!validationError.state ? "Confirm password" : validationError.message}
+                        label={"Confirm password"}
                         onChange={(e)=>{updatePassword_2Input(e)}}
                         sx={textFieldSXProps}
+                        required
                     />
                     {
                         validationError.state ? 

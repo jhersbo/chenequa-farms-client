@@ -84,7 +84,13 @@ const NavBar = ({ clickIndex, setClickIndex, setUser, loginState, setLoginState,
                     {
                         navMethods.map((element: NavMethodsMap, index: number)=>{
                             return(
-                                <NavBtn key={index} element={element} index={index} clickIndex={clickIndex} setClickIndex={setClickIndex}/>
+                                <NavBtn 
+                                    key={index} 
+                                    element={element} 
+                                    index={index} 
+                                    clickIndex={clickIndex} 
+                                    setClickIndex={setClickIndex}
+                                    blur={blur}/>
                             )
                         })
                     }
