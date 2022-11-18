@@ -23,7 +23,20 @@ interface MainContainerProps{
 
 
 
-const MainContainer = ({ clickIndex, setClickIndex, setUser, loginState, setLoginState, regState, setRegState, blur, setBlur, setSiteState }: MainContainerProps)=>{
+const MainContainer = (props: MainContainerProps)=>{
+
+    let { 
+        clickIndex, 
+        setClickIndex, 
+        setUser, 
+        loginState, 
+        setLoginState, 
+        regState, 
+        setRegState, 
+        blur, 
+        setBlur, 
+        setSiteState 
+    } = props
 
     let user = useContext(UserContext)
 
