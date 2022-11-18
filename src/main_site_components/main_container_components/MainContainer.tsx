@@ -6,6 +6,7 @@ import AccountWidget from "./minor_components/AccountWidget"
 import { UserContext, UserContextInterface } from "../../contexts/global"
 
 import AdminBtn from "./minor_components/micro_components/AdminBtn"
+import SearchBar from "./minor_components/micro_components/SearchBar"
 
 interface MainContainerProps{
     clickIndex: number,
@@ -32,7 +33,7 @@ const MainContainer = ({ clickIndex, setClickIndex, setUser, loginState, setLogi
                 <header style={{"filter": blur ? "blur(4px)" : "none"}}>
                     <h1>ChenequaFarms.com</h1>
                 </header>
-                <h5 style={{"filter": blur ? "blur(4px)" : "none"}}>*Searchbar*</h5>
+                <SearchBar blur={blur}/>
                 {
                     user?.is_admin ?
                         <AdminBtn setSiteState={setSiteState}/>
@@ -49,7 +50,11 @@ const MainContainer = ({ clickIndex, setClickIndex, setUser, loginState, setLogi
                 />
             </div>
             <div style={{"filter": blur ? "blur(4px)" : "none"}}>
-                <MainSubContainer clickIndex={clickIndex} setClickIndex={setClickIndex}/>
+                <MainSubContainer 
+                    clickIndex={clickIndex} 
+                    setClickIndex={setClickIndex}
+                    blur={blur}
+                />
             </div>
         </div>
     )

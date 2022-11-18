@@ -1,11 +1,13 @@
+import BrowseContainer from "./BrowseContainer"
 import Home from "./Home"
 
 interface MainSubContainerProps{
     clickIndex: number,
-    setClickIndex: React.Dispatch<React.SetStateAction<number>>
+    setClickIndex: React.Dispatch<React.SetStateAction<number>>,
+    blur: boolean
 }
 
-const MainSubContainer = ({ clickIndex, setClickIndex }: MainSubContainerProps)=>{
+const MainSubContainer = ({ clickIndex, setClickIndex, blur }: MainSubContainerProps)=>{
     switch (clickIndex) {
         case 0:
             return(
@@ -16,7 +18,9 @@ const MainSubContainer = ({ clickIndex, setClickIndex }: MainSubContainerProps)=
         case 1:
             return(
                 <>
-                    Categories
+                    <BrowseContainer 
+                        blur={blur}
+                    />
                 </>
             )
         case 2:

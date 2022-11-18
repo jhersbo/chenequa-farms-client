@@ -1,0 +1,15 @@
+@import "/src/Sass/_variables";
+
+@media (min-width: $mobilebreakpoint){
+    #browse-container{
+        display: flex;
+        align-items: center;
+
+        min-height: 85vh;
+        width: 94vw;
+    }
+}
+
+@media (max-width: $mobilebreakpoint){
+
+}

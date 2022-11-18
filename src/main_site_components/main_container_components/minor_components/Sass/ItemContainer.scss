@@ -1,0 +1,11 @@
+@import "/src/Sass/_variables";
+
+@media (min-width: $mobilebreakpoint){
+    #item-container{
+        margin-left: 0.5rem;
+    }
+}
+
+@media (max-width: $mobilebreakpoint){
+
+}
