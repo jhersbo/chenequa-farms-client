@@ -68,6 +68,7 @@ const LoginForm = (props: LoginFormProps)=>{
             </header>
             <div id="login-form-container">
                 <CustomTextField
+                    data-testid="login-email"
                     error={validationError.state}
                     id="email-input"
                     label="Email address"
@@ -76,6 +77,7 @@ const LoginForm = (props: LoginFormProps)=>{
                     required
                 />
                 <CustomTextField
+                    data-testid="login-password"
                     error={validationError.state}
                     className="password-input"
                     type="password"
