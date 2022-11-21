@@ -26,6 +26,7 @@ interface RegFormProps{
     },
     handleCloseBtn: () => void,
     updateEmailInput: (event: any) => void,
+    updatePhoneInput: (event: any) => void,
     updatePassword_1Input: (event: any) => void,
     handleLoginSubmit: () => Promise<void>,
     handleForgotPasswordState: () => void,
@@ -45,7 +46,8 @@ const RegForm = (props: RegFormProps)=>{
         closeIconSXProps, 
         isLoading, 
         validationError, 
-        updateEmailInput, 
+        updateEmailInput,
+        updatePhoneInput, 
         updateFirstNameInput, 
         updateLastNameInput, 
         updatePassword_1Input, 
@@ -82,6 +84,15 @@ const RegForm = (props: RegFormProps)=>{
                         className="form-fields"
                         label="Email address"
                         onChange={(e)=>{updateEmailInput(e)}}
+                        sx={textFieldSXProps}
+                        required
+                    />
+                    <CustomTextField
+                        error={validationError.state}
+                        id="phone-input"
+                        className="form-fields"
+                        label="Phone number"
+                        onChange={(e)=>{updatePhoneInput(e)}}
                         sx={textFieldSXProps}
                         required
                     />

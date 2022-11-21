@@ -24,28 +24,40 @@ const BrowseContainer = (props: BrowseContainerProps)=>{
     const [ categoryDB, setCategoryDB ] = useState([])
     const [ category, setCategory ] = useState<number | null>(null)
     const [ error, setError ] = useState({state: false, message: ""})
+    const [ isLoading, setIsLoading ] = useState(false)
 
     const [ catCollapsed, setCatCollapsed ] = useState(false)
 
     useEffect(()=>{
+        setIsLoading(true)
         const retrieveCategories = async ()=>{
-            let response = await fetch(serverURL + "categories")
-            let parsedResponse = await response.json()
-            
-            console.log(parsedResponse)
-
-            if(!parsedResponse.success){
+            try{
+                let response = await fetch(serverURL + "categories")
+                let parsedResponse = await response.json()
+                
+                console.log(parsedResponse)
+    
+                if(!parsedResponse.success){
+                    setIsLoading(false)
+                    setError({
+                        state: true,
+                        message: "Error retrieving category data."
+                    })
+                    return
+                }
+                setCategoryDB(parsedResponse.data)
+                setIsLoading(false)
+            }catch(err){
+                setIsLoading(false)
                 setError({
                     state: true,
-                    message: "Error retrieving data."
+                    message: "Error connecting to server."
                 })
-                return
             }
-    
-            setCategoryDB(parsedResponse.data)
             return
         }
         retrieveCategories()
+        return
     }, [])
 
     return(
@@ -58,12 +70,16 @@ const BrowseContainer = (props: BrowseContainerProps)=>{
                 error={error}
                 catCollapsed={catCollapsed}
                 setCatCollapsed={setCatCollapsed}
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
             />
             <ItemContainer
                 catCollapsed={catCollapsed}
                 setCatCollapsed={setCatCollapsed}
                 categoryDB={categoryDB}
                 category={category}
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
             />
         </div>
     )

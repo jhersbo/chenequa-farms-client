@@ -8,7 +8,9 @@ interface ItemContainerProps{
     catCollapsed: boolean,
     setCatCollapsed: React.Dispatch<React.SetStateAction<boolean>>,
     categoryDB: CategoryTypes[],
-    category: number | null
+    category: number | null,
+    isLoading: boolean,
+    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const ItemContainer = (props: ItemContainerProps)=>{
@@ -19,7 +21,9 @@ const ItemContainer = (props: ItemContainerProps)=>{
         catCollapsed,
         setCatCollapsed,
         categoryDB,
-        category
+        category,
+        isLoading,
+        setIsLoading
     } = props
 
     useEffect(()=>{

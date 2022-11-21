@@ -2,6 +2,8 @@ import "./Sass/CategoryMenu.scss"
 
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
+import { Bars } from "react-loader-spinner"
+import { loadingBarsStyle } from "./AccountWidget";
 
 import { CategoryTypes } from "./BrowseContainer"
 
@@ -21,7 +23,9 @@ interface CategoryMenuProps{
         message: string;
     },
     catCollapsed: boolean,
-    setCatCollapsed: React.Dispatch<React.SetStateAction<boolean>>
+    setCatCollapsed: React.Dispatch<React.SetStateAction<boolean>>,
+    isLoading: boolean,
+    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const arrowSXProps = {
@@ -39,7 +43,9 @@ const CategoryMenu = (props: CategoryMenuProps)=>{
         setError, 
         error,
         catCollapsed,
-        setCatCollapsed
+        setCatCollapsed,
+        isLoading,
+        setIsLoading
     } = props
 
     
@@ -55,20 +61,47 @@ const CategoryMenu = (props: CategoryMenuProps)=>{
             }}
             transition={{ duration: 0.5, type: "tween" }}
         >
-            {
-                catCollapsed ?
-                    <ArrowCircleRightIcon
-                        className="arrow-icon"
-                        onClick={()=>{setCatCollapsed(!catCollapsed)}}
-                        sx={arrowSXProps}
-                    />
-                :
-                    <ArrowCircleLeftIcon
-                        className="arrow-icon"
-                        onClick={()=>{setCatCollapsed(!catCollapsed)}}
-                        sx={arrowSXProps}
-                    />
-            }
+            <div style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center"
+            }}>
+                {
+                    catCollapsed ?
+                        <ArrowCircleRightIcon
+                            className="arrow-icon"
+                            onClick={()=>{setCatCollapsed(!catCollapsed)}}
+                            sx={arrowSXProps}
+                        />
+                    :
+                        <ArrowCircleLeftIcon
+                            className="arrow-icon"
+                            onClick={()=>{setCatCollapsed(!catCollapsed)}}
+                            sx={arrowSXProps}
+                        />
+                }
+
+                {
+                    error && !catCollapsed ?
+                        <h5 style={{
+                            margin: "0em",
+                            color: "red"
+                        }}>{error.message}</h5>
+                    :
+                        null
+                }
+
+                {
+                    isLoading && !catCollapsed ?
+                        <Bars
+                            height={loadingBarsStyle.height}
+                            width={loadingBarsStyle.width}
+                            color={loadingBarsStyle.color}
+                        />
+                    :
+                        null
+                }
+            </div>
             <ul id="category-ul"
                 style={{
                     display: catCollapsed ? "none" : "flex"

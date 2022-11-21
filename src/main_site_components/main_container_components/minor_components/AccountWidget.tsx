@@ -67,6 +67,7 @@ const AccountWidget = (props: AccountWidgetProps)=>{
     } = props
 
     const [ emailInput, setEmailInput ] = useState("")
+    const [ phoneNumber, setPhoneNumber ] = useState("")
     const [ firstName, setFirstName ] = useState("")
     const [ lastName, setLastName ] = useState("")
     const [ password_1, setPassword_1 ] = useState("")
@@ -97,7 +98,7 @@ const AccountWidget = (props: AccountWidgetProps)=>{
     }
 
     const handleLoginSubmit = async ()=>{
-
+        //add try/catch behavior
         setIsLoading(true)
 
         let emailOmit = emailInput === ""
@@ -109,37 +110,42 @@ const AccountWidget = (props: AccountWidgetProps)=>{
             return
         }
 
-        let response = await fetch(serverURL + "user_auth/auth",{
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                email_address: emailInput,
-                password_hash: password_1
+        try{
+            let response = await fetch(serverURL + "user_auth/auth",{
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email_address: emailInput,
+                    password_hash: password_1
+                })
             })
-        })
-
-        let parsedResponse = await response.json()
-        console.log(parsedResponse)
-
-        if(!parsedResponse.success){
+    
+            let parsedResponse = await response.json()
+            console.log(parsedResponse)
+    
+            if(!parsedResponse.success){
+                setIsLoading(false)
+                setValidationError({state: true, message: "Unable to log in. Please check your login credentials."})
+                return
+            }
+    
+            setUser(parsedResponse.data)
+            Cookies.set("user", JSON.stringify(parsedResponse.data))
             setIsLoading(false)
-            setValidationError({state: true, message: "Unable to log in. Please check your login credentials."})
+            setLoginState(false)
+            setRegState(false)
+            setBlur(false)
+            return
+        }catch(err){
+            setValidationError({state: true, message: "Error connecting to the server."})
+            setIsLoading(false)
             return
         }
-
-        setUser(parsedResponse.data)
-        Cookies.set("user", JSON.stringify(parsedResponse.data))
-        setIsLoading(false)
-        setLoginState(false)
-        setRegState(false)
-        setBlur(false)
-        return
     }
 
     const handleRegistration = async ()=>{
-
         setIsLoading(true)
 
         let emailOmit = emailInput === ""
@@ -160,38 +166,51 @@ const AccountWidget = (props: AccountWidgetProps)=>{
             return
         }
 
-        let response = await fetch(serverURL + "user_auth", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                email_address: emailInput,
-                first_name: firstName,
-                last_name: lastName,
-                password_hash: password_1
+        try{
+            let response = await fetch(serverURL + "user_auth", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email_address: emailInput,
+                    phone_number: phoneNumber,
+                    first_name: firstName,
+                    last_name: lastName,
+                    password_hash: password_1
+                })
             })
-        })
-
-        let parsedResponse = await response.json()
-
-        if(!parsedResponse.success){
+    
+            let parsedResponse = await response.json()
+    
+            if(!parsedResponse.success){
+                setIsLoading(false)
+                setValidationError({state: true, message: "Unable to create account. Please check your credentials."})
+                return
+            }
+    
+            setUser(parsedResponse.data)
+            Cookies.set("user", JSON.stringify(parsedResponse.data))
             setIsLoading(false)
-            setValidationError({state: true, message: "Unable to create account. Please check your credentials."})
+            setLoginState(false)
+            setRegState(false)
+            setBlur(false)
+            return
+        }catch(err){
+            setValidationError({state: true, message: "Error connecting to the server."})
+            setIsLoading(false)
             return
         }
-
-        setUser(parsedResponse.data)
-        Cookies.set("user", JSON.stringify(parsedResponse.data))
-        setIsLoading(false)
-        setLoginState(false)
-        setRegState(false)
-        setBlur(false)
-        return
     }
 
     const updateEmailInput = (event: any)=>{
+        setValidationError({state: false, message: ""})
         setEmailInput(event.target.value)
+    }
+
+    const updatePhoneInput = (event: any)=>{
+        setValidationError({state: false, message: ""})
+        setPhoneNumber(event.target.value)
     }
 
     const updateFirstNameInput = (event: any)=>{
@@ -222,6 +241,7 @@ const AccountWidget = (props: AccountWidgetProps)=>{
     }
 
     const handleSendRecoveryEmail = async ()=>{
+        //add try/catch behavior
         setIsLoading(true)
 
         if(emailInput === ""){
@@ -230,29 +250,35 @@ const AccountWidget = (props: AccountWidgetProps)=>{
             return
         }
 
-        let response = await fetch(serverURL + "user_auth/forgot-password", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                email_address: emailInput
+        try{
+            let response = await fetch(serverURL + "user_auth/forgot-password", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email_address: emailInput
+                })
             })
-        })
-
-        let parsedResponse = await response.json()
-
-        if(!parsedResponse.success){
+    
+            let parsedResponse = await response.json()
+    
+            if(!parsedResponse.success){
+                setIsLoading(false)
+                setValidationError({state: true, message: "Unable to send password reset email. Please check to be sure your email address is correct."})
+                return
+            }
+    
+            setRecoverySuccess(true)
             setIsLoading(false)
-            setValidationError({state: true, message: "Unable to send password reset email. Please check to be sure your email address is correct."})
+            setLoginState(false)
+            setRegState(false)
+            return
+        }catch(err){
+            setValidationError({state: true, message: "Error connecting to the server."})
+            setIsLoading(false)
             return
         }
-
-        setRecoverySuccess(true)
-        setIsLoading(false)
-        setLoginState(false)
-        setRegState(false)
-        return
     }
 
     const handleCloseBtn = ()=>{
@@ -295,6 +321,7 @@ const AccountWidget = (props: AccountWidgetProps)=>{
                 closeIconSXProps={closeIconSXProps}
                 handleCloseBtn={handleCloseBtn}
                 updateEmailInput={updateEmailInput}
+                updatePhoneInput={updatePhoneInput}
                 updatePassword_1Input={updatePassword_1Input}
                 handleLoginSubmit={handleLoginSubmit}
                 handleForgotPasswordState={handleForgotPasswordState}

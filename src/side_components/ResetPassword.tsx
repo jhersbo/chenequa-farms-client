@@ -36,6 +36,7 @@ const ResetPassword = ()=>{
     }
 
     const submitPasswordUpdate = async ()=>{
+        //add try/catch behavior
         setIsLoading(true)
         let passwordsMatch = password_1 === password_2;
 
