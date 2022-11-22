@@ -1,8 +1,9 @@
 import "../Sass/AccountWidget.scss"
 
-import CloseIcon from '@mui/icons-material/Close';
 import { CustomTextField } from "../AccountWidget";
 import { Bars } from "react-loader-spinner"
+
+import CloseBtn from "./CloseBtn";
 
 interface LoginFormProps{
     loadingBarsStyle: {
@@ -14,9 +15,6 @@ interface LoginFormProps{
     textFieldSXProps: {
         marginBottom: string,
         width: string,
-    },
-    closeIconSXProps: {
-        fontSize: string
     },
     isLoading: boolean,
     validationError: {
@@ -35,7 +33,6 @@ const LoginForm = (props: LoginFormProps)=>{
     let { 
         loadingBarsStyle, 
         textFieldSXProps, 
-        closeIconSXProps, 
         isLoading, 
         validationError, 
         handleCloseBtn, 
@@ -48,11 +45,7 @@ const LoginForm = (props: LoginFormProps)=>{
 
     return(
         <div id="login-container">
-            <button 
-                className="close-btn"
-                onClick={()=>{handleCloseBtn()}}>
-                <CloseIcon sx={closeIconSXProps}/>
-            </button>
+            <CloseBtn handleCloseBtn={handleCloseBtn}/>
             <header id="login-reg-header">
                 <h3>Login</h3>
                 {

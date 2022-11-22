@@ -35,10 +35,6 @@ export const CustomTextField = styled(TextField)({
     },
 })
 
-export const closeIconSXProps = {
-    fontSize: "28px"
-}
-
 export const loadingBarsStyle = {
     height: "40",
     width: "40",
@@ -262,7 +258,9 @@ const AccountWidget = (props: AccountWidgetProps)=>{
             })
     
             let parsedResponse = await response.json()
-    
+            
+            console.log(parsedResponse)
+
             if(!parsedResponse.success){
                 setIsLoading(false)
                 setValidationError({state: true, message: "Unable to send password reset email. Please check to be sure your email address is correct."})
@@ -287,6 +285,7 @@ const AccountWidget = (props: AccountWidgetProps)=>{
         setIsLoading(false)
         setLoginState(false)
         setRegState(false)
+        setAccountScreen(false)
         setBlur(false)
     }
 
@@ -302,7 +301,6 @@ const AccountWidget = (props: AccountWidgetProps)=>{
                 isLoading={isLoading}
                 validationError={validationError}
                 textFieldSXProps={textFieldSXProps}
-                closeIconSXProps={closeIconSXProps}
                 handleCloseBtn={handleCloseBtn}
                 updateEmailInput={updateEmailInput}
                 updatePassword_1Input={updatePassword_1Input}
@@ -318,7 +316,6 @@ const AccountWidget = (props: AccountWidgetProps)=>{
                 isLoading={isLoading}
                 validationError={validationError}
                 textFieldSXProps={textFieldSXProps}
-                closeIconSXProps={closeIconSXProps}
                 handleCloseBtn={handleCloseBtn}
                 updateEmailInput={updateEmailInput}
                 updatePhoneInput={updatePhoneInput}
@@ -338,7 +335,6 @@ const AccountWidget = (props: AccountWidgetProps)=>{
             <ForgotPassForm
                 loadingBarsStyle={loadingBarsStyle}
                 textFieldSXProps={textFieldSXProps}
-                closeIconSXProps={closeIconSXProps}
                 isLoading={isLoading}
                 validationError={validationError}
                 handleCloseBtn={handleCloseBtn}
@@ -349,7 +345,7 @@ const AccountWidget = (props: AccountWidgetProps)=>{
         )
     }else if (accountScreen){
         return(
-            <AccountScreen/>
+            <AccountScreen handleCloseBtn={handleCloseBtn}/>
         )
     }else{
         return(

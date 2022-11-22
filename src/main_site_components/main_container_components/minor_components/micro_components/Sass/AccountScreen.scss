@@ -1,0 +1,16 @@
+@import "/src/Sass/_variables";
+
+@media (min-width: $mobilebreakpoint){
+    #account-ul{
+        list-style-type: none;
+        padding-left: 0em;
+
+        li{
+            margin-bottom: 1rem;
+        }
+    }
+}
+
+@media (max-width: $mobilebreakpoint){
+
+}

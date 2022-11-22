@@ -1,10 +1,9 @@
 import "../Sass/AccountWidget.scss"
 
-import CloseIcon from '@mui/icons-material/Close';
-import TextField from '@mui/material/TextField';
-import { CustomTextField } from "../AccountWidget";
 import { Bars } from "react-loader-spinner"
 
+import { CustomTextField } from "../AccountWidget";
+import CloseBtn from "./CloseBtn";
 interface RegFormProps{
     loadingBarsStyle: {
         height: string,
@@ -15,9 +14,6 @@ interface RegFormProps{
     textFieldSXProps: {
         marginBottom: string,
         width: string,
-    },
-    closeIconSXProps: {
-        fontSize: string
     },
     isLoading: boolean,
     validationError: {
@@ -43,7 +39,6 @@ const RegForm = (props: RegFormProps)=>{
     let { 
         loadingBarsStyle, 
         textFieldSXProps, 
-        closeIconSXProps, 
         isLoading, 
         validationError, 
         updateEmailInput,
@@ -59,11 +54,7 @@ const RegForm = (props: RegFormProps)=>{
 
     return(
         <div id="login-container">
-                <button 
-                    className="close-btn"
-                    onClick={()=>{handleCloseBtn()}}>
-                    <CloseIcon sx={closeIconSXProps}/>
-                </button>
+                <CloseBtn handleCloseBtn={handleCloseBtn}/>
                 <header id="login-reg-header">
                     <h3>Register</h3>
                     {

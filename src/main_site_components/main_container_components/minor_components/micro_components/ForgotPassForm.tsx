@@ -1,8 +1,9 @@
 import "../Sass/AccountWidget.scss"
 
-import CloseIcon from '@mui/icons-material/Close';
 import TextField from '@mui/material/TextField';
 import { Bars } from "react-loader-spinner"
+
+import CloseBtn from "./CloseBtn";
 
 interface ForgotPassFormProps{
     loadingBarsStyle: {
@@ -14,9 +15,6 @@ interface ForgotPassFormProps{
     textFieldSXProps: {
         marginBottom: string,
         width: string,
-    },
-    closeIconSXProps: {
-        fontSize: string
     },
     isLoading: boolean,
     validationError: {
@@ -33,8 +31,7 @@ const ForgotPassForm = (props: ForgotPassFormProps)=>{
 
     let {
         loadingBarsStyle, 
-        textFieldSXProps, 
-        closeIconSXProps,
+        textFieldSXProps,
         isLoading, 
         validationError,
         handleCloseBtn,
@@ -46,11 +43,7 @@ const ForgotPassForm = (props: ForgotPassFormProps)=>{
 
     return(
         <div id="login-container">
-                <button 
-                    className="close-btn"
-                    onClick={()=>{handleCloseBtn()}}>
-                    <CloseIcon sx={closeIconSXProps}/>
-                </button>
+                <CloseBtn handleCloseBtn={handleCloseBtn}/>
                 <header id="login-reg-header">
                     <h3>Forgot your password?</h3>
                     {
