@@ -56,6 +56,7 @@ const AccountWidget = (props: AccountWidgetProps)=>{
 
     const [ loginState, setLoginState ] = useState(false)
     const [ regState, setRegState ] = useState(false)
+    const [ accountScreen, setAccountScreen ] = useState(false)
 
     const [ emailInput, setEmailInput ] = useState("")
     const [ phoneNumber, setPhoneNumber ] = useState("")
@@ -66,8 +67,8 @@ const AccountWidget = (props: AccountWidgetProps)=>{
     const [ forgotPassword, setForgotPassword ] = useState(false)
     const [ recoverySuccess, setRecoverySuccess ] = useState(false)
     const [ validationError, setValidationError ] = useState({state: false, message: ""})
+
     const [ isLoading, setIsLoading ] = useState(false)
-    const [ accountScreen, setAccountScreen ] = useState(false)
     
     const user = useContext(UserContext)
 
@@ -234,7 +235,7 @@ const AccountWidget = (props: AccountWidgetProps)=>{
     }
 
     const handleSendRecoveryEmail = async ()=>{
-        //add try/catch behavior
+        
         setIsLoading(true)
 
         if(emailInput === ""){

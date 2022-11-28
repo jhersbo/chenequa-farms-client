@@ -28,14 +28,12 @@ const ItemContainer = (props: ItemContainerProps)=>{
         blur
     } = props
 
-    useEffect(()=>{
-        if(category !== null){
-            let selectedCategory = categoryDB[category]
-            let ID = selectedCategory.category_id
-
-            //api call here
-        }
-    }, [category, categoryDB])
+    if(category !== null){
+        let selectedCategory = categoryDB[category]
+        console.log(selectedCategory)
+        let items = selectedCategory.inventories
+        console.log(items)
+    }
 
     return(
         <div id="item-container" style={{

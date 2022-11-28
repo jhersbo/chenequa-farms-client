@@ -8,6 +8,7 @@ import CategoryMenu from "./CategoryMenu"
 import ItemContainer from "./ItemContainer"
 
 export interface CategoryTypes{
+    inventories: any
     category_id: string, 
     category_name: string, 
     category_thumbnail: string
