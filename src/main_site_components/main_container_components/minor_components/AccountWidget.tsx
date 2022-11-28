@@ -44,10 +44,6 @@ export const loadingBarsStyle = {
 
 interface AccountWidgetProps{
     setUser: React.Dispatch<React.SetStateAction<UserContextInterface | null>>,
-    loginState: boolean,
-    setLoginState: React.Dispatch<React.SetStateAction<boolean>>
-    regState: boolean,
-    setRegState: React.Dispatch<React.SetStateAction<boolean>>,
     setBlur: React.Dispatch<React.SetStateAction<boolean>>
 }
 
@@ -55,12 +51,11 @@ const AccountWidget = (props: AccountWidgetProps)=>{
     
     let { 
         setUser, 
-        loginState, 
-        setLoginState, 
-        regState, 
-        setRegState, 
         setBlur 
     } = props
+
+    const [ loginState, setLoginState ] = useState(false)
+    const [ regState, setRegState ] = useState(false)
 
     const [ emailInput, setEmailInput ] = useState("")
     const [ phoneNumber, setPhoneNumber ] = useState("")
@@ -86,11 +81,13 @@ const AccountWidget = (props: AccountWidgetProps)=>{
     const handleSwitchToLogin = ()=>{
         setLoginState(true)
         setRegState(false)
+        setBlur(true)
     }
 
     const handleSwitchToReg = ()=>{
         setRegState(true)
         setLoginState(false)
+        setBlur(true)
     }
 
     const handleLoginSubmit = async ()=>{

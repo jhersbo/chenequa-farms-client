@@ -72,6 +72,7 @@ const BrowseContainer = (props: BrowseContainerProps)=>{
                 setCatCollapsed={setCatCollapsed}
                 isLoading={isLoading}
                 setIsLoading={setIsLoading}
+                blur={blur}
             />
             <ItemContainer
                 catCollapsed={catCollapsed}
@@ -80,6 +81,7 @@ const BrowseContainer = (props: BrowseContainerProps)=>{
                 category={category}
                 isLoading={isLoading}
                 setIsLoading={setIsLoading}
+                blur={blur}
             />
         </div>
     )

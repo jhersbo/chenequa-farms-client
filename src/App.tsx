@@ -12,7 +12,7 @@ import NavBar from './main_site_components/nav_components/NavBar';
 import ResetPassword from './side_components/ResetPassword';
 
 //Contexts
-import { ScreenSizeContext, UserContext, UserContextInterface } from './contexts/global';
+import { ScreenSizeContext, UserContext, BlurContext, UserContextInterface } from './contexts/global';
 
 export const serverURL = process.env.NODE_ENV === "development" 
 ? process.env.REACT_APP_LOCAL_SERVER 
@@ -40,16 +40,11 @@ function App() {
   //admin state
   const [ siteState, setSiteState ] = useState("client")
   //login states
-  const [ loginState, setLoginState ] = useState(false)
-  const [ regState, setRegState ] = useState(false)
   const [ blur, setBlur ] = useState(false)
 
   useEffect(()=>{
-    if(loginState || regState){
-      setBlur(true)
-    }
     setScreenSize({width: window.innerWidth, height: window.innerHeight})
-  }, [loginState, regState])
+  }, [])
 
   if(siteState === "admin"){
     return(
@@ -65,29 +60,21 @@ function App() {
             <Route path='/' element={
               <ScreenSizeContext.Provider value={screenSize}>
                 <UserContext.Provider value={user}>
+                  <BlurContext.Provider value={blur}>
                     <NavBar 
                       clickIndex={clickIndex} 
                       setClickIndex={setClickIndex} 
                       setUser={setUser} 
-                      loginState={loginState} 
-                      setLoginState={setLoginState} 
-                      regState={regState} 
-                      setRegState={setRegState}
-                      blur={blur}
                       setBlur={setBlur}
                     />
                     <MainContainer 
                       clickIndex={clickIndex} 
                       setClickIndex={setClickIndex} 
                       setUser={setUser} 
-                      loginState={loginState} 
-                      setLoginState={setLoginState} 
-                      regState={regState} 
-                      setRegState={setRegState}
-                      blur={blur}
                       setBlur={setBlur}
                       setSiteState={setSiteState}
                     />
+                  </BlurContext.Provider>
                 </UserContext.Provider>
               </ScreenSizeContext.Provider>
             }/>

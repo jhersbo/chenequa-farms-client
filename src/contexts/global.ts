@@ -35,3 +35,7 @@ export interface ScreenSizeContextInterface{
 }
 
 export const ScreenSizeContext = createContext<ScreenSizeContextInterface | null>(null)
+
+//blur
+
+export const BlurContext = createContext(false)

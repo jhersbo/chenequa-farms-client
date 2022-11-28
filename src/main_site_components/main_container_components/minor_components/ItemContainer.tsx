@@ -10,7 +10,8 @@ interface ItemContainerProps{
     categoryDB: CategoryTypes[],
     category: number | null,
     isLoading: boolean,
-    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
+    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
+    blur: boolean
 }
 
 const ItemContainer = (props: ItemContainerProps)=>{
@@ -23,7 +24,8 @@ const ItemContainer = (props: ItemContainerProps)=>{
         categoryDB,
         category,
         isLoading,
-        setIsLoading
+        setIsLoading,
+        blur
     } = props
 
     useEffect(()=>{

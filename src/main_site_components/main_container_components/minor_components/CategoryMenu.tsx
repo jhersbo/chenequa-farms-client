@@ -25,7 +25,8 @@ interface CategoryMenuProps{
     catCollapsed: boolean,
     setCatCollapsed: React.Dispatch<React.SetStateAction<boolean>>,
     isLoading: boolean,
-    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
+    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
+    blur: boolean
 }
 
 const arrowSXProps = {
@@ -45,7 +46,8 @@ const CategoryMenu = (props: CategoryMenuProps)=>{
         catCollapsed,
         setCatCollapsed,
         isLoading,
-        setIsLoading
+        setIsLoading,
+        blur
     } = props
 
     

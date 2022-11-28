@@ -1,19 +1,16 @@
 import "./Sass/NavBar.scss"
-import { useContext, useState, useEffect } from "react";
+import { useContext } from "react";
 import Cookies from "js-cookie";
 
 import Tooltip from '@mui/material/Tooltip';
 import CottageIcon from '@mui/icons-material/Cottage';
-import CategoryIcon from '@mui/icons-material/Category';
 import LocalFloristIcon from '@mui/icons-material/LocalFlorist';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LoyaltyIcon from '@mui/icons-material/Loyalty';
-import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 //contexts
-import { ScreenSizeContext, UserContext, UserContextInterface } from "../../contexts/global";
+import { BlurContext, ScreenSizeContext, UserContext, UserContextInterface } from "../../contexts/global";
 
 //components
 import NavBtn from './minor_components/micro_components/NavBtn'
@@ -28,18 +25,14 @@ interface NavBarProps{
     clickIndex: number,
     setClickIndex: React.Dispatch<React.SetStateAction<number>>,
     setUser: React.Dispatch<React.SetStateAction<UserContextInterface | null>>
-    loginState: boolean,
-    setLoginState: React.Dispatch<React.SetStateAction<boolean>>
-    regState: boolean,
-    setRegState: React.Dispatch<React.SetStateAction<boolean>>,
-    blur: boolean,
     setBlur: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const NavBar = ({ clickIndex, setClickIndex, setUser, loginState, setLoginState, regState, setRegState, blur, setBlur }: NavBarProps)=>{
+const NavBar = ({ clickIndex, setClickIndex, setUser, setBlur }: NavBarProps)=>{
 
     const screenSize = useContext(ScreenSizeContext)
     const user = useContext(UserContext)
+    const blur = useContext(BlurContext)
 
     const iconSXProp = {
         color: "white",
@@ -59,10 +52,6 @@ const NavBar = ({ clickIndex, setClickIndex, setUser, loginState, setLoginState,
             label: "Browse subscriptions.",
             jsx: <LoyaltyIcon sx={iconSXProp}/>
         },
-        // {
-        //     label: "View your cart.",
-        //     jsx: <ShoppingCartIcon sx={iconSXProp}/>
-        // }
         {
             label: "Browse pickup dates.",
             jsx: <CalendarMonthIcon sx={iconSXProp}/>
@@ -90,7 +79,7 @@ const NavBar = ({ clickIndex, setClickIndex, setUser, loginState, setLoginState,
                                     index={index} 
                                     clickIndex={clickIndex} 
                                     setClickIndex={setClickIndex}
-                                    blur={blur}/>
+                                />
                             )
                         })
                     }

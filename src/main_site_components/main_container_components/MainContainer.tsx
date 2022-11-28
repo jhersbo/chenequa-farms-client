@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react"
 
 import MainSubContainer from "./minor_components/MainSubContainer"
 import AccountWidget from "./minor_components/AccountWidget"
-import { UserContext, UserContextInterface } from "../../contexts/global"
+import { BlurContext, UserContext, UserContextInterface } from "../../contexts/global"
 
 import AdminBtn from "./minor_components/micro_components/AdminBtn"
 import SearchBar from "./minor_components/micro_components/SearchBar"
@@ -12,11 +12,6 @@ interface MainContainerProps{
     clickIndex: number,
     setClickIndex: React.Dispatch<React.SetStateAction<number>>,
     setUser: React.Dispatch<React.SetStateAction<UserContextInterface | null>>,
-    loginState: boolean,
-    setLoginState: React.Dispatch<React.SetStateAction<boolean>>
-    regState: boolean,
-    setRegState: React.Dispatch<React.SetStateAction<boolean>>,
-    blur: boolean,
     setBlur: React.Dispatch<React.SetStateAction<boolean>>,
     setSiteState: React.Dispatch<React.SetStateAction<string>>
 }
@@ -28,17 +23,14 @@ const MainContainer = (props: MainContainerProps)=>{
     let { 
         clickIndex, 
         setClickIndex, 
-        setUser, 
-        loginState, 
-        setLoginState, 
-        regState, 
-        setRegState, 
-        blur, 
+        setUser,
         setBlur, 
         setSiteState 
     } = props
 
     let user = useContext(UserContext)
+
+    let blur = useContext(BlurContext)
 
     return(
         <div className="main-container">
@@ -55,10 +47,6 @@ const MainContainer = (props: MainContainerProps)=>{
                 }
                 <AccountWidget 
                     setUser={setUser}
-                    loginState={loginState} 
-                    setLoginState={setLoginState} 
-                    regState={regState} 
-                    setRegState={setRegState}
                     setBlur={setBlur}
                 />
             </div>

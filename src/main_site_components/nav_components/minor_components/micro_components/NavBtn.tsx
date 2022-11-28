@@ -1,20 +1,24 @@
 import "../../Sass/NavBar.scss"
-import { useState } from "react"
+import { useState, useContext } from "react";
+import { BlurContext } from "../../../../contexts/global"
 //Types
 import { NavMethodsMap } from "../../NavBar"
 
 //Components
 import { Tooltip } from "@mui/material"
 
+
 interface NavBtnProps{
     element: NavMethodsMap,
     index: number,
     clickIndex: number,
     setClickIndex: React.Dispatch<React.SetStateAction<number>>,
-    blur: boolean
 }
 
-const NavBtn = ({ element, index, clickIndex, setClickIndex, blur }: NavBtnProps)=>{
+const NavBtn = ({ element, index, clickIndex, setClickIndex}: NavBtnProps)=>{
+
+    const blur = useContext(BlurContext)
+
     return(
         <li key={index} aria-label={element.label} className='nav-list-item' style={{
             backgroundColor: clickIndex === index ? "#01B763": "inherit",
