@@ -1,13 +1,38 @@
 @import "/src/Sass/_variables";
 
 @media (min-width: $mobilebreakpoint){
+    #account-container{
+        position: absolute;
+
+        z-index: 10;
+
+        background-color: white;
+
+        left: 25vw;
+        top: 10vh;
+
+        width: 50vw;
+        height: 75vh;
+
+        border: 1px solid $Blk;
+        border-radius: 15px;
+
+        padding: 1rem;
+    }
+    
     #account-ul{
         list-style-type: none;
         padding-left: 0em;
 
         li{
             margin-bottom: 1rem;
+            font-size: 18px;
         }
+    }
+
+    ul{
+        list-style-type: none;
+        padding-left: 0rem;
     }
 }
 
