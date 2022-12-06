@@ -10,14 +10,28 @@
 
         height: 60%;
     }
+
+    .toggle-btn{
+        cursor: pointer;
+
+        border: none;
+        border-radius: 10px 10px 0px 0px;
+        padding: 0.25rem;
+
+        width: 15%;
+
+        font-family: $genSans;
+        font-weight: 600;
+        font-size: 16px;
+    }
     
     .table-container{
         overflow-y: scroll;
         scroll-behavior: smooth;
 
-        border: 1px solid $Blk;
-        background-color: lightgrey;
-        box-shadow: inset 0px 0px 5px $Blk;
+        border: 3px solid $GO;
+        border-radius: 0px 15px 15px 15px;
+        // box-shadow: inset 0px 0px 10px $Blk;
 
         padding: 0.5rem;
 

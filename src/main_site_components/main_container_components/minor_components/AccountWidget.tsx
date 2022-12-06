@@ -4,6 +4,7 @@ import { useContext, useState } from "react"
 import { UserContext, UserContextInterface } from "../../../contexts/global"
 import { serverURL } from "../../../App"
 import Cookies from "js-cookie"
+import { cookieConfig } from "../../../App"
 
 import { styled, TextField } from "@mui/material"
 
@@ -76,7 +77,8 @@ const AccountWidget = (props: AccountWidgetProps)=>{
         setUser(null)
         setEmailInput("")
         setPassword_1("")
-        Cookies.set("user", "")
+        Cookies.remove("user")
+        Cookies.remove("token")
     }
 
     const handleSwitchToLogin = ()=>{
@@ -92,7 +94,6 @@ const AccountWidget = (props: AccountWidgetProps)=>{
     }
 
     const handleLoginSubmit = async ()=>{
-        //add try/catch behavior
         setIsLoading(true)
 
         let emailOmit = emailInput === ""
@@ -115,7 +116,6 @@ const AccountWidget = (props: AccountWidgetProps)=>{
                     password_hash: password_1
                 })
             })
-    
             let parsedResponse = await response.json()
             console.log(parsedResponse)
     
@@ -124,9 +124,14 @@ const AccountWidget = (props: AccountWidgetProps)=>{
                 setValidationError({state: true, message: "Unable to log in. Please check your login credentials."})
                 return
             }
-    
+            
+            let token = parsedResponse.data.token
+
+            delete parsedResponse.data.token
+
             setUser(parsedResponse.data)
-            Cookies.set("user", JSON.stringify(parsedResponse.data))
+            Cookies.set("user", JSON.stringify(parsedResponse.data), cookieConfig.user)
+            Cookies.set("token", JSON.stringify(token), cookieConfig.jwt)
             setIsLoading(false)
             setLoginState(false)
             setRegState(false)
@@ -182,9 +187,13 @@ const AccountWidget = (props: AccountWidgetProps)=>{
                 setValidationError({state: true, message: "Unable to create account. Please check your credentials."})
                 return
             }
-    
+            let token = parsedResponse.data.token
+
+            delete parsedResponse.data.token
+
             setUser(parsedResponse.data)
-            Cookies.set("user", JSON.stringify(parsedResponse.data))
+            Cookies.set("user", JSON.stringify(parsedResponse.data), cookieConfig.user)
+            Cookies.set("token", JSON.stringify(token), cookieConfig.jwt)
             setIsLoading(false)
             setLoginState(false)
             setRegState(false)

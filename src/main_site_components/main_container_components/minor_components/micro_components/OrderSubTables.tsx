@@ -9,16 +9,38 @@ const OrderSubTables = ()=>{
 
     const [ page, setPage ] = useState("orders")
 
+    const buttonStyle = {
+        orders: {
+            backgroundColor: page === "orders" ? "#01B763" : "#005B31",
+            boxShadow: page === "orders" ? "0px 0px 5px black" : "inset 0px 0px 4px black"
+        },
+        subs: {
+            backgroundColor: page === "subs" ? "#01B763" : "#005B31",
+            boxShadow: page === "subs" ? "0px 0px 5px black" : "inset 0px 0px 2px black"
+        }
+    }
 
     return(
         <div id="order-sub-container">
             <div>
-                <button onClick={()=>{
-                    setPage("orders")
-                }}>Orders</button>
-                <button onClick={()=>{
-                    setPage("subs")
-                }}>Subscriptions</button>
+                <button
+                    className="toggle-btn"
+                    style={buttonStyle.orders} 
+                    aria-label="orders" 
+                    onClick={()=>{
+                        setPage("orders")
+                    }}>
+                        Orders
+                </button>
+                <button
+                    className="toggle-btn"
+                    style={buttonStyle.subs}
+                    aria-label="subscriptions" 
+                    onClick={()=>{
+                        setPage("subs")
+                    }}>
+                        Subscriptions
+                </button>
             </div>
             <div className="table-container">
                 {
