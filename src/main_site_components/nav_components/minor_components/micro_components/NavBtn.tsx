@@ -17,7 +17,8 @@ interface NavBtnProps{
 
 const NavBtn = ({ element, index, clickIndex, setClickIndex}: NavBtnProps)=>{
 
-    const blur = useContext(BlurContext)
+    const blurCXT = useContext(BlurContext)
+    let blur = blurCXT?.value
 
     return(
         <li key={index} aria-label={element.label} className='nav-list-item' style={{

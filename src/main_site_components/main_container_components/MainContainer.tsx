@@ -11,8 +11,6 @@ import SearchBar from "./minor_components/micro_components/SearchBar"
 interface MainContainerProps{
     clickIndex: number,
     setClickIndex: React.Dispatch<React.SetStateAction<number>>,
-    setUser: React.Dispatch<React.SetStateAction<UserContextInterface | null>>,
-    setBlur: React.Dispatch<React.SetStateAction<boolean>>,
     setSiteState: React.Dispatch<React.SetStateAction<string>>
 }
 
@@ -22,15 +20,14 @@ const MainContainer = (props: MainContainerProps)=>{
 
     let { 
         clickIndex, 
-        setClickIndex, 
-        setUser,
-        setBlur, 
+        setClickIndex,
         setSiteState 
     } = props
 
-    let user = useContext(UserContext)
-
-    let blur = useContext(BlurContext)
+    let userCXT = useContext(UserContext)
+    let user = userCXT.value
+    let blurCXT = useContext(BlurContext)
+    let blur = blurCXT?.value
 
     return(
         <div className="main-container">
@@ -38,23 +35,19 @@ const MainContainer = (props: MainContainerProps)=>{
                 <header style={{"filter": blur ? "blur(4px)" : "none"}}>
                     <h1>ChenequaFarms.com</h1>
                 </header>
-                <SearchBar blur={blur}/>
+                <SearchBar/>
                 {
                     user?.is_admin ?
                         <AdminBtn setSiteState={setSiteState}/>
                     :
                         null
                 }
-                <AccountWidget 
-                    setUser={setUser}
-                    setBlur={setBlur}
-                />
+                <AccountWidget/>
             </div>
             <div style={{"filter": blur ? "blur(4px)" : "none"}}>
                 <MainSubContainer 
                     clickIndex={clickIndex} 
                     setClickIndex={setClickIndex}
-                    blur={blur}
                 />
             </div>
         </div>

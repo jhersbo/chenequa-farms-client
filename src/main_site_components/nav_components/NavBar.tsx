@@ -23,16 +23,15 @@ export interface NavMethodsMap{
 
 interface NavBarProps{
     clickIndex: number,
-    setClickIndex: React.Dispatch<React.SetStateAction<number>>,
-    setUser: React.Dispatch<React.SetStateAction<UserContextInterface | null>>
-    setBlur: React.Dispatch<React.SetStateAction<boolean>>
+    setClickIndex: React.Dispatch<React.SetStateAction<number>>
 }
 
-const NavBar = ({ clickIndex, setClickIndex, setUser, setBlur }: NavBarProps)=>{
+const NavBar = ({ clickIndex, setClickIndex }: NavBarProps)=>{
 
     const screenSize = useContext(ScreenSizeContext)
-    const user = useContext(UserContext)
-    const blur = useContext(BlurContext)
+    const userCXT = useContext(UserContext)
+    const blurCXT = useContext(BlurContext)
+    let blur = blurCXT?.value
 
     const iconSXProp = {
         color: "white",
@@ -59,7 +58,7 @@ const NavBar = ({ clickIndex, setClickIndex, setUser, setBlur }: NavBarProps)=>{
     ]
 
     const handleSignOut = ()=>{
-        setUser(null)
+        userCXT?.setUser(null)
         Cookies.set("user", "")
     }
 

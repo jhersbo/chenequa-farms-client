@@ -1,11 +1,11 @@
-interface SearchBarProps{
-    blur: boolean
-}
+import { useContext } from "react"
+import { BlurContext } from "../../../../contexts/global"
 
-const SearchBar = (props: SearchBarProps)=>{
-    let { 
-        blur 
-    } = props
+
+const SearchBar = ()=>{
+
+    const blurCXT = useContext(BlurContext)
+    let blur = blurCXT?.value
 
     return(
         <div style={{"filter": blur ? "blur(4px)" : "none"}} id="searchbar-container">

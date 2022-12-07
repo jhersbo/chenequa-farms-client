@@ -4,10 +4,9 @@ import Home from "./Home"
 interface MainSubContainerProps{
     clickIndex: number,
     setClickIndex: React.Dispatch<React.SetStateAction<number>>,
-    blur: boolean
 }
 
-const MainSubContainer = ({ clickIndex, setClickIndex, blur }: MainSubContainerProps)=>{
+const MainSubContainer = ({ clickIndex, setClickIndex, }: MainSubContainerProps)=>{
     switch (clickIndex) {
         case 0:
             return(
@@ -18,9 +17,7 @@ const MainSubContainer = ({ clickIndex, setClickIndex, blur }: MainSubContainerP
         case 1:
             return(
                 <>
-                    <BrowseContainer 
-                        blur={blur}
-                    />
+                    <BrowseContainer/>
                 </>
             )
         case 2:

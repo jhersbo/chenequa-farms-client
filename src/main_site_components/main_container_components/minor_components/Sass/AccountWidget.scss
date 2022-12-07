@@ -111,6 +111,11 @@
     .close-btn:hover{
         box-shadow: inset 1px 1px 10px grey;
     }
+
+    em{
+        font-size: 18px;
+        color: red;
+    }
 }
 
 @media (max-width: $mobilebreakpoint){

@@ -1,7 +1,7 @@
 import "./Sass/AccountWidget.scss"
 
 import { useContext, useState } from "react"
-import { UserContext, UserContextInterface } from "../../../contexts/global"
+import { UserContext, BlurContext } from "../../../contexts/global"
 import { serverURL } from "../../../App"
 import Cookies from "js-cookie"
 import { cookieConfig } from "../../../App"
@@ -44,16 +44,10 @@ export const loadingBarsStyle = {
 }
 
 interface AccountWidgetProps{
-    setUser: React.Dispatch<React.SetStateAction<UserContextInterface | null>>,
-    setBlur: React.Dispatch<React.SetStateAction<boolean>>
+
 }
 
 const AccountWidget = (props: AccountWidgetProps)=>{
-    
-    let { 
-        setUser, 
-        setBlur 
-    } = props
 
     const [ loginState, setLoginState ] = useState(false)
     const [ regState, setRegState ] = useState(false)
@@ -71,10 +65,14 @@ const AccountWidget = (props: AccountWidgetProps)=>{
 
     const [ isLoading, setIsLoading ] = useState(false)
     
-    const user = useContext(UserContext)
+    const userCXT = useContext(UserContext)
+    let user = userCXT.value
+
+    const blurCXT = useContext(BlurContext)
+    let blur = blurCXT?.value
 
     const handleSignOut = ()=>{
-        setUser(null)
+        userCXT.setUser(null)
         setEmailInput("")
         setPassword_1("")
         Cookies.remove("user")
@@ -84,13 +82,13 @@ const AccountWidget = (props: AccountWidgetProps)=>{
     const handleSwitchToLogin = ()=>{
         setLoginState(true)
         setRegState(false)
-        setBlur(true)
+        blurCXT?.setBlur(true)
     }
 
     const handleSwitchToReg = ()=>{
         setRegState(true)
         setLoginState(false)
-        setBlur(true)
+        blurCXT?.setBlur(true)
     }
 
     const handleLoginSubmit = async ()=>{
@@ -129,13 +127,13 @@ const AccountWidget = (props: AccountWidgetProps)=>{
 
             delete parsedResponse.data.token
 
-            setUser(parsedResponse.data)
+            userCXT.setUser(parsedResponse.data)
             Cookies.set("user", JSON.stringify(parsedResponse.data), cookieConfig.user)
             Cookies.set("token", JSON.stringify(token), cookieConfig.jwt)
             setIsLoading(false)
             setLoginState(false)
             setRegState(false)
-            setBlur(false)
+            blurCXT?.setBlur(false)
             return
         }catch(err){
             setValidationError({state: true, message: "Error connecting to the server."})
@@ -191,13 +189,13 @@ const AccountWidget = (props: AccountWidgetProps)=>{
 
             delete parsedResponse.data.token
 
-            setUser(parsedResponse.data)
+            userCXT.setUser(parsedResponse.data)
             Cookies.set("user", JSON.stringify(parsedResponse.data), cookieConfig.user)
             Cookies.set("token", JSON.stringify(token), cookieConfig.jwt)
             setIsLoading(false)
             setLoginState(false)
             setRegState(false)
-            setBlur(false)
+            blurCXT?.setBlur(false)
             return
         }catch(err){
             setValidationError({state: true, message: "Error connecting to the server."})
@@ -293,11 +291,11 @@ const AccountWidget = (props: AccountWidgetProps)=>{
         setLoginState(false)
         setRegState(false)
         setAccountScreen(false)
-        setBlur(false)
+        blurCXT?.setBlur(false)
     }
 
     const handleSwitchToAccount = ()=>{
-        setBlur(true)
+        blurCXT?.setBlur(true)
         setAccountScreen(true)
     }
 
@@ -364,6 +362,12 @@ const AccountWidget = (props: AccountWidgetProps)=>{
                                 <h5 id="greeting">
                                     {"Welcome, " + user.first_name.charAt(0).toUpperCase() + user.first_name.slice(1)}
                                 </h5>
+                                {
+                                    user.is_admin ?
+                                        <em>Administrator</em>
+                                    :
+                                        null
+                                }
                             </div>
                             <div className="btn-container">
                                 <button className="widget-btn collapsed-widget" aria-label="log out" onClick={()=>{handleSignOut()}}>Log Out</button>
