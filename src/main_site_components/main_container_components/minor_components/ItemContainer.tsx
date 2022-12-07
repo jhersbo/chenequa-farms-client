@@ -1,8 +1,8 @@
 import "./Sass/ItemContainer.scss"
 
 import { CategoryTypes } from "./BrowseContainer"
-
-import { useEffect, useState } from "react"
+import { BlurContext } from "../../../contexts/global"
+import { useEffect, useState, useContext } from "react"
 
 interface ItemContainerProps{
     catCollapsed: boolean,
@@ -10,8 +10,7 @@ interface ItemContainerProps{
     categoryDB: CategoryTypes[],
     category: number | null,
     isLoading: boolean,
-    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
-    blur: boolean
+    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const ItemContainer = (props: ItemContainerProps)=>{
@@ -24,9 +23,11 @@ const ItemContainer = (props: ItemContainerProps)=>{
         categoryDB,
         category,
         isLoading,
-        setIsLoading,
-        blur
+        setIsLoading
     } = props
+
+    const blurCXT = useContext(BlurContext)
+    let blur = blurCXT?.value
 
     if(category !== null){
         let selectedCategory = categoryDB[category]

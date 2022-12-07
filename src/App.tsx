@@ -51,8 +51,24 @@ function App() {
   const [ clickIndex, setClickIndex ] = useState(0)
   //admin state
   const [ siteState, setSiteState ] = useState("client")
-  //login states
+  //popup state
   const [ blur, setBlur ] = useState(false)
+
+
+  //context state objects
+  const blurCxtObj = {
+    value: blur,
+    setBlur: (value: boolean)=>{
+      setBlur(value)
+    }
+  }
+
+  const userCxtObj = {
+    value: user,
+    setUser: (user: UserContextInterface | null)=>{
+      setUser(user)
+    }
+  }
 
   useEffect(()=>{
     setScreenSize({width: window.innerWidth, height: window.innerHeight})
@@ -71,19 +87,15 @@ function App() {
           <Routes>
             <Route path='/' element={
               <ScreenSizeContext.Provider value={screenSize}>
-                <UserContext.Provider value={user}>
-                  <BlurContext.Provider value={blur}>
+                <UserContext.Provider value={userCxtObj}>
+                  <BlurContext.Provider value={blurCxtObj}>
                     <NavBar 
                       clickIndex={clickIndex} 
-                      setClickIndex={setClickIndex} 
-                      setUser={setUser} 
-                      setBlur={setBlur}
+                      setClickIndex={setClickIndex}
                     />
                     <MainContainer 
                       clickIndex={clickIndex} 
-                      setClickIndex={setClickIndex} 
-                      setUser={setUser} 
-                      setBlur={setBlur}
+                      setClickIndex={setClickIndex}
                       setSiteState={setSiteState}
                     />
                   </BlurContext.Provider>

@@ -5,7 +5,8 @@ import { useContext, useState } from "react"
 
 const OrderSubTables = ()=>{
     
-    const user = useContext(UserContext)
+    const userCXT = useContext(UserContext)
+    let user = userCXT.value
 
     const [ page, setPage ] = useState("orders")
 

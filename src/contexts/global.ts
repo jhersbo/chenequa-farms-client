@@ -8,6 +8,7 @@ export interface UserContextInterface{
     first_name: string,
     last_name: string,
     is_admin: boolean,
+    token?: string,
     user_orders?: [
         {
             filled: boolean,
@@ -25,7 +26,12 @@ export interface UserContextInterface{
     ]
 }
 
-export const UserContext = createContext<UserContextInterface | any>(null)
+export interface UserCXTObjInterface{
+    value: UserContextInterface,
+    setUser: (user: UserContextInterface) => void
+}
+
+export const UserContext = createContext<UserContextInterface | UserCXTObjInterface | any>(null)
 
 
 //screen size
@@ -37,5 +43,8 @@ export interface ScreenSizeContextInterface{
 export const ScreenSizeContext = createContext<ScreenSizeContextInterface | null>(null)
 
 //blur
-
-export const BlurContext = createContext(false)
+export interface BlurContextObjInterface{
+    value: boolean,
+    setBlur: (value: boolean) => void
+}
+export const BlurContext = createContext<BlurContextObjInterface | null>(null)

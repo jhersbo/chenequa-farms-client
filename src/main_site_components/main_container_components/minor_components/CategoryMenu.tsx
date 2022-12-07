@@ -8,7 +8,9 @@ import { loadingBarsStyle } from "./AccountWidget";
 import { CategoryTypes } from "./BrowseContainer"
 
 import { motion } from "framer-motion"
-import { useState } from "react";
+import { useState, useContext } from "react";
+
+import { BlurContext } from "../../../contexts/global";
 
 interface CategoryMenuProps{
     categoryDB: CategoryTypes[],
@@ -25,8 +27,7 @@ interface CategoryMenuProps{
     catCollapsed: boolean,
     setCatCollapsed: React.Dispatch<React.SetStateAction<boolean>>,
     isLoading: boolean,
-    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
-    blur: boolean
+    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const arrowSXProps = {
@@ -47,10 +48,10 @@ const CategoryMenu = (props: CategoryMenuProps)=>{
         setCatCollapsed,
         isLoading,
         setIsLoading,
-        blur
     } = props
 
-    
+    const blurCXT = useContext(BlurContext)
+    let blur = blurCXT?.value
 
     const handleChangeCategory = (index: number)=>{
         setCategory(index)
@@ -72,13 +73,21 @@ const CategoryMenu = (props: CategoryMenuProps)=>{
                     catCollapsed ?
                         <ArrowCircleRightIcon
                             className="arrow-icon"
-                            onClick={()=>{setCatCollapsed(!catCollapsed)}}
+                            onClick={
+                                blur
+                                ? ()=>{}
+                                : ()=>{setCatCollapsed(!catCollapsed)}
+                            }
                             sx={arrowSXProps}
                         />
                     :
                         <ArrowCircleLeftIcon
                             className="arrow-icon"
-                            onClick={()=>{setCatCollapsed(!catCollapsed)}}
+                            onClick={
+                                blur
+                                ? ()=>{}
+                                : ()=>{setCatCollapsed(!catCollapsed)}
+                            }
                             sx={arrowSXProps}
                         />
                 }
@@ -118,7 +127,11 @@ const CategoryMenu = (props: CategoryMenuProps)=>{
                                 style={{
                                     backgroundColor: category === index ? "#01B763" : "inherit",
                                 }}
-                                onClick={()=>{handleChangeCategory(index)}}
+                                onClick={
+                                    blur 
+                                    ? ()=>{} 
+                                    : ()=>{handleChangeCategory(index)}
+                                }
                             >
                                 <img 
                                     src={element.category_thumbnail} 

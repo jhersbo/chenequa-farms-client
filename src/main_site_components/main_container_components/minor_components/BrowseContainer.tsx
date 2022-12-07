@@ -15,12 +15,10 @@ export interface CategoryTypes{
 }
 
 interface BrowseContainerProps{
-    blur: boolean
+
 }
 
-const BrowseContainer = (props: BrowseContainerProps)=>{
-
-    let { blur } = props
+const BrowseContainer = ()=>{
 
     const [ categoryDB, setCategoryDB ] = useState([])
     const [ category, setCategory ] = useState<number | null>(null)
@@ -73,7 +71,6 @@ const BrowseContainer = (props: BrowseContainerProps)=>{
                 setCatCollapsed={setCatCollapsed}
                 isLoading={isLoading}
                 setIsLoading={setIsLoading}
-                blur={blur}
             />
             <ItemContainer
                 catCollapsed={catCollapsed}
@@ -82,7 +79,6 @@ const BrowseContainer = (props: BrowseContainerProps)=>{
                 category={category}
                 isLoading={isLoading}
                 setIsLoading={setIsLoading}
-                blur={blur}
             />
         </div>
     )
