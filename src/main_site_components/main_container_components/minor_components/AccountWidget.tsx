@@ -364,7 +364,7 @@ const AccountWidget = (props: AccountWidgetProps)=>{
                                 </h5>
                                 {
                                     user.is_admin ?
-                                        <em>Administrator</em>
+                                        <em className="alert">Administrator</em>
                                     :
                                         null
                                 }

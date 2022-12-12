@@ -126,6 +126,7 @@ const CategoryMenu = (props: CategoryMenuProps)=>{
                                 key={`category-${element.category_id}`}
                                 style={{
                                     backgroundColor: category === index ? "#01B763" : "inherit",
+                                    border: category === index ? "1px solid black" : "none"
                                 }}
                                 onClick={
                                     blur 

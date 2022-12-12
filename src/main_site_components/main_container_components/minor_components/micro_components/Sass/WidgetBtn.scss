@@ -1,0 +1,38 @@
+@import "/src/Sass/_variables";
+
+@media (min-width: $mobilebreakpoint){
+    
+    .widget-btn{
+        cursor: pointer;
+
+        background-color: transparent;
+
+        border: 2px solid $GO;
+        border-radius: 15px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        // box-shadow: 1px 1px 5px $Castleton;
+
+        font-family: $genSans;
+        font-weight: 600;
+        width: 25%;
+    }
+
+    .widget-btn:hover{
+        box-shadow: inset 1px 1px 5px grey;
+    }
+
+    #login-reg-header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+@media (max-width: $mobilebreakpoint){
+
+}

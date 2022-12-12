@@ -4,6 +4,7 @@ import { CustomTextField } from "../AccountWidget";
 import { Bars } from "react-loader-spinner"
 
 import CloseBtn from "./CloseBtn";
+import WidgetBtn from "./WidgetBtn";
 
 interface LoginFormProps{
     loadingBarsStyle: {
@@ -88,27 +89,20 @@ const LoginForm = (props: LoginFormProps)=>{
                         null
                 }
                 <div id="login-btn-container">
-                    <button 
-                        className="widget-btn login-reg-submit" 
-                        onClick={()=>{handleLoginSubmit()}}
-                        disabled={isLoading ? true : false}>
-                            Login
-                    </button>
+                    <WidgetBtn disabledBool={isLoading} action={handleLoginSubmit}>
+                        Login
+                    </WidgetBtn>
                     {
                         validationError.state ?
-                            <button className="widget-btn" onClick={()=>{handleForgotPasswordState()}}
-                            disabled={isLoading ? true : false}>
+                            <WidgetBtn disabledBool={isLoading} action={handleLoginSubmit}>
                                 Forgot your password?
-                            </button>
+                            </WidgetBtn>
                         :
                             null
                     }
-                    <button 
-                        className="widget-btn login-reg-submit" 
-                        onClick={()=>{handleSwitchToReg()}}
-                        disabled={isLoading ? true : false}>
-                            Register
-                    </button>
+                    <WidgetBtn disabledBool={isLoading} action={handleSwitchToReg}>
+                        Register
+                    </WidgetBtn>
                 </div>
             </div>
         </div>

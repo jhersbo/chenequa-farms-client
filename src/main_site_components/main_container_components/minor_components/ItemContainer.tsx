@@ -4,6 +4,8 @@ import { CategoryTypes } from "./BrowseContainer"
 import { BlurContext } from "../../../contexts/global"
 import { useEffect, useState, useContext } from "react"
 
+import Masonry from "@mui/lab/Masonry"
+import ItemCard from "./micro_components/ItemCard"
 interface ItemContainerProps{
     catCollapsed: boolean,
     setCatCollapsed: React.Dispatch<React.SetStateAction<boolean>>,
@@ -14,8 +16,6 @@ interface ItemContainerProps{
 }
 
 const ItemContainer = (props: ItemContainerProps)=>{
-
-    const [ currentItems, setCurrentItems ] = useState(null)
     
     let {
         catCollapsed,
@@ -29,18 +29,38 @@ const ItemContainer = (props: ItemContainerProps)=>{
     const blurCXT = useContext(BlurContext)
     let blur = blurCXT?.value
 
+    let selectedCategory, items;
+
     if(category !== null){
-        let selectedCategory = categoryDB[category]
+        selectedCategory = categoryDB[category]
         console.log(selectedCategory)
-        let items = selectedCategory.inventories
+        items = selectedCategory.inventories
         console.log(items)
     }
 
     return(
-        <div id="item-container" style={{
-            width: catCollapsed ? "90vw" : "72vw"
-        }}>
-            Item Container
+        <div id="item-container">
+            {
+                items ?
+                    <Masonry 
+                        columns={catCollapsed ? 5 : 4} 
+                        spacing={3}
+                    >
+
+                        {
+                            items.map((element: any, index: number)=>{
+                                return(
+                                    <ItemCard key={index} element={element} index={index}/>
+                                )
+                            })
+                        }
+                    </Masonry>
+
+                :
+                    <>
+                        Select a category to start browsing!
+                    </>
+            }
         </div>
     )
 }

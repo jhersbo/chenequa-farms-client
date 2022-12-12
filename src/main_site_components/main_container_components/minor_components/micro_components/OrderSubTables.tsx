@@ -82,6 +82,11 @@ const OrderSubTables = ()=>{
                                         )
                                     })
                                 }
+                                {
+                                    user.user_orders.length === 0
+                                    ? <h4>You have no orders yet!</h4>
+                                    : null
+                                }
                             </tbody>
                         </table>
                     :
@@ -108,6 +113,11 @@ const OrderSubTables = ()=>{
                                             </tr>
                                         )
                                     })
+                                }
+                                {
+                                    user.subscriptions.length === 0
+                                    ? <h4>You have no subscriptions yet!</h4>
+                                    : null
                                 }
                             </tbody>
                         </table>

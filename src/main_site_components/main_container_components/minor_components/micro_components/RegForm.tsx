@@ -4,6 +4,7 @@ import { Bars } from "react-loader-spinner"
 
 import { CustomTextField } from "../AccountWidget";
 import CloseBtn from "./CloseBtn";
+import WidgetBtn from "./WidgetBtn";
 interface RegFormProps{
     loadingBarsStyle: {
         height: string,
@@ -132,18 +133,18 @@ const RegForm = (props: RegFormProps)=>{
                             null
                     }
                     <div id="login-btn-container">
-                        <button 
-                            className="widget-btn login-reg-submit"
-                            onClick={()=>{handleRegistration()}}
-                            disabled={isLoading ? true : false}>
-                                Register
-                        </button>
-                        <button 
-                            className="widget-btn login-reg-submit" 
-                            onClick={()=>{handleSwitchToLogin()}}
-                            disabled={isLoading ? true : false}>
-                                Have an account?
-                        </button>
+                        <WidgetBtn 
+                            disabledBool={isLoading}
+                            action={handleRegistration}
+                        >
+                            Register
+                        </WidgetBtn>
+                        <WidgetBtn
+                            disabledBool={isLoading}
+                            action={handleSwitchToLogin}
+                        >
+                            Have an account?
+                        </WidgetBtn>
                     </div>
                 </div>
             </div>
