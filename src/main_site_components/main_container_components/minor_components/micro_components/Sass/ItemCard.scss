@@ -10,7 +10,7 @@
         box-shadow: 0px 0px 10px black;
 
         height: max-content;
-        flex-grow: 0;
+        flex: 0 1 0px;
         margin-right: 1rem;
 
         .item-img{
@@ -38,7 +38,7 @@
                 align-items: center;
                 .desc{
                     color: gray;
-                    font-size: 18px;
+                    font-size: 14px;
                     font-weight: 500;
                 }
             }

@@ -110,9 +110,6 @@ const ItemCard = (props: ItemCardProps)=>{
                     :   null
                 }
                 <span id="price">
-                    <em>
-                        Price: &nbsp;
-                    </em>
                     ${element.price}
                 </span>
             </div>
