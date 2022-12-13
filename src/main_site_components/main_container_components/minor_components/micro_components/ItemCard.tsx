@@ -29,7 +29,7 @@ const fabSXProps = {
     backgroundColor: "#01B763",
     fontSize: "32px",
     display: "flex",
-    alignItems: "center"
+    alignItems: "center",
 }
 
 const shoppingCartSXProps = {
@@ -113,32 +113,32 @@ const ItemCard = (props: ItemCardProps)=>{
                     <em>
                         Price: &nbsp;
                     </em>
-                    ${element.price}.00
+                    ${element.price}
                 </span>
             </div>
             {
                 user
                 ?   <div className="card-action-btns">
                         <div className="increment-btns">
-                            <Fab
+                            <button
                                 onClick={()=>{
                                     dispatch({type: "increment_number"})
                                 }}
                                 disabled={blur}
                                 aria-label="increment"
-                                size="small"
-                                sx={fabSXProps}
-                            >+</Fab>
+                                // size="small"
+                                // sx={fabSXProps}
+                            >+</button>
                             <span>Qty:&nbsp;{qty}</span>
-                            <Fab
+                            <button
                                 onClick={()=>{
                                     dispatch({type: "decrement_number"})
                                 }}
                                 disabled={blur}
                                 aria-label="decrement"
-                                size="small"
-                                sx={fabSXProps}
-                            >-</Fab>
+                                // size="small"
+                                // sx={fabSXProps}
+                            >-</button>
                         </div>
                         <Tooltip title="Add to cart" placement="left" arrow>
                             <ShoppingCartIcon sx={shoppingCartSXProps}/>

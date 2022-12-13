@@ -72,7 +72,7 @@ function App() {
 
   useEffect(()=>{
     setScreenSize({width: window.innerWidth, height: window.innerHeight})
-  }, [])
+  }, [window.innerWidth, window.innerHeight])
 
   if(siteState === "admin"){
     return(

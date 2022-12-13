@@ -1,4 +1,5 @@
 import "./Sass/MainContainer.scss"
+import Cookies from "js-cookie"
 import { useContext, useEffect, useState } from "react"
 
 import MainSubContainer from "./minor_components/MainSubContainer"
@@ -7,6 +8,7 @@ import { BlurContext, UserContext, UserContextInterface } from "../../contexts/g
 
 import AdminBtn from "./minor_components/micro_components/AdminBtn"
 import SearchBar from "./minor_components/micro_components/SearchBar"
+import CartContainer from "./minor_components/CartContainer"
 
 interface MainContainerProps{
     clickIndex: number,
@@ -29,6 +31,10 @@ const MainContainer = (props: MainContainerProps)=>{
     let blurCXT = useContext(BlurContext)
     let blur = blurCXT?.value
 
+    const [cart, setCart] = useState(
+        
+    )
+
     return(
         <div className="main-container">
             <div className="main-top-bar">
@@ -50,6 +56,7 @@ const MainContainer = (props: MainContainerProps)=>{
                     setClickIndex={setClickIndex}
                 />
             </div>
+            <CartContainer/>
         </div>
     )
 }

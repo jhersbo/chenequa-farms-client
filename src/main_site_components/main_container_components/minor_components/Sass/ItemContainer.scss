@@ -8,9 +8,13 @@
         margin-left: 0.5rem;
         overflow-y: scroll;
 
+    }
+
+    .item-display-box{
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-around;
+        justify-content: flex-start;
+        align-items: flex-start;
     }
 }
 

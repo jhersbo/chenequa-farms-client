@@ -40,7 +40,7 @@ export interface ScreenSizeContextInterface{
     width: number
 }
 
-export const ScreenSizeContext = createContext<ScreenSizeContextInterface | null>(null)
+export const ScreenSizeContext = createContext<ScreenSizeContextInterface>({height: window.innerHeight, width: window.innerWidth})
 
 //blur
 export interface BlurContextObjInterface{

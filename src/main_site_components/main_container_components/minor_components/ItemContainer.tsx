@@ -1,10 +1,10 @@
 import "./Sass/ItemContainer.scss"
 
 import { CategoryTypes } from "./BrowseContainer"
-import { BlurContext } from "../../../contexts/global"
+import { BlurContext, ScreenSizeContext } from "../../../contexts/global"
 import { useEffect, useState, useContext } from "react"
 
-import Masonry from "@mui/lab/Masonry"
+import Grid from '@mui/material/Grid';
 import ItemCard from "./micro_components/ItemCard"
 interface ItemContainerProps{
     catCollapsed: boolean,
@@ -30,7 +30,6 @@ const ItemContainer = (props: ItemContainerProps)=>{
     let blur = blurCXT?.value
 
     let selectedCategory, items;
-
     if(category !== null){
         selectedCategory = categoryDB[category]
         console.log(selectedCategory)
@@ -42,9 +41,8 @@ const ItemContainer = (props: ItemContainerProps)=>{
         <div id="item-container">
             {
                 items ?
-                    <Masonry 
-                        columns={catCollapsed ? 5 : 4} 
-                        spacing={3}
+                    <div
+                        className="item-display-box"
                     >
 
                         {
@@ -54,7 +52,7 @@ const ItemContainer = (props: ItemContainerProps)=>{
                                 )
                             })
                         }
-                    </Masonry>
+                    </div>
 
                 :
                     <>

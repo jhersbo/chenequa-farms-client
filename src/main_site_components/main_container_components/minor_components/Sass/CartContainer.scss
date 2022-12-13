@@ -1,0 +1,18 @@
+@import "/src/Sass/_variables";
+
+@media (min-width: $mobilebreakpoint){
+    #cart-container{
+        border: 1px solid black;
+
+        position: absolute;
+        right: 1rem;
+        bottom: 0;
+        z-index: 10;
+
+        display: flex;
+    }
+}
+
+@media (max-width: $mobilebreakpoint){
+
+}

@@ -5,8 +5,10 @@ import { TextField } from "@mui/material"
 import { Bars } from "react-loader-spinner"
 
 import { textFieldSXProps, loadingBarsStyle } from "../main_site_components/main_container_components/minor_components/AccountWidget"
+import { CustomTextField } from "../main_site_components/main_container_components/minor_components/AccountWidget"
 import { serverURL } from "../App"
 import { useState } from "react"
+import { useParams } from "react-router-dom"
 
 const ResetPassword = ()=>{
 
@@ -17,9 +19,7 @@ const ResetPassword = ()=>{
     const [ recoverySuccess, setRecoverySuccess ] = useState(false)
     const [ validationError, setValidationError ] = useState({state: false, message: ""})
 
-    //starts slicing after '/forgot-password/'
-    const parsedToken = window.location.pathname.slice(17)
-    console.log(parsedToken)
+    let { token } = useParams()
 
     const updateEmailInput = (event: any)=>{
         setEmailInput(event.target.value)
@@ -37,38 +37,43 @@ const ResetPassword = ()=>{
 
     const submitPasswordUpdate = async ()=>{
         //add try/catch behavior
-        setIsLoading(true)
-        let passwordsMatch = password_1 === password_2;
-
-        if(!passwordsMatch){
-            setIsLoading(false)
-            setValidationError({state: true, message: "Passwords do not match."})
-            return
-        }
-
-        let response = await fetch(serverURL + "user_auth/forgot-password", {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                email_address: emailInput,
-                password_hash: password_1,
-                reset_password_token: parsedToken
+        try{
+            setIsLoading(true)
+            let passwordsMatch = password_1 === password_2;
+    
+            if(!passwordsMatch){
+                setIsLoading(false)
+                setValidationError({state: true, message: "Passwords do not match."})
+                return
+            }
+    
+            let response = await fetch(serverURL + "user_auth/forgot-password", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email_address: emailInput,
+                    password_hash: password_1,
+                    reset_password_token: token
+                })
             })
-        })
-
-        let parsedResponse = await response.json()
-        console.log(parsedResponse)
-
-        if(!parsedResponse.success){
+    
+            let parsedResponse = await response.json()
+            console.log(parsedResponse)
+    
+            if(!parsedResponse.success){
+                setIsLoading(false)
+                setValidationError({state: true, message: "Password update failed. Please request another reset email."})
+                return
+            }
+            setRecoverySuccess(true)
             setIsLoading(false)
-            setValidationError({state: true, message: "Password update failed. Please request another reset email."})
             return
+        }catch(err){
+            setValidationError({state: true, message: "Unable to connect to the server."})
+            setIsLoading(false)
         }
-        setRecoverySuccess(true)
-        setIsLoading(false)
-        return
     }
 
     return(
@@ -95,24 +100,27 @@ const ResetPassword = ()=>{
                             null
                     }
                 </header>
-                <TextField
+                <CustomTextField
                     id="email-input"
                     className="form-fields"
                     label="Email address"
+                    error={validationError.state}
                     onChange={(e)=>{updateEmailInput(e)}}
                     sx={textFieldSXProps}
                 />
-                <TextField
+                <CustomTextField
                     className="password-input form-fields"
                     type="password"
-                    label={!validationError.state ? "Password" : validationError.message}
+                    label={"Password"}
+                    error={validationError.state}
                     onChange={(e)=>{updatePassword_1Input(e)}}
                     sx={textFieldSXProps}
                 />
-                <TextField
+                <CustomTextField
                     className="password-input form-fields"
                     type="password"
-                    label={!validationError.state ? "Confirm password" : validationError.message}
+                    label={"Confirm password"}
+                    error={validationError.state}
                     onChange={(e)=>{updatePassword_2Input(e)}}
                     sx={textFieldSXProps}
                 />
