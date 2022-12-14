@@ -98,9 +98,14 @@ const ItemCard = (props: ItemCardProps)=>{
                 <h4>{element.name}</h4>
                 <h5 
                     className="collapsable-desc"
-                    onClick={()=>{setDescOpen(!descOpen)}}>
+                    onClick={()=>{setDescOpen(!descOpen)}}
+                >
                     <em className="desc">Description</em>
-                    {descOpen ? <ArrowDropUpIcon sx={arrowDropSXProps}/> : <ArrowDropDownIcon sx={arrowDropSXProps}/>}
+                    {
+                        descOpen 
+                        ? <ArrowDropUpIcon sx={arrowDropSXProps}/> 
+                        : <ArrowDropDownIcon sx={arrowDropSXProps}/>
+                    }
                 </h5>
                 {
                     descOpen
@@ -141,7 +146,7 @@ const ItemCard = (props: ItemCardProps)=>{
                             <ShoppingCartIcon sx={shoppingCartSXProps}/>
                         </Tooltip>
                     </div>
-                :   <h5>Log in to make purchases!</h5>
+                :   <h6 id="logged-out-msg">Log in to make purchases!</h6>
             }
         </div>
     )

@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from "react"
 import MainSubContainer from "./minor_components/MainSubContainer"
 import AccountWidget from "./minor_components/AccountWidget"
 import { BlurContext, UserContext, UserContextInterface } from "../../contexts/global"
+import { CartContext } from "../../contexts/cart"
 
 import AdminBtn from "./minor_components/micro_components/AdminBtn"
 import SearchBar from "./minor_components/micro_components/SearchBar"
@@ -31,32 +32,45 @@ const MainContainer = (props: MainContainerProps)=>{
     let blurCXT = useContext(BlurContext)
     let blur = blurCXT?.value
 
+    let cookieCart = Cookies.get("cart")
+    if(cookieCart){
+        cookieCart = JSON.parse(cookieCart)
+    }
     const [cart, setCart] = useState(
-        
+        cookieCart === undefined
+        ? []
+        : cookieCart
     )
+    
+    const cartCTX = {
+        value: cart,
+        setCart: (value: any) => setCart(value)
+    }
 
     return(
         <div className="main-container">
-            <div className="main-top-bar">
-                <header style={{"filter": blur ? "blur(4px)" : "none"}}>
-                    <h1>ChenequaFarms.com</h1>
-                </header>
-                <SearchBar/>
-                {
-                    user?.is_admin ?
-                        <AdminBtn setSiteState={setSiteState}/>
-                    :
-                        null
-                }
-                <AccountWidget/>
-            </div>
-            <div style={{"filter": blur ? "blur(4px)" : "none"}}>
-                <MainSubContainer 
-                    clickIndex={clickIndex} 
-                    setClickIndex={setClickIndex}
-                />
-            </div>
-            <CartContainer/>
+            <CartContext.Provider value={cartCTX}>
+                <div className="main-top-bar">
+                    <header style={{"filter": blur ? "blur(4px)" : "none"}}>
+                        <h1>ChenequaFarms.com</h1>
+                    </header>
+                    <SearchBar/>
+                    {
+                        user?.is_admin ?
+                            <AdminBtn setSiteState={setSiteState}/>
+                        :
+                            null
+                    }
+                    <AccountWidget/>
+                </div>
+                <div style={{"filter": blur ? "blur(4px)" : "none"}}>
+                    <MainSubContainer 
+                        clickIndex={clickIndex} 
+                        setClickIndex={setClickIndex}
+                    />
+                </div>
+                <CartContainer/>
+            </CartContext.Provider>
         </div>
     )
 }
