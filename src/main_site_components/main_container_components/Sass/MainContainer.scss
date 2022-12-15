@@ -11,6 +11,9 @@
         justify-content: space-between;
         align-items: center;
         padding-left: 1em;
+        .brand-header{
+            font-size: 40px;
+        }
     }
 
     #admin-btn{
@@ -28,6 +31,7 @@
 
         padding: 0.5em;
     }
+
 }
 
 @media (max-width: $mobilebreakpoint){

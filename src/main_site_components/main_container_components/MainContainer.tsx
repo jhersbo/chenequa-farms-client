@@ -51,9 +51,12 @@ const MainContainer = (props: MainContainerProps)=>{
         <div className="main-container">
             <CartContext.Provider value={cartCTX}>
                 <div className="main-top-bar">
-                    <header style={{"filter": blur ? "blur(4px)" : "none"}}>
-                        <h1>ChenequaFarms.com</h1>
-                    </header>
+                    <h1 
+                        style={{"filter": blur ? "blur(4px)" : "none"}}
+                        className="brand-header"
+                    >
+                        ChenequaFarms.com
+                    </h1>
                     <SearchBar/>
                     {
                         user?.is_admin ?

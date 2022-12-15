@@ -360,7 +360,7 @@ const AccountWidget = (props: AccountWidgetProps)=>{
                         <div id="signed-in-container">
                             <div>
                                 <h5 id="greeting">
-                                    {"Welcome, " + user.first_name.charAt(0).toUpperCase() + user.first_name.slice(1)}
+                                    Welcome,&nbsp;{user.first_name.charAt(0).toUpperCase() + user.first_name.slice(1)}
                                 </h5>
                                 {
                                     user.is_admin ?

@@ -6,7 +6,7 @@
         border-radius: 15px;
 
         padding: 1rem;
-
+        min-width: 15vw;
     }
 
     #greeting{
@@ -16,7 +16,7 @@
     #signed-in-container{
         display: flex;
         align-items: center;
-        justify-content: space-around;
+        justify-content: space-between;
         width: 15vw;
 
         button{
