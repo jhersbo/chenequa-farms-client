@@ -1,7 +1,6 @@
 import "./Sass/ResetPassword.scss"
 import "../main_site_components/main_container_components/minor_components/Sass/AccountWidget.scss"
 
-import { TextField } from "@mui/material"
 import { Bars } from "react-loader-spinner"
 
 import { textFieldSXProps, loadingBarsStyle } from "../main_site_components/main_container_components/minor_components/AccountWidget"
@@ -36,7 +35,6 @@ const ResetPassword = ()=>{
     }
 
     const submitPasswordUpdate = async ()=>{
-        //add try/catch behavior
         try{
             setIsLoading(true)
             let passwordsMatch = password_1 === password_2;
@@ -111,7 +109,7 @@ const ResetPassword = ()=>{
                 <CustomTextField
                     className="password-input form-fields"
                     type="password"
-                    label={"Password"}
+                    label="Password"
                     error={validationError.state}
                     onChange={(e)=>{updatePassword_1Input(e)}}
                     sx={textFieldSXProps}
@@ -119,7 +117,7 @@ const ResetPassword = ()=>{
                 <CustomTextField
                     className="password-input form-fields"
                     type="password"
-                    label={"Confirm password"}
+                    label="Confirm password"
                     error={validationError.state}
                     onChange={(e)=>{updatePassword_2Input(e)}}
                     sx={textFieldSXProps}
@@ -135,6 +133,7 @@ const ResetPassword = ()=>{
                 <div id="reset-btn-container">
                     <button 
                         className="widget-btn login-reg-submit"
+                        aria-label="submit password update"
                         disabled={isLoading ? true : false}
                         onClick={()=>{submitPasswordUpdate()}}>
                             {
@@ -146,6 +145,7 @@ const ResetPassword = ()=>{
                     </button>
                     <button 
                         className="widget-btn login-reg-submit"
+                        aria-label="navigate back to the main site"
                         onClick={()=>{window.location.href = "/"}}>
                         Back to the main site
                     </button>
