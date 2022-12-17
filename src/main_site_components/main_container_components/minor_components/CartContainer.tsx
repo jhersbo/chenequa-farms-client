@@ -4,9 +4,11 @@ import { useContext, useState } from "react"
 import { BlurContext, UserContext } from "../../../contexts/global"
 import { CartContext } from "../../../contexts/cart"
 
+import CartItem from "./micro_components/CartItem"
 import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp';
 import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import CartContents from "./micro_components/CartContents"
 
 const arrowSXProps = {
     cursor: "pointer",
@@ -27,8 +29,18 @@ const CartContainer = ()=>{
     let blur = blurCXT?.value
     const cartCXT = useContext(CartContext)
     let cart = cartCXT.value
-
+    console.log(cart)
     const [cartExpanded, setCartExpanded] = useState(false)
+
+    const calculateTotalPrice = ()=>{
+        let total = 0
+
+        cart.forEach(({ item, qty }: any) => {
+            total += qty * parseFloat(item.price)
+        });
+
+        return total
+    }
 
     return(
         <motion.div 
@@ -58,16 +70,22 @@ const CartContainer = ()=>{
                         />
                 }
                 <div>
-                    $0.00
+                    Total: ${calculateTotalPrice()}
                 </div>
                 <ShoppingCartIcon sx={shoppingCartSXProps}/>
             </div>
             {
                 cartExpanded
                 ?   <>
-                        <div id="cart-contents">
-                            Cart contents
-                        </div>
+                        <CartContents>
+                            {
+                                cart.map((element: any, index: number)=>{
+                                    return(
+                                        <CartItem key={`cart-item-${index}`} element={element} index={index}/>
+                                    )
+                                })
+                            }
+                        </CartContents>
                         <div id="cart-action-container">
                             Action btns
                         </div>

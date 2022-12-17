@@ -1,11 +1,12 @@
 import "./Sass/ItemCard.scss"
+import Cookies from "js-cookie";
 import { useContext, useReducer, useState } from "react"
 import { BlurContext, UserContext } from "../../../../contexts/global"
+import { CartContext } from "../../../../contexts/cart";
 
 import { motion } from "framer-motion"
 
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import Fab from '@mui/material/Fab';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import Tooltip from '@mui/material/Tooltip';
@@ -23,13 +24,6 @@ interface ItemCardProps{
     }
 
     index: number
-}
-
-const fabSXProps = {
-    backgroundColor: "#01B763",
-    fontSize: "32px",
-    display: "flex",
-    alignItems: "center",
 }
 
 const shoppingCartSXProps = {
@@ -71,12 +65,61 @@ const ItemCard = (props: ItemCardProps)=>{
     let blurCXT = useContext(BlurContext)
     let blur = blurCXT?.value
 
+    let cartCXT = useContext(CartContext)
+    let cart = cartCXT.value
+
     const [qty, dispatch] = useReducer(itemSelectReducer, 0)
 
     const [descOpen, setDescOpen] = useState(false)
 
     const addItemToCart = ()=>{
+        //if no qty, do nothing
+        if(qty === 0) return
+        //set qty counter to zero
+        dispatch({type: "zero"})
+        //if cart is empty, push element to the cart
+        if(cart.length === 0){
+            cartCXT.setCart([{
+                item: element,
+                qty: qty
+            }])
+            Cookies.set("cart", JSON.stringify([{
+                    item: element,
+                    qty: qty
+                }])
+            )
+            return
+        }
+        //check to see if cart contains our target element
+        //returns the element if true, undefined if false
+        let containsElement = cart.find(
+            (item: any) => item.item === element
+        )
+        //make a new, mutable variable
+        let mutCart = cart
+        if(containsElement){
+            let oldQty = containsElement.qty
+            //replace old target element with new one with updated qty
+            mutCart.splice(
+                mutCart.indexOf(containsElement), 
+                1, 
+                {
+                    ...containsElement, 
+                    qty: oldQty + qty
+                }
+            )
+            cartCXT.setCart([...mutCart])
+            Cookies.set("cart", JSON.stringify([...mutCart]))
+            return
+        }
 
+        //default action
+        cartCXT.setCart([...mutCart, {item: element, qty: qty}])
+        Cookies.set("cart", JSON.stringify([
+            ...mutCart, 
+            {item: element, qty: qty}
+        ]))
+        return
     }
 
     return(
@@ -143,7 +186,7 @@ const ItemCard = (props: ItemCardProps)=>{
                             >-</button>
                         </div>
                         <Tooltip title="Add to cart" placement="left" arrow>
-                            <ShoppingCartIcon sx={shoppingCartSXProps}/>
+                            <ShoppingCartIcon sx={shoppingCartSXProps} onClick={()=>{addItemToCart()}}/>
                         </Tooltip>
                     </div>
                 :   <h6 id="logged-out-msg">Log in to make purchases!</h6>
