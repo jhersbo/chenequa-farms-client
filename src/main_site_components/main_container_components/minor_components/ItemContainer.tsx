@@ -32,9 +32,7 @@ const ItemContainer = (props: ItemContainerProps)=>{
     let selectedCategory, items;
     if(category !== null){
         selectedCategory = categoryDB[category]
-        console.log(selectedCategory)
         items = selectedCategory.inventories
-        console.log(items)
     }
 
     return(

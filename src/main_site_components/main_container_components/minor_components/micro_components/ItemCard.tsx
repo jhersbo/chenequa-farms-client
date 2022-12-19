@@ -93,7 +93,7 @@ const ItemCard = (props: ItemCardProps)=>{
         //check to see if cart contains our target element
         //returns the element if true, undefined if false
         let containsElement = cart.find(
-            (item: any) => item.item === element
+            (el: any) => el.item.item_id === element.item_id
         )
         //make a new, mutable variable
         let mutCart = cart
@@ -171,8 +171,6 @@ const ItemCard = (props: ItemCardProps)=>{
                                 }}
                                 disabled={blur}
                                 aria-label="increment"
-                                // size="small"
-                                // sx={fabSXProps}
                             >+</button>
                             <span>Qty:&nbsp;{qty}</span>
                             <button
@@ -181,8 +179,6 @@ const ItemCard = (props: ItemCardProps)=>{
                                 }}
                                 disabled={blur}
                                 aria-label="decrement"
-                                // size="small"
-                                // sx={fabSXProps}
                             >-</button>
                         </div>
                         <Tooltip title="Add to cart" placement="left" arrow>

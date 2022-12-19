@@ -9,9 +9,9 @@ import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp
 import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import CartContents from "./micro_components/CartContents"
+import LargeActionBtn from "./micro_components/LargeActionBtn"
 
 const arrowSXProps = {
-    cursor: "pointer",
     fontSize: "32px",
     color: "#01B763",
 }
@@ -29,8 +29,10 @@ const CartContainer = ()=>{
     let blur = blurCXT?.value
     const cartCXT = useContext(CartContext)
     let cart = cartCXT.value
-    console.log(cart)
+
     const [cartExpanded, setCartExpanded] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
+    const [error, setError] = useState({state: false, message: ""})
 
     const calculateTotalPrice = ()=>{
         let total = 0
@@ -40,6 +42,14 @@ const CartContainer = ()=>{
         });
 
         return total
+    }
+
+    const handleSubmitOrder = async ()=>{
+        try {
+            setIsLoading(true)
+        } catch (error) {
+            
+        }
     }
 
     return(
@@ -56,18 +66,28 @@ const CartContainer = ()=>{
             <div id="cart-header-container">
                 {
                     cartExpanded
-                    ?   <KeyboardDoubleArrowDownIcon
+                    ?   <button
+                            className="style-free-btn"
+                            aria-label="collapse cart"
                             onClick={()=>{
                                 setCartExpanded(false)
                             }}
-                            sx={arrowSXProps}
-                        />
-                    :   <KeyboardDoubleArrowUpIcon 
+                        >
+                            <KeyboardDoubleArrowDownIcon
+                                sx={arrowSXProps}
+                            />
+                        </button>
+                    :   <button
+                            className="style-free-btn"
+                            aria-label="expand cart"
                             onClick={()=>{
                                 setCartExpanded(true)
                             }}
-                            sx={arrowSXProps} 
-                        />
+                        >
+                            <KeyboardDoubleArrowUpIcon 
+                                sx={arrowSXProps} 
+                            />
+                        </button>
                 }
                 <div>
                     Total: ${calculateTotalPrice()}
@@ -79,16 +99,24 @@ const CartContainer = ()=>{
                 ?   <>
                         <CartContents>
                             {
-                                cart.map((element: any, index: number)=>{
-                                    return(
-                                        <CartItem key={`cart-item-${index}`} element={element} index={index}/>
-                                    )
-                                })
+                                cart.length !== 0
+                                ?   cart.map((element: any, index: number)=>{
+                                        return(
+                                            <CartItem key={`cart-item-${index}`} element={element} index={index}/>
+                                        )
+                                    })
+                                :   <div id="nothing-msg-container">
+                                        <span>Nothing in your cart!</span>
+                                    </div>
                             }
                         </CartContents>
-                        <div id="cart-action-container">
-                            Action btns
-                        </div>
+                        <LargeActionBtn 
+                            isLoading={isLoading} 
+                            error={error} 
+                            action={handleSubmitOrder}
+                        >
+                            Place Order
+                        </LargeActionBtn>
                     </>
                 :
                     null

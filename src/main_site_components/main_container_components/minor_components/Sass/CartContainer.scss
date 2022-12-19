@@ -25,6 +25,26 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        margin-bottom: 0.25rem;
+    }
+
+    .style-free-btn{
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0rem;
+        margin: 0rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #nothing-msg-container{
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }
 

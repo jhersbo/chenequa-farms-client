@@ -1,0 +1,31 @@
+@import "/src/Sass/_variables";
+
+@media (min-width: $mobilebreakpoint){
+    #lg-action-btn{
+        cursor: pointer;
+        width: 80%;
+        height: 5%;
+        margin: 0.5rem 0rem;
+        border-radius: 15px;
+        border: 1px solid $Blk;
+        background-color: $GO;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        span{
+            font-family: $genSans;
+            font-weight: 800;
+            font-size: 18px;
+        }
+    }
+
+    #lg-action-btn:hover{
+        box-shadow: inset 0px 0px 5px $Blk;
+    }
+}
+
+@media (max-width: $mobilebreakpoint){
+
+}
