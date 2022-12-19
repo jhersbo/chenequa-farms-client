@@ -2,9 +2,8 @@
 
 @media (min-width: $mobilebreakpoint){
     #cart-contents{
-        border: 1px solid black;
-        box-shadow: inset 0px 0px 10px grey;
-        border-radius: 15px;
+        border: 2px solid $GO;
+        border-radius: 10px;
         width: 98%;
         height: 98%;
 

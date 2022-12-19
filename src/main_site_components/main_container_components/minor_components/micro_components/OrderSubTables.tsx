@@ -66,10 +66,10 @@ const OrderSubTables = ()=>{
                                                         {
                                                             element.order_content.map((element: any, index: number)=>{
                                                                 let parsedElement = JSON.parse(element)
-                                                                
+                                                                let { item, qty } = parsedElement
                                                                 return(
                                                                     <li key={`order-content-${index}`}>
-                                                                        {`${parsedElement.name} (${parsedElement.qty})`}
+                                                                        {`${item.name} (${qty})`}
                                                                     </li>
                                                                 )
                                                             })
@@ -92,12 +92,14 @@ const OrderSubTables = ()=>{
                     :
                         <table>
                             <thead>
-                                <th>Subscription ID</th>
-                                <th>Type</th>
-                                <th>Rate</th>
-                                <th>Active?</th>
-                                <th>Purchase Date</th>
-                                <th>Renew Date</th>
+                                <tr>
+                                    <th>Subscription ID</th>
+                                    <th>Type</th>
+                                    <th>Rate</th>
+                                    <th>Active?</th>
+                                    <th>Purchase Date</th>
+                                    <th>Renew Date</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 {

@@ -2,7 +2,8 @@
 
 @media (min-width: $mobilebreakpoint){
     #cart-container{
-        border: 1px solid black;
+        border: 1px solid $Blk;
+        box-shadow: 0px 0px 10px grey;
         background-color: white;
         border-radius: 15px 15px 0px 0px;
 
@@ -45,6 +46,13 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        color: $GO;
+    }
+
+    .error-msg{
+        font-weight: 500;
+        font-size: 22px;
+        color: $Blk;
     }
 }
 

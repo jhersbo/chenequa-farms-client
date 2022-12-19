@@ -1,4 +1,5 @@
 import "./Sass/CartContainer.scss"
+import { serverURL } from "../../../App"
 import { motion } from "framer-motion"
 import { useContext, useState } from "react"
 import { BlurContext, UserContext } from "../../../contexts/global"
@@ -45,10 +46,41 @@ const CartContainer = ()=>{
     }
 
     const handleSubmitOrder = async ()=>{
+        setIsLoading(true)
+        let stringItems = cart.map((el: any, index: number)=>{
+            return JSON.stringify(el)
+        })
+        if(!user){
+            setIsLoading(false)
+            setError({state: true, message: "Log in to place your order!"})
+            return
+        }
         try {
-            setIsLoading(true)
+            let response = await fetch(serverURL + "user_orders", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                    //add authorization header??
+                },
+                body: JSON.stringify({
+                    user_id: user.user_id,
+                    order_price: calculateTotalPrice(),
+                    order_content: stringItems
+                })
+            })
+            let parsedResponse = await response.json()
+            console.log(parsedResponse)
+            if(!parsedResponse.success){
+                setIsLoading(false)
+                setError({state: true, message: parsedResponse.message})
+                return
+            }
+            setIsLoading(false)
+            cartCXT.setCart([])
+            window.alert("Order successful! Check your email for confirmation.")
         } catch (error) {
-            
+            setIsLoading(false)
+            setError({state: true, message: "Server connection error."})
         }
     }
 
@@ -110,13 +142,17 @@ const CartContainer = ()=>{
                                     </div>
                             }
                         </CartContents>
-                        <LargeActionBtn 
-                            isLoading={isLoading} 
-                            error={error} 
-                            action={handleSubmitOrder}
-                        >
-                            Place Order
-                        </LargeActionBtn>
+                        {
+                            user === null
+                            ?   <span className="error-msg">Log in to place an order</span>
+                            :   <LargeActionBtn 
+                                    isLoading={isLoading} 
+                                    error={error} 
+                                    action={handleSubmitOrder}
+                                >
+                                    {"Place order"}
+                                </LargeActionBtn>
+                        }
                     </>
                 :
                     null

@@ -36,7 +36,7 @@ const LargeActionBtn = (props: LargeActionBtnProps)=>{
         <button 
             id="lg-action-btn"
             aria-label="submit order"
-            disabled={isLoading || error.state || cart.length === 0}
+            disabled={isLoading || cart.length === 0}
             onClick={()=>{
                 action()
             }}
@@ -48,12 +48,7 @@ const LargeActionBtn = (props: LargeActionBtnProps)=>{
                         color={barsStyleProps.color}
                     />
                 :   <span>{children}</span>
-            }
-            {
-                error.state
-                ?   <span>{error.message}</span>
-                :   null
-            }
+            }   
         </button>
     )
 }
