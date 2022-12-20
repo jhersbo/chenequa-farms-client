@@ -382,8 +382,8 @@ const AccountWidget = (props: AccountWidgetProps)=>{
                                 </h5>
                             </div>
                             <div className="btn-container">
-                                <button className="widget-btn" aria-label="log out" onClick={()=>{handleSwitchToLogin()}}>Log In</button>
-                                <button className="widget-btn" aria-label="log out" onClick={()=>{handleSwitchToReg()}}>Register</button>
+                                <button className="widget-btn" aria-label="log in" onClick={()=>{handleSwitchToLogin()}}>Log In</button>
+                                <button className="widget-btn" aria-label="register" onClick={()=>{handleSwitchToReg()}}>Register</button>
                             </div>
                         </div>
                 }

@@ -1,7 +1,10 @@
 import "./Sass/OrderSubTables.scss";
 
 import { UserContext } from "../../../../contexts/global"
-import { useContext, useState } from "react"
+import { useContext, useState, useEffect } from "react"
+import { serverURL } from "../../../../App";
+
+import { Bars } from "react-loader-spinner";
 
 const OrderSubTables = ()=>{
     
@@ -9,6 +12,49 @@ const OrderSubTables = ()=>{
     let user = userCXT.value
 
     const [ page, setPage ] = useState("orders")
+    const [ orders, setOrders ] = useState([])
+    const [ subs, setSubs ] = useState([])
+    const [ error, setError ] = useState({state: false, message: ""})
+    const [ isLoading, setIsLoading ] = useState(false)
+
+    useEffect(()=>{
+        const retrieveOrders = async ()=>{
+            try{
+                setIsLoading(true)
+                let response = await fetch(serverURL + "user_orders/" + user.user_id)
+                let parsedResponse = await response.json()
+                if(!parsedResponse.success){
+                    setIsLoading(false)
+                    setError({state: true, message: parsedResponse.message})
+                }
+                setOrders(parsedResponse.data)
+                setIsLoading(false)
+            }catch(err){
+                setIsLoading(false)
+                setError({state: true, message: "Error connecting to the server."})
+            }
+        }
+
+        const retrieveSubs = async ()=>{
+            try{
+                setIsLoading(true)
+                let response = await fetch(serverURL + "subscriptions/" + user.user_id)
+                let parsedResponse = await response.json()
+                if(!parsedResponse.success){
+                    setIsLoading(false)
+                    setError({state: true, message: parsedResponse.message})
+                }
+                setSubs(parsedResponse.data)
+                setIsLoading(false)
+            }catch(err){
+                setIsLoading(false)
+                setError({state: true, message: "Error connecting to the server."})
+            }
+        }
+
+        retrieveOrders()
+        retrieveSubs()
+    }, [user])
 
     const buttonStyle = {
         orders: {
@@ -52,42 +98,52 @@ const OrderSubTables = ()=>{
                                     <th>Order ID</th>
                                     <th>Order Content</th>
                                     <th>Total Price</th>
+                                    <th>Order date</th>
                                     <th>Filled?</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                {
-                                    user.user_orders.map((element: any, index: number)=>{
-                                        return(
-                                            <tr key={`order-table-row-${index}`}>
-                                                <td>{element.order_id}</td>
-                                                <td>
-                                                    <ul>
-                                                        {
-                                                            element.order_content.map((element: any, index: number)=>{
-                                                                let parsedElement = JSON.parse(element)
-                                                                let { item, qty } = parsedElement
-                                                                return(
-                                                                    <li key={`order-content-${index}`}>
-                                                                        {`${item.name} (${qty})`}
-                                                                    </li>
-                                                                )
-                                                            })
-                                                        }
-                                                    </ul>
-                                                </td>
-                                                <td>${element.order_price}</td>
-                                                <td>{element.filled ? "Yes" : "No"}</td>
-                                            </tr>
-                                        )
-                                    })
-                                }
-                                {
-                                    user.user_orders.length === 0
-                                    ? <h4>You have no orders yet!</h4>
-                                    : null
-                                }
-                            </tbody>
+                            {
+                                isLoading
+                                ?   <tbody>
+                                        <Bars/>
+                                    </tbody>
+                                :   <tbody>
+                                        {
+                                            error.state
+                                            ?   <span>{error.message}</span>
+                                            :   orders.map((element: any, index: number)=>{
+                                                    return(
+                                                        <tr key={`order-table-row-${index}`}>
+                                                            <td>{element.order_id}</td>
+                                                            <td>
+                                                                <ul>
+                                                                    {
+                                                                        element.order_content.map((element: any, index: number)=>{
+                                                                            let parsedElement = JSON.parse(element)
+                                                                            let { item, qty } = parsedElement
+                                                                            return(
+                                                                                <li key={`order-content-${index}`}>
+                                                                                    {`${item.name} (${qty})`}
+                                                                                </li>
+                                                                            )
+                                                                        })
+                                                                    }
+                                                                </ul>
+                                                            </td>
+                                                            <td>${element.order_price}</td>
+                                                            <td>{element.date_created.slice(0, element.date_created.indexOf("GMT"))}</td>
+                                                            <td>{element.filled ? "Yes" : "No"}</td>
+                                                        </tr>
+                                                    )
+                                                })
+                                        }
+                                        {
+                                            orders.length === 0 && !error.state
+                                            ? <span>You have no orders yet!</span>
+                                            : null
+                                        }
+                                    </tbody>
+                            }
                         </table>
                     :
                         <table>
@@ -101,27 +157,35 @@ const OrderSubTables = ()=>{
                                     <th>Renew Date</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                {
-                                    user.subscriptions.map((element: any, index: number)=>{
-                                        return(
-                                            <tr key={`sub-table-row-${index}`}>
-                                                <td>{element.sub_id}</td>
-                                                <td>{element.type}</td>
-                                                <td>${element.rate}</td>
-                                                <td>{element.active ? "Yes" : "No"}</td>
-                                                <td>{element.purch_date.slice(0, element.purch_date.indexOf(" "))}</td>
-                                                <td>{element.renew_date.slice(0, element.purch_date.indexOf(" "))}</td>
-                                            </tr>
-                                        )
-                                    })
-                                }
-                                {
-                                    user.subscriptions.length === 0
-                                    ? <h4>You have no subscriptions yet!</h4>
-                                    : null
-                                }
-                            </tbody>
+                            {
+                                isLoading
+                                ?   <tbody>
+                                        <Bars/>
+                                    </tbody>
+                                :   <tbody>
+                                        {
+                                            error.state
+                                            ?   <span>{error.message}</span>
+                                            :   subs.map((element: any, index: number)=>{
+                                                    return(
+                                                        <tr key={`sub-table-row-${index}`}>
+                                                            <td>{element.sub_id}</td>
+                                                            <td>{element.type}</td>
+                                                            <td>${element.rate}</td>
+                                                            <td>{element.active ? "Yes" : "No"}</td>
+                                                            <td>{element.purch_date.slice(0, element.purch_date.indexOf(" "))}</td>
+                                                            <td>{element.renew_date.slice(0, element.purch_date.indexOf(" "))}</td>
+                                                        </tr>
+                                                    )
+                                                })
+                                        }
+                                        {
+                                            subs.length === 0 && !error.state
+                                            ? <span>You have no subscriptions yet!</span>
+                                            : null
+                                        }
+                                    </tbody>
+                            }
                         </table>
                 }
             </div>
