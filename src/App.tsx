@@ -21,7 +21,7 @@ export const serverURL = process.env.NODE_ENV === "development"
 //browser cookie configuration
 export const cookieConfig = {
   user: {
-    expires: 1,
+    expires: (1/24),
     path: "/",
   },
   jwt: {

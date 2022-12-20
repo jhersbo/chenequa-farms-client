@@ -1,4 +1,5 @@
 import "./Sass/CartContainer.scss"
+import Cookies from "js-cookie"
 import { serverURL } from "../../../App"
 import { motion } from "framer-motion"
 import { useContext, useState } from "react"
@@ -55,12 +56,24 @@ const CartContainer = ()=>{
             setError({state: true, message: "Log in to place your order!"})
             return
         }
+        //retrieve auth token
+        let cookieToken = Cookies.get("token");
+        if(cookieToken){
+            cookieToken = JSON.parse(cookieToken)
+        }else{
+            setIsLoading(false)
+            setError({
+                state: true, 
+                message: "Session expired. Please log in again."
+            })
+            return
+        }
         try {
             let response = await fetch(serverURL + "user_orders", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
-                    //add authorization header??
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${cookieToken}`,
                 },
                 body: JSON.stringify({
                     user_id: user.user_id,
@@ -77,6 +90,7 @@ const CartContainer = ()=>{
             }
             setIsLoading(false)
             cartCXT.setCart([])
+            Cookies.remove("cart")
             window.alert("Order successful! Check your email for confirmation.")
         } catch (error) {
             setIsLoading(false)
@@ -95,6 +109,11 @@ const CartContainer = ()=>{
             }}
             style={{"filter": blur ? "blur(4px)" : "none"}}
         >
+            {
+                error.state
+                ?   <span className="error-msg">{error.message}</span>
+                :   null
+            }
             <div id="cart-header-container">
                 {
                     cartExpanded

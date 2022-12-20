@@ -134,6 +134,7 @@ const AccountWidget = (props: AccountWidgetProps)=>{
             setLoginState(false)
             setRegState(false)
             blurCXT?.setBlur(false)
+            window.location.href = "/"
             return
         }catch(err){
             setValidationError({state: true, message: "Error connecting to the server."})
@@ -196,6 +197,7 @@ const AccountWidget = (props: AccountWidgetProps)=>{
             setLoginState(false)
             setRegState(false)
             blurCXT?.setBlur(false)
+            window.location.href = "/"
             return
         }catch(err){
             setValidationError({state: true, message: "Error connecting to the server."})

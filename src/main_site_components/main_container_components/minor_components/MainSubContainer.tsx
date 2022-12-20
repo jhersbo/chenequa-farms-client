@@ -1,5 +1,6 @@
 import BrowseContainer from "./BrowseContainer"
 import Home from "./Home"
+import SubscriptionsContainer from "./SubscriptionsContainer"
 
 interface MainSubContainerProps{
     clickIndex: number,
@@ -23,7 +24,7 @@ const MainSubContainer = ({ clickIndex, setClickIndex, }: MainSubContainerProps)
         case 2:
             return(
                 <>
-                    Subscriptions
+                    <SubscriptionsContainer/>
                 </>
             )
         case 3:
