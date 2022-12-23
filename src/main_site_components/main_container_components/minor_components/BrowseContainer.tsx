@@ -1,6 +1,6 @@
 import "./Sass/BrowseContainer.scss"
 
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 
 import { serverURL } from "../../../App"
 

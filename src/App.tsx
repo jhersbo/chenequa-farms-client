@@ -1,9 +1,9 @@
 //CSS
-import './Sass/App.scss'
+import './Sass/App.scss';
 //Dependencies
-import Cookies from 'js-cookie'
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
+import Cookies from 'js-cookie';
 import { useEffect, useState } from "react";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 //Components
 import MainContainer from './main_site_components/main_container_components/MainContainer';
@@ -11,7 +11,7 @@ import NavBar from './main_site_components/nav_components/NavBar';
 import ResetPassword from './side_components/ResetPassword';
 
 //Contexts
-import { ScreenSizeContext, UserContext, BlurContext, UserContextInterface } from './contexts/global';
+import { BlurContext, ScreenSizeContext, UserContext, UserContextInterface } from './contexts/global';
 
 //server URL ternary
 export const serverURL = process.env.NODE_ENV === "development" 

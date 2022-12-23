@@ -1,8 +1,8 @@
 import "./Sass/LargeActionBtn.scss"
 
 import { useContext } from "react"
-import { CartContext } from "../../../../contexts/cart"
 import { Bars } from "react-loader-spinner"
+import { CartContext } from "../../../../contexts/cart"
 
 
 interface LargeActionBtnProps{

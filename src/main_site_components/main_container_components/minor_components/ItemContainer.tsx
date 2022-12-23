@@ -1,11 +1,10 @@
-import "./Sass/ItemContainer.scss"
+import "./Sass/ItemContainer.scss";
 
-import { CategoryTypes } from "./BrowseContainer"
-import { BlurContext, ScreenSizeContext } from "../../../contexts/global"
-import { useEffect, useState, useContext } from "react"
+import { useContext } from "react";
+import { BlurContext } from "../../../contexts/global";
+import { CategoryTypes } from "./BrowseContainer";
 
-import Grid from '@mui/material/Grid';
-import ItemCard from "./micro_components/ItemCard"
+import ItemCard from "./micro_components/ItemCard";
 interface ItemContainerProps{
     catCollapsed: boolean,
     setCatCollapsed: React.Dispatch<React.SetStateAction<boolean>>,

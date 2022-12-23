@@ -1,14 +1,14 @@
-import "./Sass/CategoryMenu.scss"
+import "./Sass/CategoryMenu.scss";
 
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
-import { Bars } from "react-loader-spinner"
+import { Bars } from "react-loader-spinner";
 import { loadingBarsStyle } from "./AccountWidget";
 
-import { CategoryTypes } from "./BrowseContainer"
+import { CategoryTypes } from "./BrowseContainer";
 
-import { motion } from "framer-motion"
-import { useState, useContext } from "react";
+import { motion } from "framer-motion";
+import { useContext } from "react";
 
 import { BlurContext } from "../../../contexts/global";
 

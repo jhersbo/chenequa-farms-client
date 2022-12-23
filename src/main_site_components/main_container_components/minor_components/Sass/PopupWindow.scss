@@ -1,0 +1,12 @@
+@import "/src/Sass/_variables";
+
+@media (min-width: $mobilebreakpoint){
+    #popup-window{
+        position: absolute;
+        
+    }
+}
+
+@media (max-width: $mobilebreakpoint){
+
+}

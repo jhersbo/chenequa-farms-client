@@ -1,7 +1,7 @@
-import "../Sass/AccountWidget.scss"
+import "../Sass/AccountWidget.scss";
 
+import { Bars } from "react-loader-spinner";
 import { CustomTextField } from "../AccountWidget";
-import { Bars } from "react-loader-spinner"
 
 import CloseBtn from "./CloseBtn";
 import WidgetBtn from "./WidgetBtn";

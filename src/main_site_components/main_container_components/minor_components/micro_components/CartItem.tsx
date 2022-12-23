@@ -1,7 +1,7 @@
-import "./Sass/CartItem.scss";
+import Cookies from "js-cookie";
 import { useContext } from "react";
 import { CartContext } from "../../../../contexts/cart";
-import Cookies from "js-cookie";
+import "./Sass/CartItem.scss";
 
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import Tooltip from '@mui/material/Tooltip';

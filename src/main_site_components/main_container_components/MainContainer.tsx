@@ -1,15 +1,15 @@
-import "./Sass/MainContainer.scss"
 import Cookies from "js-cookie"
-import { useContext, useEffect, useState } from "react"
+import { useContext, useState } from "react"
+import "./Sass/MainContainer.scss"
 
-import MainSubContainer from "./minor_components/MainSubContainer"
-import AccountWidget from "./minor_components/AccountWidget"
-import { BlurContext, UserContext, UserContextInterface } from "../../contexts/global"
 import { CartContext } from "../../contexts/cart"
+import { BlurContext, UserContext } from "../../contexts/global"
+import AccountWidget from "./minor_components/AccountWidget"
+import MainSubContainer from "./minor_components/MainSubContainer"
 
+import CartContainer from "./minor_components/CartContainer"
 import AdminBtn from "./minor_components/micro_components/AdminBtn"
 import SearchBar from "./minor_components/micro_components/SearchBar"
-import CartContainer from "./minor_components/CartContainer"
 
 interface MainContainerProps{
     clickIndex: number,

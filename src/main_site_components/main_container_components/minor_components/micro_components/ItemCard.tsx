@@ -1,16 +1,14 @@
-import "./Sass/ItemCard.scss"
 import Cookies from "js-cookie";
-import { useContext, useReducer, useState } from "react"
-import { BlurContext, UserContext } from "../../../../contexts/global"
+import { useContext, useReducer, useState } from "react";
 import { CartContext } from "../../../../contexts/cart";
+import { BlurContext, UserContext } from "../../../../contexts/global";
+import "./Sass/ItemCard.scss";
 
-import { motion } from "framer-motion"
 
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Tooltip from '@mui/material/Tooltip';
-import WidgetBtn from "./WidgetBtn"
 
 interface ItemCardProps{
     element: {

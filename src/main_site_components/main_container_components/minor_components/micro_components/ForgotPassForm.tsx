@@ -1,7 +1,7 @@
-import "../Sass/AccountWidget.scss"
+import "../Sass/AccountWidget.scss";
 
 import TextField from '@mui/material/TextField';
-import { Bars } from "react-loader-spinner"
+import { Bars } from "react-loader-spinner";
 
 import CloseBtn from "./CloseBtn";
 

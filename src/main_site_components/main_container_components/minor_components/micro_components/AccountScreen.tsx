@@ -1,7 +1,7 @@
 import "../Sass/AccountWidget.scss";
 import "./Sass/AccountScreen.scss";
 
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { UserContext } from "../../../../contexts/global";
 
 import CloseBtn from "./CloseBtn";
@@ -19,6 +19,7 @@ const AccountScreen = (props: AccountScreenProps)=>{
 
     const userCXT = useContext(UserContext)
     let user = userCXT.value
+
     return(
         <div id="account-container">
             <CloseBtn handleCloseBtn={handleCloseBtn}/>
