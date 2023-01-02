@@ -150,7 +150,7 @@ const OrderSubTables = ()=>{
                             <thead>
                                 <tr>
                                     <th>Subscription ID</th>
-                                    <th>Type</th>
+                                    <th>Type ID</th>
                                     <th>Rate</th>
                                     <th>Active?</th>
                                     <th>Purchase Date</th>
@@ -170,8 +170,8 @@ const OrderSubTables = ()=>{
                                                     return(
                                                         <tr key={`sub-table-row-${index}`}>
                                                             <td>{element.sub_id}</td>
-                                                            <td>{element.type}</td>
-                                                            <td>${element.rate}</td>
+                                                            <td>{element.sub_type_id}</td>
+                                                            <td>${element.price}</td>
                                                             <td>{element.active ? "Yes" : "No"}</td>
                                                             <td>{element.purch_date.slice(0, element.purch_date.indexOf(" "))}</td>
                                                             <td>{element.renew_date.slice(0, element.purch_date.indexOf(" "))}</td>

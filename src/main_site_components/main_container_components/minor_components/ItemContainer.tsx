@@ -25,9 +25,6 @@ const ItemContainer = (props: ItemContainerProps)=>{
         setIsLoading
     } = props
 
-    const blurCXT = useContext(BlurContext)
-    let blur = blurCXT?.value
-
     let selectedCategory, items;
     if(category !== null){
         selectedCategory = categoryDB[category]
@@ -45,7 +42,7 @@ const ItemContainer = (props: ItemContainerProps)=>{
                         {
                             items.map((element: any, index: number)=>{
                                 return(
-                                    <ItemCard key={index} element={element} index={index}/>
+                                    <ItemCard key={`item-card-${index}`} element={element} index={index}/>
                                 )
                             })
                         }

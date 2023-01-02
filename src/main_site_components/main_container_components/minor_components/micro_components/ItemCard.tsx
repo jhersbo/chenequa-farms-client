@@ -18,7 +18,7 @@ interface ItemCardProps{
         name: string,
         number_remaining: number,
         photo_path: string, 
-        price: string
+        price: number
     }
 
     index: number
