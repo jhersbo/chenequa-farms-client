@@ -1,6 +1,6 @@
+import PopupWindow from "./PopupWindow"
 import { useContext, useEffect, useState } from "react"
 import { BlurContext } from "../../../contexts/global"
-import { CartContext } from "../../../contexts/cart"
 import { serverURL } from "../../../App"
 
 const SubscriptionsContainer = ()=>{
@@ -10,6 +10,8 @@ const SubscriptionsContainer = ()=>{
 
     //data states
     const [ subsDB, setSubsDB ] = useState([])
+    //user-driven states
+    const [ subClicked, setSubClicked ] = useState()
     //feedback states
     const [ isLoading, setIsLoading ] = useState(false)
     const [ error, setError ] = useState({state: false, message: ""})
@@ -40,9 +42,22 @@ const SubscriptionsContainer = ()=>{
         getSubs()
     }, [])
 
+
+    if(subsDB.length === 0){
+        return(
+            <div id="subscriptions-container">
+                No subscriptions currently available
+            </div>
+        )
+    }
+
     return(
         <div id="subscriptions-container">
-            Subs container
+            <PopupWindow>
+                <div>
+                    <span>Popup Window</span>
+                </div>
+            </PopupWindow>
         </div>
     )
 }

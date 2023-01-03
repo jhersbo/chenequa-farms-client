@@ -57,7 +57,7 @@ const MainContainer = (props: MainContainerProps)=>{
                     >
                         ChenequaFarms.com
                     </h1>
-                    <SearchBar/>
+                    {/* <SearchBar/> */}
                     {
                         user?.is_admin ?
                             <AdminBtn setSiteState={setSiteState}/>

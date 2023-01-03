@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"
 import Cookies from "js-cookie"
-import { useContext, useState } from "react"
+import { useContext, useState, useEffect } from "react"
 import { serverURL } from "../../../App"
 import { CartContext } from "../../../contexts/cart"
 import { BlurContext, UserContext } from "../../../contexts/global"
@@ -12,6 +12,8 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import CartContents from "./micro_components/CartContents"
 import CartItem from "./micro_components/CartItem"
 import LargeActionBtn from "./micro_components/LargeActionBtn"
+import PopupWindow from "./PopupWindow"
+import WidgetBtn from "./micro_components/WidgetBtn"
 
 const arrowSXProps = {
     fontSize: "32px",
@@ -35,6 +37,15 @@ const CartContainer = ()=>{
     const [cartExpanded, setCartExpanded] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState({state: false, message: ""})
+    const [orderSuccess, setOrderSuccess] = useState(true)
+
+    useEffect(()=>{
+        //toggles blur when order success is true
+        if(orderSuccess){
+            blurCXT?.setBlur(true)
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [orderSuccess])
 
     const calculateTotalPrice = ()=>{
         let total = 0
@@ -91,11 +102,38 @@ const CartContainer = ()=>{
             setIsLoading(false)
             cartCXT.setCart([])
             Cookies.remove("cart")
-            window.alert("Order successful! Check your email for confirmation.")
+            // window.alert("Order successful! Check your email for confirmation.")
+            setOrderSuccess(true)
         } catch (error) {
             setIsLoading(false)
             setError({state: true, message: "Server connection error."})
         }
+    }
+
+    const closePopup = ()=>{
+        blurCXT?.setBlur(false)
+        setOrderSuccess(false)
+    }
+
+    if(orderSuccess){
+        return(
+            <PopupWindow>
+                <div id="cart-popup-container">
+                    <div id="cart-popup-content">
+                        <span>Order successful!</span>
+                        <span>A confirmation email has been sent to: <u>{user.email_address}</u>.</span>
+                        <span>No further action is needed at this time.</span>
+                    </div>
+                    <div id="cart-popup-actions">
+                        <WidgetBtn
+                            action={closePopup}
+                        >
+                            Close
+                        </WidgetBtn>
+                    </div>
+                </div>
+            </PopupWindow>
+        )
     }
 
     return(

@@ -62,7 +62,7 @@ const CartItem = (props: CartItemProps)=>{
             <div className="flex-space-between">
                 <div id="desc-container">
                     <span id="item-name">{item.name}</span>
-                    <span>ID: {item.item_id}</span>
+                    <span id="item-id">ID: {item.item_id}</span>
                 </div>
                 <div id="info-container">
                     <span id="price">${item.price}</span>

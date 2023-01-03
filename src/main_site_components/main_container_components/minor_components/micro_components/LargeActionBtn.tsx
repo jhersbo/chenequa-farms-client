@@ -7,8 +7,8 @@ import { CartContext } from "../../../../contexts/cart"
 
 interface LargeActionBtnProps{
     children: JSX.Element | string,
-    isLoading: boolean,
-    error: {
+    isLoading?: boolean,
+    error?: {
         state: boolean,
         message: string
     },

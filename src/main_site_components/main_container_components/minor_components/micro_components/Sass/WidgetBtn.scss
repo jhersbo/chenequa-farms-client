@@ -26,6 +26,10 @@
         box-shadow: inset 1px 1px 5px grey;
     }
 
+    .widget-btn:active{
+        box-shadow: inset 0px 0px 5px $Blk;
+    }
+
     #login-reg-header{
         display: flex;
         justify-content: space-between;
