@@ -5,7 +5,7 @@ import { Bars } from "react-loader-spinner"
 
 import { textFieldSXProps, loadingBarsStyle } from "../main_site_components/main_container_components/minor_components/AccountWidget"
 import { CustomTextField } from "../main_site_components/main_container_components/minor_components/AccountWidget"
-import { serverURL } from "../App"
+import { serverURL } from "../utils/serverURL"
 import { useState } from "react"
 import { useParams } from "react-router-dom"
 

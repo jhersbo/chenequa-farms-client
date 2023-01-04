@@ -63,7 +63,7 @@ const NavBar = ({ clickIndex, setClickIndex }: NavBarProps)=>{
     }
 
     return(
-        <div className="nav-container" style={{"filter": blur ? "blur(4px)" : "none"}}>
+        <div className="nav-container" style={blurCXT?.payload}>
             <div className="nav-hero-container">
                 <h3>LOGO</h3>
             </div>

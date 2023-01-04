@@ -52,7 +52,6 @@ const MainContainer = (props: MainContainerProps)=>{
             <CartContext.Provider value={cartCTX}>
                 <div className="main-top-bar">
                     <h1 
-                        style={{"filter": blur ? "blur(4px)" : "none"}}
                         className="brand-header"
                     >
                         ChenequaFarms.com
@@ -66,12 +65,10 @@ const MainContainer = (props: MainContainerProps)=>{
                     }
                     <AccountWidget/>
                 </div>
-                <div style={{"filter": blur ? "blur(4px)" : "none"}}>
                     <MainSubContainer 
                         clickIndex={clickIndex} 
                         setClickIndex={setClickIndex}
                     />
-                </div>
                 <CartContainer/>
             </CartContext.Provider>
         </div>

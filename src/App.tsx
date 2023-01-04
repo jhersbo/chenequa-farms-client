@@ -13,23 +13,6 @@ import ResetPassword from './side_components/ResetPassword';
 //Contexts
 import { BlurContext, ScreenSizeContext, UserContext, UserContextInterface } from './contexts/global';
 
-//server URL ternary
-export const serverURL = process.env.NODE_ENV === "development" 
-? process.env.REACT_APP_LOCAL_SERVER 
-: process.env.REACT_APP_PROD_SERVER
-
-//browser cookie configuration
-export const cookieConfig = {
-  user: {
-    expires: (1/24),
-    path: "/",
-  },
-  jwt: {
-    expires: (1/24),
-    path: "/"
-  }
-}
-
 function App() {
   // Cookies.remove("user")
   let cookieUser = Cookies.get('user')
@@ -60,6 +43,9 @@ function App() {
     value: blur,
     setBlur: (value: boolean)=>{
       setBlur(value)
+    },
+    payload: {
+      "filter": blur ? "brightness(0.6)" : "none"
     }
   }
 

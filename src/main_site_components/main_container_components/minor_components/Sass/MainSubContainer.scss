@@ -1,11 +1,7 @@
 @import "/src/Sass/_variables";
 
 @media (min-width: $mobilebreakpoint){
-    #browse-container{
-        display: flex;
-        align-items: center;
-        min-height: 100%;
-        width: 94vw;
+    .main-sub-div{
         background-color: white;
     }
 }

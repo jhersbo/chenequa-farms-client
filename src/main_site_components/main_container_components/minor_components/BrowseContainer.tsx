@@ -1,9 +1,10 @@
 import "./Sass/BrowseContainer.scss"
 
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 
-import { serverURL } from "../../../App"
+import { serverURL } from "../../../utils/serverURL"
 
+import { BlurContext } from "../../../contexts/global"
 import CategoryMenu from "./CategoryMenu"
 import ItemContainer from "./ItemContainer"
 
@@ -26,6 +27,8 @@ const BrowseContainer = ()=>{
     const [ isLoading, setIsLoading ] = useState(false)
 
     const [ catCollapsed, setCatCollapsed ] = useState(false)
+
+    const blurCXT = useContext(BlurContext)
 
     useEffect(()=>{
         setIsLoading(true)
@@ -60,7 +63,7 @@ const BrowseContainer = ()=>{
     }, [])
 
     return(
-        <div id="browse-container">
+        <div id="browse-container" style={blurCXT?.payload}>
             <CategoryMenu
                 categoryDB={categoryDB}
                 setCategory={setCategory}

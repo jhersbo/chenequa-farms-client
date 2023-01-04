@@ -45,6 +45,9 @@ export const ScreenSizeContext = createContext<ScreenSizeContextInterface>({heig
 //blur
 export interface BlurContextObjInterface{
     value: boolean,
-    setBlur: (value: boolean) => void
+    setBlur: (value: boolean) => void,
+    payload: {
+        filter: string
+    }
 }
 export const BlurContext = createContext<BlurContextObjInterface | null>(null)

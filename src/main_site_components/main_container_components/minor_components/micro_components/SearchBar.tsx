@@ -8,7 +8,7 @@ const SearchBar = ()=>{
     let blur = blurCXT?.value
 
     return(
-        <div style={{"filter": blur ? "blur(4px)" : "none"}} id="searchbar-container">
+        <div style={blurCXT?.payload} id="searchbar-container">
             <h3>
                 Searchbar
             </h3>

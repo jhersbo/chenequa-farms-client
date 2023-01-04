@@ -2,9 +2,9 @@ import "./Sass/AccountWidget.scss"
 
 import { useContext, useState } from "react"
 import { UserContext, BlurContext } from "../../../contexts/global"
-import { serverURL } from "../../../App"
+import { serverURL } from "../../../utils/serverURL"
 import Cookies from "js-cookie"
-import { cookieConfig } from "../../../App"
+import { cookieConfig } from "../../../utils/cookieConfig"
 
 import { styled, TextField } from "@mui/material"
 

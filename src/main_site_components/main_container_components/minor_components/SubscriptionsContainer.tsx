@@ -1,7 +1,7 @@
 import PopupWindow from "./PopupWindow"
 import { useContext, useEffect, useState } from "react"
 import { BlurContext } from "../../../contexts/global"
-import { serverURL } from "../../../App"
+import { serverURL } from "../../../utils/serverURL"
 
 const SubscriptionsContainer = ()=>{
 
@@ -53,11 +53,7 @@ const SubscriptionsContainer = ()=>{
 
     return(
         <div id="subscriptions-container">
-            <PopupWindow>
-                <div>
-                    <span>Popup Window</span>
-                </div>
-            </PopupWindow>
+            Subscriptions container
         </div>
     )
 }

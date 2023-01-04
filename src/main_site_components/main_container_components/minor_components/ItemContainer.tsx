@@ -25,6 +25,8 @@ const ItemContainer = (props: ItemContainerProps)=>{
         setIsLoading
     } = props
 
+    const blurCXT = useContext(BlurContext)
+
     let selectedCategory, items;
     if(category !== null){
         selectedCategory = categoryDB[category]
@@ -32,7 +34,7 @@ const ItemContainer = (props: ItemContainerProps)=>{
     }
 
     return(
-        <div id="item-container">
+        <div id="item-container" style={blurCXT?.payload}>
             {
                 items ?
                     <div

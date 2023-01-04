@@ -1,7 +1,7 @@
 import { motion } from "framer-motion"
 import Cookies from "js-cookie"
 import { useContext, useState, useEffect } from "react"
-import { serverURL } from "../../../App"
+import { serverURL } from "../../../utils/serverURL"
 import { CartContext } from "../../../contexts/cart"
 import { BlurContext, UserContext } from "../../../contexts/global"
 import "./Sass/CartContainer.scss"
@@ -37,7 +37,7 @@ const CartContainer = ()=>{
     const [cartExpanded, setCartExpanded] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState({state: false, message: ""})
-    const [orderSuccess, setOrderSuccess] = useState(true)
+    const [orderSuccess, setOrderSuccess] = useState(false)
 
     useEffect(()=>{
         //toggles blur when order success is true
@@ -102,7 +102,6 @@ const CartContainer = ()=>{
             setIsLoading(false)
             cartCXT.setCart([])
             Cookies.remove("cart")
-            // window.alert("Order successful! Check your email for confirmation.")
             setOrderSuccess(true)
         } catch (error) {
             setIsLoading(false)
@@ -121,7 +120,7 @@ const CartContainer = ()=>{
                 <div id="cart-popup-container">
                     <div id="cart-popup-content">
                         <span>Order successful!</span>
-                        <span>A confirmation email has been sent to: <u>{user.email_address}</u>.</span>
+                        <span>A confirmation email has been sent to: <u>{user?.email_address}</u>.</span>
                         <span>No further action is needed at this time.</span>
                     </div>
                     <div id="cart-popup-actions">
@@ -145,7 +144,7 @@ const CartContainer = ()=>{
             transition={{ 
                 duration: 0.5, type: "tween" 
             }}
-            style={{"filter": blur ? "blur(4px)" : "none"}}
+            style={blurCXT?.payload}
         >
             {
                 error.state

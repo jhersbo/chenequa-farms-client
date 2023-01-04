@@ -1,7 +1,7 @@
 import "./Sass/OrderSubTables.scss";
 
 import { useContext, useEffect, useState } from "react";
-import { serverURL } from "../../../../App";
+import { serverURL } from "../../../../utils/serverURL";
 import { UserContext } from "../../../../contexts/global";
 
 import { Bars } from "react-loader-spinner";
