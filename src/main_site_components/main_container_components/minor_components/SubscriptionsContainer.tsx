@@ -1,7 +1,9 @@
-import PopupWindow from "./PopupWindow"
 import { useContext, useEffect, useState } from "react"
+import { Bars } from "react-loader-spinner"
 import { BlurContext } from "../../../contexts/global"
 import { serverURL } from "../../../utils/serverURL"
+import "./Sass/SubscriptionsContainer.scss"
+import SubscriptionCard from "./micro_components/SubscriptionCard"
 
 const SubscriptionsContainer = ()=>{
 
@@ -30,6 +32,7 @@ const SubscriptionsContainer = ()=>{
                     })
                     return
                 }
+                setIsLoading(false)
                 setSubsDB(parsedResponse.data)
             }catch(err){
                 setIsLoading(false)
@@ -42,6 +45,7 @@ const SubscriptionsContainer = ()=>{
         getSubs()
     }, [])
 
+    console.log(subsDB)
 
     if(subsDB.length === 0){
         return(
@@ -52,8 +56,32 @@ const SubscriptionsContainer = ()=>{
     }
 
     return(
-        <div id="subscriptions-container">
-            Subscriptions container
+        <div 
+            id="subscriptions-container" 
+            // style={blurCXT?.payload}
+        >
+            {
+                isLoading
+                ?   <Bars/>
+                :   null
+            }
+            {
+                error.state
+                ?   <span className="error-msg">{error.message}</span>
+                :   null
+            }
+            {
+                subsDB.map((el: any, index: number)=>{
+                    return(
+                        <SubscriptionCard 
+                            key={`sub-card-${index}`} 
+                            element={el} 
+                            index={index} 
+                            setSubClicked={setSubClicked}
+                        />
+                    )
+                })
+            }
         </div>
     )
 }

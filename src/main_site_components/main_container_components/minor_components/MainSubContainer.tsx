@@ -1,8 +1,9 @@
-import { useContext } from "react"
-import BrowseContainer from "./BrowseContainer"
-import Home from "./Home"
-import SubscriptionsContainer from "./SubscriptionsContainer"
-import { BlurContext } from "../../../contexts/global"
+import { useContext } from "react";
+import { BlurContext } from "../../../contexts/global";
+import BrowseContainer from "./BrowseContainer";
+import Home from "./Home";
+import "./Sass/MainSubContainer.scss";
+import SubscriptionsContainer from "./SubscriptionsContainer";
 
 interface MainSubContainerProps{
     clickIndex: number,

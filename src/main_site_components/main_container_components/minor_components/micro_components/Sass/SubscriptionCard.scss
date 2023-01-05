@@ -1,7 +1,8 @@
 @import "/src/Sass/_variables";
 
 @media (min-width: $mobilebreakpoint){
-    .item-card{
+    .sub-card{
+
         display: flex;
         flex-direction: column;
         // child properties
@@ -14,12 +15,10 @@
         margin-right: 1rem;
         margin-bottom: 1rem;
 
-        .item-img{
+        .sub-img{
             aspect-ratio: 16/9;
-
             border-radius: 10px 10px 0px 0px;
         }
-
         #logged-out-msg{
             color: $GO;
             padding: 0rem 0.5rem;
@@ -76,31 +75,18 @@
                 display: none;
             }
 
-            #price{
-                font-size: 22px;
-                margin-top: 1rem
-            }
-
             .collapsable-desc{
                 cursor: pointer;
             }
-        }
 
-        .card-action-btns{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0rem 0.5rem 0.5rem 0.5rem;
-            margin-top: 0.5rem;
-
-            .increment-btns{
+            #card-price-actions{
                 display: flex;
-                justify-content: space-around;
+                justify-content: space-between;
                 align-items: center;
-
-                font-size: 18px;
-
-                width: 50%;
+                margin-top: 1rem;
+                #price{
+                    font-size: 22px;
+                }
             }
         }
     }

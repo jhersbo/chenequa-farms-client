@@ -34,7 +34,10 @@ const ItemContainer = (props: ItemContainerProps)=>{
     }
 
     return(
-        <div id="item-container" style={blurCXT?.payload}>
+        <div 
+            id="item-container" 
+            // style={blurCXT?.payload}
+        >
             {
                 items ?
                     <div

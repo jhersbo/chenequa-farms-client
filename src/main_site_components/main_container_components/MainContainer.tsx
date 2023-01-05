@@ -65,10 +65,10 @@ const MainContainer = (props: MainContainerProps)=>{
                     }
                     <AccountWidget/>
                 </div>
-                    <MainSubContainer 
-                        clickIndex={clickIndex} 
-                        setClickIndex={setClickIndex}
-                    />
+                <MainSubContainer 
+                    clickIndex={clickIndex} 
+                    setClickIndex={setClickIndex}
+                />
                 <CartContainer/>
             </CartContext.Provider>
         </div>

@@ -90,7 +90,7 @@ const NavBar = ({ clickIndex, setClickIndex }: NavBarProps)=>{
                         <SettingsIcon sx={iconSXProp}/>
                     </button>
                 </Tooltip> */}
-                <Tooltip title="Logout" placement="right" arrow>
+                <Tooltip title="Logout" placement="right" arrow disableHoverListener={blur}>
                     <button className="nav-list-btn foot-btn" aria-label="logout" onClick={()=>{handleSignOut()}}>
                         <LogoutIcon sx={iconSXProp}/>
                     </button>

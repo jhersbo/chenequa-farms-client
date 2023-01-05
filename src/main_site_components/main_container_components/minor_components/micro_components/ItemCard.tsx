@@ -122,9 +122,6 @@ const ItemCard = (props: ItemCardProps)=>{
 
     return(
         <div 
-            style={{
-                border: "1px solid black"
-            }}
             className="item-card"
             key={`card-${element.item_id}`}
         >
@@ -179,11 +176,11 @@ const ItemCard = (props: ItemCardProps)=>{
                                 aria-label="decrement"
                             >-</button>
                         </div>
-                        <Tooltip title="Add to cart" placement="left" arrow>
+                        <Tooltip title="Add to cart" placement="left" arrow disableHoverListener={blur}>
                             <ShoppingCartIcon sx={shoppingCartSXProps} onClick={()=>{addItemToCart()}}/>
                         </Tooltip>
                     </div>
-                :   <h6 id="logged-out-msg">Log in to make purchases!</h6>
+                :   <span id="logged-out-msg">Log in to make purchases!</span>
             }
         </div>
     )

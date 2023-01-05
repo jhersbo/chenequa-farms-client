@@ -63,7 +63,7 @@ const CategoryMenu = (props: CategoryMenuProps)=>{
                 width: catCollapsed ? "2.5vw" : "20vw"
             }}
             transition={{ duration: 0.5, type: "tween" }}
-            style={blurCXT?.payload}
+            // style={blurCXT?.payload}
         >
             <div style={{
                 display: "flex",
