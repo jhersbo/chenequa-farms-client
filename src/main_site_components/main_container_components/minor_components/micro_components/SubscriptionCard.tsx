@@ -4,21 +4,13 @@ import ShoppingCart from "@mui/icons-material/ShoppingCart";
 import Tooltip from '@mui/material/Tooltip';
 import { useContext, useState } from "react";
 import { BlurContext, UserContext } from "../../../../contexts/global";
+import { SubElement } from "../SubscriptionsContainer";
 import "./Sass/SubscriptionCard.scss";
 
-type Element = {
-    description: string,
-    name: string,
-    number_available: number,
-    photo_path: string,
-    price: number,
-    sub_type_id: string
-}
-
 interface SubCardPropTypes{
-    element: Element
+    element: SubElement
     index: number
-    setSubClicked: React.Dispatch<React.SetStateAction<undefined>>
+    setSubClicked: React.Dispatch<React.SetStateAction<SubElement | null>>
 }
 
 const arrowDropSXProps = {
@@ -42,8 +34,8 @@ const SubscriptionCard = (props: SubCardPropTypes)=>{
     const blurCXT = useContext(BlurContext)
     let blur = blurCXT?.value
 
-    const bufferSubscription = (element: Element)=>{
-
+    const bufferSubscription = (element: SubElement)=>{
+        setSubClicked(element)
     }
 
     return (
@@ -77,7 +69,7 @@ const SubscriptionCard = (props: SubCardPropTypes)=>{
                 }
                 <div id="card-price-actions">
                     <span id="price">
-                        ${element.price}
+                        ${element.price}/pickup
                     </span>
                     {
                         user

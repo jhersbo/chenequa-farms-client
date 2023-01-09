@@ -1,24 +1,8 @@
 @import "/src/Sass/_variables";
 
 @media (min-width: $mobilebreakpoint){
-    #subscriptions-container{
-        max-height: 100%;
-        max-width: 100%;
-        min-height: 100%;
-        min-width: 100%;
-        padding: 1rem 0rem 0rem 0rem;
-
-        overflow-y: scroll;
-        background-color: white;
-
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-        align-items: flex-start;
-    }
-
-    #confirm-sub-container{
-        #sub-popup-content{
+    #sub-submitted-container{
+        #sub-submitted-content{
             display: flex;
             flex-direction: column;
 
@@ -33,7 +17,7 @@
             }
         }
 
-        #sub-popup-actions{
+        #sub-submitted-actions{
             display: flex;
             justify-content: space-around;
             align-items: center;
