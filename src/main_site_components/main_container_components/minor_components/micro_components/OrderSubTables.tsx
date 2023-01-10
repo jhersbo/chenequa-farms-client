@@ -5,6 +5,7 @@ import { serverURL } from "../../../../utils/serverURL";
 import { UserContext } from "../../../../contexts/global";
 
 import { Bars } from "react-loader-spinner";
+import CenteredLoadingBars from "./CenteredLoadingBars";
 
 const OrderSubTables = ()=>{
     
@@ -105,7 +106,7 @@ const OrderSubTables = ()=>{
                             {
                                 isLoading
                                 ?   <tbody>
-                                        <Bars/>
+                                        <CenteredLoadingBars/>
                                     </tbody>
                                 :   <tbody>
                                         {
@@ -150,7 +151,7 @@ const OrderSubTables = ()=>{
                             <thead>
                                 <tr>
                                     <th>Subscription ID</th>
-                                    <th>Type ID</th>
+                                    <th>Type</th>
                                     <th>Rate</th>
                                     <th>Active?</th>
                                     <th>Purchase Date</th>
@@ -170,7 +171,7 @@ const OrderSubTables = ()=>{
                                                     return(
                                                         <tr key={`sub-table-row-${index}`}>
                                                             <td>{element.sub_id}</td>
-                                                            <td>{element.sub_type_id}</td>
+                                                            <td>{element.sub_name}</td>
                                                             <td>${element.price}</td>
                                                             <td>{element.active ? "Yes" : "No"}</td>
                                                             <td>{element.purch_date.slice(0, element.purch_date.indexOf(" "))}</td>

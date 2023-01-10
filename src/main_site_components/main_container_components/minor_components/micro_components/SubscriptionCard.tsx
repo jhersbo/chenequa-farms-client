@@ -68,9 +68,12 @@ const SubscriptionCard = (props: SubCardPropTypes)=>{
                     :   null
                 }
                 <div id="card-price-actions">
-                    <span id="price">
-                        ${element.price}/pickup
-                    </span>
+                    <div id="price-box">
+                        <span id="price">
+                            ${element.price}
+                        </span>
+                        <span id="qualifier">&nbsp;per pickup</span>
+                    </div>
                     {
                         user
                         ?   <Tooltip 

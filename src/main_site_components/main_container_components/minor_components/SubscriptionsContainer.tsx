@@ -7,6 +7,7 @@ import "./Sass/SubscriptionsContainer.scss"
 import ConfirmSubPopup from "./micro_components/ConfirmSubPopup"
 import SubSubmittedPopup from "./micro_components/SubSubmittedPopup"
 import SubscriptionCard from "./micro_components/SubscriptionCard"
+import CenteredLoadingBars from "./micro_components/CenteredLoadingBars"
 
 export type SubElement = {
     description: string,
@@ -109,16 +110,6 @@ const SubscriptionsContainer = ()=>{
             setError({state: true, message: "Server error."})
         }
     }
-
-    //no subs in DB
-    if(subsDB.length === 0){
-        return(
-            <div id="subscriptions-container">
-                No subscriptions currently available
-            </div>
-        )
-    }
-
     //sub has been clicked and buffered
     if(subClicked){
         return(
@@ -148,10 +139,9 @@ const SubscriptionsContainer = ()=>{
         <div 
             id="subscriptions-container" 
         >
-            {/* come back to this */}
             {
                 isLoading
-                ?   <Bars/>
+                ?   <CenteredLoadingBars/>
                 :   null
             }
             {
@@ -159,18 +149,20 @@ const SubscriptionsContainer = ()=>{
                 ?   <span className="error-msg">{error.message}</span>
                 :   null
             }
-            {
-                subsDB.map((el: SubElement, index: number)=>{
-                    return(
-                        <SubscriptionCard 
-                            key={`sub-card-${index}`} 
-                            element={el} 
-                            index={index} 
-                            setSubClicked={setSubClicked}
-                        />
-                    )
-                })
-            }
+            <div className="item-display-box">
+                {
+                    subsDB.map((el: SubElement, index: number)=>{
+                        return(
+                            <SubscriptionCard 
+                                key={`sub-card-${index}`} 
+                                element={el} 
+                                index={index} 
+                                setSubClicked={setSubClicked}
+                            />
+                        )
+                    })
+                }
+            </div>
         </div>
     )
 }

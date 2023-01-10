@@ -2,12 +2,13 @@
 
 @media (min-width: $mobilebreakpoint){
     #cart-container{
-        border: 1px solid $Blk;
-        box-shadow: 0px 0px 10px grey;
+        // border: 1px solid $Blk;
+        border-bottom: none;
+        box-shadow: 0px 0px 8px $Blk;
         background-color: white;
         border-radius: 15px 15px 0px 0px;
 
-        position: absolute;
+        position: fixed;
         padding: 0.5rem 1rem;
         right: 2.5rem;
         bottom: 0;

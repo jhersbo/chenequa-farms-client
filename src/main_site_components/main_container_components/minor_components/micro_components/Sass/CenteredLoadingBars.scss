@@ -1,0 +1,13 @@
+@import "/src/Sass/_variables";
+
+@media (min-width: $mobilebreakpoint){
+    .static-centered{
+        position: relative;
+        left: 45%;
+        top: 45%;
+    }
+}
+
+@media (max-width: $mobilebreakpoint){
+
+}

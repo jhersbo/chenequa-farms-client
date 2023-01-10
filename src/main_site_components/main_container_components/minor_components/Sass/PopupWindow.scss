@@ -2,7 +2,7 @@
 
 @media (min-width: $mobilebreakpoint){
     #popup-window{
-        position: absolute;
+        position: fixed;
         min-height: max-content;
         min-width: max-content;
         z-index: 10;

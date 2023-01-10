@@ -157,6 +157,7 @@ const CartContainer = ()=>{
                     ?   <button
                             className="style-free-btn"
                             aria-label="collapse cart"
+                            disabled={blur}
                             onClick={()=>{
                                 setCartExpanded(false)
                             }}
@@ -168,6 +169,7 @@ const CartContainer = ()=>{
                     :   <button
                             className="style-free-btn"
                             aria-label="expand cart"
+                            disabled={blur}
                             onClick={()=>{
                                 setCartExpanded(true)
                             }}

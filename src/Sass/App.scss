@@ -3,7 +3,9 @@
 @media (min-width: $mobilebreakpoint){
     .app{
         min-height: 100vh;
+        max-height: 100vh;
         min-width: 100vw;
+        max-width: 100vw;
 
         font-family: $genSans;
         font-size: x-large;
@@ -11,6 +13,8 @@
     
         display: flex;
         justify-content: flex-start;
+
+        scroll-behavior:unset;
     }
 }
 
