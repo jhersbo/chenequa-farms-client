@@ -3,9 +3,9 @@
 @media (min-width: $mobilebreakpoint){
     #browse-container{
         display: flex;
-        align-items: center;
-        min-height: 100%;
-        width: 94vw;
+        align-items: flex-start;
+        height: 100%;
+        width: 100%;
         background-color: white;
     }
 }

@@ -5,8 +5,8 @@
         background-color: $Blk;
         color:white;
 
-        max-width: 8vw;
-        min-width: 6vw;
+        max-width: 4vw;
+        min-width: 4vw;
         min-height: 100%;
 
 
@@ -49,6 +49,9 @@
     .nav-list-btn{
         border: none;
         background-color: transparent;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
         border-radius: 15px;
 

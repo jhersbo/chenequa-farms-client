@@ -65,7 +65,6 @@ const BrowseContainer = ()=>{
     return(
         <div 
             id="browse-container" 
-            // style={blurCXT?.payload}
         >
             <CategoryMenu
                 categoryDB={categoryDB}

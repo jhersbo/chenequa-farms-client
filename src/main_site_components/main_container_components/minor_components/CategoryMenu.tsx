@@ -31,9 +31,9 @@ interface CategoryMenuProps{
 }
 
 const arrowSXProps = {
-    fontSize: "38px",
+    fontSize: "32px",
     boxShadow: "0px 0px 5px grey",
-    backgroundColor: "#0b0b0c"
+    backgroundColor: "#0b0b0c",
 }
 
 const CategoryMenu = (props: CategoryMenuProps)=>{
@@ -60,10 +60,14 @@ const CategoryMenu = (props: CategoryMenuProps)=>{
     return(
         <motion.div id="category-menu-container"
             animate={{
-                width: catCollapsed ? "2.5vw" : "20vw"
+                width: catCollapsed ? "2.5%" : "20%",
+                height: catCollapsed ? "5%" : "90%"
             }}
             transition={{ duration: 0.5, type: "tween" }}
-            // style={blurCXT?.payload}
+            style={{
+                justifyContent: catCollapsed ? "center" : "flex-start",
+                alignItems: catCollapsed ? "center" : "flex-start"
+            }}
         >
             <div style={{
                 display: "flex",
@@ -95,10 +99,7 @@ const CategoryMenu = (props: CategoryMenuProps)=>{
 
                 {
                     error && !catCollapsed ?
-                        <h5 style={{
-                            margin: "0em",
-                            color: "red"
-                        }}>{error.message}</h5>
+                        <span className="error-msg">{error.message}</span>
                     :
                         null
                 }

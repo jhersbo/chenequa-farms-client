@@ -3,7 +3,9 @@
 @media (min-width: $mobilebreakpoint){
     
     ::-webkit-scrollbar{
-        width: 0.5vw
+        width: 0.5vw;
+        //maybe change?
+        display: none;
     }
 
 
@@ -24,9 +26,8 @@
     }
     
     #category-menu-container{
-        min-width: 50px;
-        height: 82vh;
-        border: 1px solid $Blk;
+        display: flex;
+        flex-direction: column;
         border-radius: 0px 15px 15px 0px;
 
         box-shadow: 0px 0px 5px $Blk;
