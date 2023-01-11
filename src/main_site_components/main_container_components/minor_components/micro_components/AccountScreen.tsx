@@ -1,11 +1,9 @@
-import "../Sass/AccountWidget.scss";
-import "./Sass/AccountScreen.scss";
-
 import { useContext } from "react";
 import { UserContext } from "../../../../contexts/global";
-
+import "../Sass/AccountWidget.scss";
+import AccountTables from "./AccountTables";
 import CloseBtn from "./CloseBtn";
-import OrderSubTables from "./OrderSubTables";
+import "./Sass/AccountScreen.scss";
 
 interface AccountScreenProps{
     handleCloseBtn: ()=> void
@@ -43,7 +41,7 @@ const AccountScreen = (props: AccountScreenProps)=>{
                     <u>Phone number</u>{`: ${user.phone_number}`}
                 </li>
             </ul>
-            <OrderSubTables/>
+            <AccountTables/>
         </div>
     )
 }

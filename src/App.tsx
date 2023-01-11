@@ -73,19 +73,19 @@ function App() {
           <Routes>
             <Route path='/' element={
               <ScreenSizeContext.Provider value={screenSize}>
-                <UserContext.Provider value={userCxtObj}>
-                  <BlurContext.Provider value={blurCxtObj}>
-                    <NavBar 
-                      clickIndex={clickIndex} 
-                      setClickIndex={setClickIndex}
-                    />
-                    <MainContainer 
-                      clickIndex={clickIndex} 
-                      setClickIndex={setClickIndex}
-                      setSiteState={setSiteState}
-                    />
-                  </BlurContext.Provider>
-                </UserContext.Provider>
+              <UserContext.Provider value={userCxtObj}>
+              <BlurContext.Provider value={blurCxtObj}>
+                <NavBar 
+                  clickIndex={clickIndex} 
+                  setClickIndex={setClickIndex}
+                />
+                <MainContainer 
+                  clickIndex={clickIndex} 
+                  setClickIndex={setClickIndex}
+                  setSiteState={setSiteState}
+                />
+              </BlurContext.Provider>
+              </UserContext.Provider>
               </ScreenSizeContext.Provider>
             }/>
             <Route path='/forgot-password/:token' element={

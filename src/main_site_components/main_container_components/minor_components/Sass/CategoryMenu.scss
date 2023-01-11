@@ -33,35 +33,45 @@
         box-shadow: 0px 0px 5px $Blk;
 
         padding: 0.5rem 0.5rem;
-
-        overflow-y: scroll;
-        scroll-behavior: smooth;
         background-color: white;
     }
     
     #category-ul{
-        // display: flex;
+        display: flex;
         flex-direction: column;
-        justify-content: space-around;
-
-        padding: 0em;
+        justify-content: flex-start;
+        width: calc(100% - 1rem);
+        height: 100%;
+        border-radius: 0px 10px 10px 0px;
+        padding: 0.5rem;
+        margin: 0rem;
+        box-shadow: inset 0px 0px 5px $Blk;
+        overflow-y: scroll;
     }
 
     .category-list-item{
         cursor: pointer;
         list-style-type: none;
 
-        margin-bottom: 1rem;
-        padding: 0.5rem;
-        border-radius: 15px;
+        padding: 0.5rem 0rem 0.5rem 0.5rem;
+        border-radius: 0px 15px 15px 0px;
+        border-left: 2px solid black;
 
         display: flex;
         justify-content: flex-start;
         align-items: center;
+
+        span{
+            font-weight: 500;
+        }
     }
 
-    .category-list-item:hover{
-        box-shadow: inset 0px 0px 5px grey;
+    .category-list-item:not(:last-child){
+        margin-bottom: 1rem;
+    }
+
+    .category-list-item:focus-visible{
+        border: 1px solid $GO;
     }
 
     .category-name-desc{
@@ -77,6 +87,21 @@
         cursor: pointer;
         color: $GO;
         border-radius: 50%;
+    }
+
+    .spaced-span{
+        margin: 1rem 0rem 1rem 0rem;
+    }
+
+    .white-on-black{
+        font-size: 28px;
+        font-weight: 400;
+        color: white;
+        background-color: $Blk;
+        border: 4px solid $GO;
+        width: calc(100% - 1rem - 8px);
+        padding: 0.5rem 0rem 0.5rem 1rem;
+        border-radius: 0px 10px 10px 0px;
     }
 }
 

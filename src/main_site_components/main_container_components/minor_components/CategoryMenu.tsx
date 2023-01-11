@@ -1,16 +1,12 @@
-import "./Sass/CategoryMenu.scss";
-
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
-import { Bars } from "react-loader-spinner";
-import { loadingBarsStyle } from "./AccountWidget";
-
-import { CategoryTypes } from "./BrowseContainer";
-
 import { motion } from "framer-motion";
 import { useContext } from "react";
-
+import { Bars } from "react-loader-spinner";
 import { BlurContext } from "../../../contexts/global";
+import { loadingBarsStyle } from "./AccountWidget";
+import { CategoryTypes } from "./BrowseContainer";
+import "./Sass/CategoryMenu.scss";
 
 interface CategoryMenuProps{
     categoryDB: CategoryTypes[],
@@ -72,12 +68,14 @@ const CategoryMenu = (props: CategoryMenuProps)=>{
             <div style={{
                 display: "flex",
                 justifyContent: "space-between",
-                alignItems: "center"
+                alignItems: "center",
+                width: "100%"
             }}>
                 {
                     catCollapsed ?
                         <ArrowCircleRightIcon
                             className="arrow-icon"
+                            tabIndex={0}
                             onClick={
                                 blur
                                 ? ()=>{}
@@ -88,6 +86,7 @@ const CategoryMenu = (props: CategoryMenuProps)=>{
                     :
                         <ArrowCircleLeftIcon
                             className="arrow-icon"
+                            tabIndex={0}
                             onClick={
                                 blur
                                 ? ()=>{}
@@ -115,6 +114,10 @@ const CategoryMenu = (props: CategoryMenuProps)=>{
                         null
                 }
             </div>
+            <span 
+                className='spaced-span white-on-black'
+                style={{display: catCollapsed ? "none" : "inherit"}}
+            >Categories:</span>
             <ul id="category-ul"
                 style={{
                     display: catCollapsed ? "none" : "flex"
@@ -126,9 +129,10 @@ const CategoryMenu = (props: CategoryMenuProps)=>{
                             <li 
                                 className="category-list-item"
                                 key={`category-${element.category_id}`}
+                                tabIndex={0}
                                 style={{
                                     backgroundColor: category === index ? "#01B763" : "inherit",
-                                    border: category === index ? "1px solid black" : "none"
+                                    boxShadow: category === index ? "inset 0px 0px 10px black" : "none"
                                 }}
                                 onClick={
                                     blur 
@@ -136,16 +140,9 @@ const CategoryMenu = (props: CategoryMenuProps)=>{
                                     : ()=>{handleChangeCategory(index)}
                                 }
                             >
-                                <img 
-                                    src={element.category_thumbnail} 
-                                    alt={element.category_name + "category image"}
-                                    className="category-img"
-                                />
-                                <div className="category-name-desc">
-                                    <h3 className="category-name">
-                                        {element.category_name}
-                                    </h3>
-                                </div>
+                                <span className="category-name">
+                                    {element.category_name}
+                                </span>   
                             </li>
                         )
                     })

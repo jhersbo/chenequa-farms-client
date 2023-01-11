@@ -1,19 +1,14 @@
-import "./Sass/NavBar.scss"
-import { useContext } from "react";
-import Cookies from "js-cookie";
-
-import Tooltip from '@mui/material/Tooltip';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import CottageIcon from '@mui/icons-material/Cottage';
 import LocalFloristIcon from '@mui/icons-material/LocalFlorist';
-import LoyaltyIcon from '@mui/icons-material/Loyalty';
 import LogoutIcon from '@mui/icons-material/Logout';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-
-//contexts
-import { BlurContext, ScreenSizeContext, UserContext, UserContextInterface } from "../../contexts/global";
-
-//components
-import NavBtn from './minor_components/micro_components/NavBtn'
+import LoyaltyIcon from '@mui/icons-material/Loyalty';
+import Tooltip from '@mui/material/Tooltip';
+import Cookies from "js-cookie";
+import { useContext } from "react";
+import { BlurContext, ScreenSizeContext, UserContext } from "../../contexts/global";
+import "./Sass/NavBar.scss";
+import NavBtn from './minor_components/micro_components/NavBtn';
 
 
 export interface NavMethodsMap{
@@ -35,7 +30,7 @@ const NavBar = ({ clickIndex, setClickIndex }: NavBarProps)=>{
 
     const iconSXProp = {
         color: "white",
-        fontSize: "3rem",
+        fontSize: "2rem",
     }
     
     const navMethods = [

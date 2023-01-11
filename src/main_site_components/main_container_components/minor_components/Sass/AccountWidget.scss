@@ -109,7 +109,11 @@
     }
 
     .close-btn:hover{
-        box-shadow: inset 1px 1px 10px grey;
+        box-shadow: inset 0px 0px 5px grey;
+    }
+
+    .close-btn:active{
+        box-shadow: inset 0px 0px 5px $Blk;
     }
 
     .alert{
